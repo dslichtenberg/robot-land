@@ -1,0 +1,6142 @@
+[
+  {
+    "file": "characters/mo.glb",
+    "triangle_count": 9704,
+    "lod0_triangle_count": 9704,
+    "draw_calls": 3,
+    "material_names": [
+      "eyes",
+      "mo_main",
+      "mouth"
+    ],
+    "bounding_box_size_m": [
+      0.86464,
+      0.89199,
+      0.46161
+    ],
+    "bounding_box_min_m": [
+      -0.43232,
+      0.00141,
+      -0.26001
+    ],
+    "bounding_box_max_m": [
+      0.43232,
+      0.89341,
+      0.2016
+    ],
+    "bone_count": 27,
+    "clips": [
+      {
+        "name": "idle",
+        "length": 2.0
+      },
+      {
+        "name": "walk",
+        "length": 0.8
+      },
+      {
+        "name": "hop",
+        "length": 0.4
+      },
+      {
+        "name": "drive",
+        "length": 2.0
+      },
+      {
+        "name": "drive_left",
+        "length": 0.03333
+      },
+      {
+        "name": "drive_right",
+        "length": 0.03333
+      },
+      {
+        "name": "cheer",
+        "length": 1.5
+      },
+      {
+        "name": "wave",
+        "length": 1.5
+      },
+      {
+        "name": "oops",
+        "length": 0.8
+      },
+      {
+        "name": "dizzy",
+        "length": 1.0
+      },
+      {
+        "name": "victory",
+        "length": 2.0
+      }
+    ],
+    "textures": [
+      {
+        "name": "mo_eyes_sheet",
+        "width": 512,
+        "height": 512,
+        "sha256": "ac1c5320e1c584c473f788828699428268f12287d181cc0751501f8af558fbd2"
+      },
+      {
+        "name": "mo_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "ebfa84139522046122bae954b18ebf7f8408bb74c89e73ab7d93258032ee30d8"
+      },
+      {
+        "name": "mo_mouth_sheet",
+        "width": 256,
+        "height": 256,
+        "sha256": "f078427615c7e4437257b6c4a3eb798374ac43217ee79963bcb2255c2a82a775"
+      }
+    ],
+    "file_size_bytes": 743796
+  },
+  {
+    "file": "characters/nick.glb",
+    "triangle_count": 9704,
+    "lod0_triangle_count": 9704,
+    "draw_calls": 3,
+    "material_names": [
+      "eyes",
+      "mouth",
+      "nick_main"
+    ],
+    "bounding_box_size_m": [
+      0.9606,
+      0.99108,
+      0.57166
+    ],
+    "bounding_box_min_m": [
+      -0.48028,
+      0.00159,
+      -0.34766
+    ],
+    "bounding_box_max_m": [
+      0.48033,
+      0.99267,
+      0.224
+    ],
+    "bone_count": 29,
+    "clips": [
+      {
+        "name": "idle",
+        "length": 2.0
+      },
+      {
+        "name": "walk",
+        "length": 0.8
+      },
+      {
+        "name": "hop",
+        "length": 0.4
+      },
+      {
+        "name": "drive",
+        "length": 2.0
+      },
+      {
+        "name": "drive_left",
+        "length": 0.03333
+      },
+      {
+        "name": "drive_right",
+        "length": 0.03333
+      },
+      {
+        "name": "cheer",
+        "length": 1.5
+      },
+      {
+        "name": "wave",
+        "length": 1.5
+      },
+      {
+        "name": "oops",
+        "length": 0.8
+      },
+      {
+        "name": "dizzy",
+        "length": 1.0
+      },
+      {
+        "name": "victory",
+        "length": 2.0
+      }
+    ],
+    "textures": [
+      {
+        "name": "nick_eyes_sheet",
+        "width": 512,
+        "height": 512,
+        "sha256": "4217192d57d6b6bfade4d0fd42f60aa8cf2f22bc44c08d4b8e9f3be2c241f43d"
+      },
+      {
+        "name": "nick_mouth_sheet",
+        "width": 256,
+        "height": 256,
+        "sha256": "4c099352b63bf4058610c23fb85aa63e01f4f66d3c1d488cf56bce79ebbe4bb4"
+      },
+      {
+        "name": "nick_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4f544652e82d9a2f1b89cf504de839bc16846483e16c5dffbeed2722821adf3f"
+      }
+    ],
+    "file_size_bytes": 768340
+  },
+  {
+    "file": "characters/pip.glb",
+    "triangle_count": 9704,
+    "lod0_triangle_count": 9704,
+    "draw_calls": 3,
+    "material_names": [
+      "eyes",
+      "mouth",
+      "pip_main"
+    ],
+    "bounding_box_size_m": [
+      0.76855,
+      0.79695,
+      0.30231
+    ],
+    "bounding_box_min_m": [
+      -0.38429,
+      0.00126,
+      -0.12311
+    ],
+    "bounding_box_max_m": [
+      0.38426,
+      0.7982,
+      0.1792
+    ],
+    "bone_count": 26,
+    "clips": [
+      {
+        "name": "idle",
+        "length": 2.0
+      },
+      {
+        "name": "walk",
+        "length": 0.8
+      },
+      {
+        "name": "hop",
+        "length": 0.4
+      },
+      {
+        "name": "drive",
+        "length": 2.0
+      },
+      {
+        "name": "drive_left",
+        "length": 0.03333
+      },
+      {
+        "name": "drive_right",
+        "length": 0.03333
+      },
+      {
+        "name": "cheer",
+        "length": 1.5
+      },
+      {
+        "name": "wave",
+        "length": 1.5
+      },
+      {
+        "name": "oops",
+        "length": 0.8
+      },
+      {
+        "name": "dizzy",
+        "length": 1.0
+      },
+      {
+        "name": "victory",
+        "length": 2.0
+      }
+    ],
+    "textures": [
+      {
+        "name": "pip_eyes_sheet",
+        "width": 512,
+        "height": 512,
+        "sha256": "24a33992fc44965c3e03b5c48a122c50d9d176d8db738735841546199c4ce5b4"
+      },
+      {
+        "name": "pip_mouth_sheet",
+        "width": 256,
+        "height": 256,
+        "sha256": "bf4b52eb6d0985d70a563a315c76ff3121b47e65dd87aadaff3aa007ee338e58"
+      },
+      {
+        "name": "pip_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "5ef9b205c9936f7d125929b47ac02829ec5a90d66598a0cd9864db785aba68db"
+      }
+    ],
+    "file_size_bytes": 714768
+  },
+  {
+    "file": "characters/skyler.glb",
+    "triangle_count": 9704,
+    "lod0_triangle_count": 9704,
+    "draw_calls": 3,
+    "material_names": [
+      "eyes",
+      "mouth",
+      "skyler_main"
+    ],
+    "bounding_box_size_m": [
+      0.9606,
+      1.00551,
+      0.57166
+    ],
+    "bounding_box_min_m": [
+      -0.48028,
+      0.00116,
+      -0.34766
+    ],
+    "bounding_box_max_m": [
+      0.48032,
+      1.00667,
+      0.224
+    ],
+    "bone_count": 29,
+    "clips": [
+      {
+        "name": "idle",
+        "length": 2.0
+      },
+      {
+        "name": "walk",
+        "length": 0.8
+      },
+      {
+        "name": "hop",
+        "length": 0.4
+      },
+      {
+        "name": "drive",
+        "length": 2.0
+      },
+      {
+        "name": "drive_left",
+        "length": 0.03333
+      },
+      {
+        "name": "drive_right",
+        "length": 0.03333
+      },
+      {
+        "name": "cheer",
+        "length": 1.5
+      },
+      {
+        "name": "wave",
+        "length": 1.5
+      },
+      {
+        "name": "oops",
+        "length": 0.8
+      },
+      {
+        "name": "dizzy",
+        "length": 1.0
+      },
+      {
+        "name": "victory",
+        "length": 2.0
+      }
+    ],
+    "textures": [
+      {
+        "name": "skyler_eyes_sheet",
+        "width": 512,
+        "height": 512,
+        "sha256": "e902f004d505cfa7aadfc3377230f7fc8a95e70fb1a3d851318c7cc310d6fbde"
+      },
+      {
+        "name": "skyler_mouth_sheet",
+        "width": 256,
+        "height": 256,
+        "sha256": "b5ca84424b741a00624d815fa35e424e8fc64ae1de543e4503104b257acbb071"
+      },
+      {
+        "name": "skyler_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "71e3e73cef6d057de5a3cb3221f0bff98d701bb223cec02a704223f746e0761e"
+      }
+    ],
+    "file_size_bytes": 813464
+  },
+  {
+    "file": "characters/tyler.glb",
+    "triangle_count": 9704,
+    "lod0_triangle_count": 9704,
+    "draw_calls": 3,
+    "material_names": [
+      "eyes",
+      "mouth",
+      "tyler_main"
+    ],
+    "bounding_box_size_m": [
+      0.9606,
+      0.9911,
+      0.57166
+    ],
+    "bounding_box_min_m": [
+      -0.48028,
+      0.00157,
+      -0.34766
+    ],
+    "bounding_box_max_m": [
+      0.48033,
+      0.99267,
+      0.224
+    ],
+    "bone_count": 29,
+    "clips": [
+      {
+        "name": "idle",
+        "length": 2.0
+      },
+      {
+        "name": "walk",
+        "length": 0.8
+      },
+      {
+        "name": "hop",
+        "length": 0.4
+      },
+      {
+        "name": "drive",
+        "length": 2.0
+      },
+      {
+        "name": "drive_left",
+        "length": 0.03333
+      },
+      {
+        "name": "drive_right",
+        "length": 0.03333
+      },
+      {
+        "name": "cheer",
+        "length": 1.5
+      },
+      {
+        "name": "wave",
+        "length": 1.5
+      },
+      {
+        "name": "oops",
+        "length": 0.8
+      },
+      {
+        "name": "dizzy",
+        "length": 1.0
+      },
+      {
+        "name": "victory",
+        "length": 2.0
+      }
+    ],
+    "textures": [
+      {
+        "name": "tyler_eyes_sheet",
+        "width": 512,
+        "height": 512,
+        "sha256": "594a4057f170ab549835d5aadd985f989b7f45de0ed740f12b68a448b23bb6b5"
+      },
+      {
+        "name": "tyler_mouth_sheet",
+        "width": 256,
+        "height": 256,
+        "sha256": "faa6305e6b491abef86504096a92c52505407eb2d1c446be2a6a89d0f82cfb11"
+      },
+      {
+        "name": "tyler_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "f2464b92964b86a844d01e7007c2c7596cac31958294b26b42f38fd7a77c9cbb"
+      }
+    ],
+    "file_size_bytes": 748168
+  },
+  {
+    "file": "characters/zazz.glb",
+    "triangle_count": 9704,
+    "lod0_triangle_count": 9704,
+    "draw_calls": 4,
+    "material_names": [
+      "eyes",
+      "mouth",
+      "skin_tint",
+      "zazz_main"
+    ],
+    "bounding_box_size_m": [
+      0.9606,
+      1.05297,
+      0.61266
+    ],
+    "bounding_box_min_m": [
+      -0.48028,
+      0.00116,
+      -0.34766
+    ],
+    "bounding_box_max_m": [
+      0.48033,
+      1.05413,
+      0.265
+    ],
+    "bone_count": 30,
+    "clips": [
+      {
+        "name": "idle",
+        "length": 2.0
+      },
+      {
+        "name": "walk",
+        "length": 0.8
+      },
+      {
+        "name": "hop",
+        "length": 0.4
+      },
+      {
+        "name": "drive",
+        "length": 2.0
+      },
+      {
+        "name": "drive_left",
+        "length": 0.03333
+      },
+      {
+        "name": "drive_right",
+        "length": 0.03333
+      },
+      {
+        "name": "cheer",
+        "length": 1.5
+      },
+      {
+        "name": "wave",
+        "length": 1.5
+      },
+      {
+        "name": "oops",
+        "length": 0.8
+      },
+      {
+        "name": "dizzy",
+        "length": 1.0
+      },
+      {
+        "name": "victory",
+        "length": 2.0
+      }
+    ],
+    "textures": [
+      {
+        "name": "zazz_eyes_sheet",
+        "width": 512,
+        "height": 512,
+        "sha256": "30346eb5752eacb311eb59a5e62d1a149dee7c1c7be3bfb5f9e8cb5754f66291"
+      },
+      {
+        "name": "zazz_mouth_sheet",
+        "width": 256,
+        "height": 256,
+        "sha256": "072a0d06bb10a1fdc323c02cbcbb35833b7ebc16287994bed2d236efde742657"
+      },
+      {
+        "name": "zazz_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "45ec7841bd4e4a96af6efe4372d6b8584379152c026e3f86f5dd69bd2b1b6e6a"
+      },
+      {
+        "name": "zazz_accent_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "e7ceb23ecad314f2dbc2a795b9a8f2c808efde06f3b9e33dc1f24eb1e31c0193"
+      }
+    ],
+    "file_size_bytes": 1013988
+  },
+  {
+    "file": "villains/dragon.glb",
+    "triangle_count": 14204,
+    "lod0_triangle_count": 14204,
+    "draw_calls": 3,
+    "material_names": [
+      "dragon_main",
+      "eyes",
+      "mouth"
+    ],
+    "bounding_box_size_m": [
+      2.21364,
+      2.2,
+      1.32541
+    ],
+    "bounding_box_min_m": [
+      -1.10751,
+      0.0,
+      -0.7347
+    ],
+    "bounding_box_max_m": [
+      1.10614,
+      2.2,
+      0.5907
+    ],
+    "bone_count": 14,
+    "clips": [
+      {
+        "name": "idle",
+        "length": 2.0
+      },
+      {
+        "name": "fly",
+        "length": 1.2
+      },
+      {
+        "name": "puff",
+        "length": 1.1
+      },
+      {
+        "name": "taunt",
+        "length": 1.5
+      },
+      {
+        "name": "hurt",
+        "length": 0.5
+      },
+      {
+        "name": "spin_out",
+        "length": 1.2
+      }
+    ],
+    "textures": [
+      {
+        "name": "dragon_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "85f00ee41418c14f1c7b7d6470d1586d1d7d601b00d8e048b8b1788e3012a3f3"
+      },
+      {
+        "name": "dragon_eyes_sheet",
+        "width": 512,
+        "height": 512,
+        "sha256": "6ac4ac9574928433fa3a6c69e5aa57b92283a9b8e23699ed7325fe01dc45ad20"
+      },
+      {
+        "name": "dragon_mouth_sheet",
+        "width": 256,
+        "height": 256,
+        "sha256": "10f9c8e2a0d940c3171f188a6ff1aa6e2d75fcb34fac97c2899e6e9b8b2a5a24"
+      }
+    ],
+    "file_size_bytes": 931956
+  },
+  {
+    "file": "villains/ghost.glb",
+    "triangle_count": 6104,
+    "lod0_triangle_count": 6104,
+    "draw_calls": 3,
+    "material_names": [
+      "eyes",
+      "ghost_main",
+      "mouth"
+    ],
+    "bounding_box_size_m": [
+      1.15138,
+      1.4,
+      0.52764
+    ],
+    "bounding_box_min_m": [
+      -0.57572,
+      0.0,
+      -0.26119
+    ],
+    "bounding_box_max_m": [
+      0.57566,
+      1.4,
+      0.26645
+    ],
+    "bone_count": 9,
+    "clips": [
+      {
+        "name": "float",
+        "length": 2.0
+      },
+      {
+        "name": "wave",
+        "length": 1.5
+      },
+      {
+        "name": "boo",
+        "length": 1.2
+      },
+      {
+        "name": "cheer",
+        "length": 1.5
+      }
+    ],
+    "textures": [
+      {
+        "name": "ghost_eyes_sheet",
+        "width": 512,
+        "height": 512,
+        "sha256": "d29976f0d55dcaa9f99cfbab5e5f402c4b91133c7c3f687a38eda1ba4f1bbab3"
+      },
+      {
+        "name": "ghost_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "4d77e909d6bbacd5aaf3473d6442545657ca7d29f1a5cdda23f3b143be35e62e"
+      },
+      {
+        "name": "ghost_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "298f32ba06200b54fe32f32e98686ddd85013fa8236acd47926d37cf7e3ebade"
+      },
+      {
+        "name": "ghost_mouth_sheet",
+        "width": 256,
+        "height": 256,
+        "sha256": "c427657dd2cfd95ef460575f1af461868bba87480d6a0d63ae6bc3dca793e3bb"
+      }
+    ],
+    "file_size_bytes": 414020
+  },
+  {
+    "file": "villains/snowgun.glb",
+    "triangle_count": 11904,
+    "lod0_triangle_count": 11904,
+    "draw_calls": 3,
+    "material_names": [
+      "eyes",
+      "mouth",
+      "snowgun_main"
+    ],
+    "bounding_box_size_m": [
+      1.51026,
+      2.0,
+      1.20447
+    ],
+    "bounding_box_min_m": [
+      -0.67228,
+      0.0,
+      -0.41768
+    ],
+    "bounding_box_max_m": [
+      0.83798,
+      2.0,
+      0.78679
+    ],
+    "bone_count": 9,
+    "clips": [
+      {
+        "name": "idle",
+        "length": 2.0
+      },
+      {
+        "name": "aim",
+        "length": 1.0
+      },
+      {
+        "name": "fire",
+        "length": 0.5
+      },
+      {
+        "name": "taunt",
+        "length": 1.5
+      },
+      {
+        "name": "hurt",
+        "length": 0.5
+      },
+      {
+        "name": "melt",
+        "length": 1.5
+      }
+    ],
+    "textures": [
+      {
+        "name": "snowgun_eyes_sheet",
+        "width": 512,
+        "height": 512,
+        "sha256": "4f7987f607cae6769202b693e7375a08c7f697723e7f26b00a71ffec35932139"
+      },
+      {
+        "name": "snowgun_mouth_sheet",
+        "width": 256,
+        "height": 256,
+        "sha256": "5a29543339e70d917ecdd5c250baadacfb42baca3421d931ae5ed502d5c9cb8f"
+      },
+      {
+        "name": "snowgun_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "75dd732ee58b95947cb898218d61a01778e5bccb0bee126e52b6be58287a8063"
+      }
+    ],
+    "file_size_bytes": 850496
+  },
+  {
+    "file": "villains/tall-robot.glb",
+    "triangle_count": 7718,
+    "lod0_triangle_count": 7718,
+    "draw_calls": 3,
+    "material_names": [
+      "robot_glow",
+      "eyes",
+      "robot_main"
+    ],
+    "bounding_box_size_m": [
+      1.62014,
+      2.2,
+      0.60717
+    ],
+    "bounding_box_min_m": [
+      -0.85976,
+      0.0,
+      -0.2786
+    ],
+    "bounding_box_max_m": [
+      0.76038,
+      2.2,
+      0.32857
+    ],
+    "bone_count": 9,
+    "clips": [
+      {
+        "name": "idle",
+        "length": 2.0
+      },
+      {
+        "name": "wave",
+        "length": 1.5
+      },
+      {
+        "name": "talk",
+        "length": 1.5
+      },
+      {
+        "name": "beep",
+        "length": 0.8
+      }
+    ],
+    "textures": [
+      {
+        "name": "tall-robot_bulb_basecolor",
+        "width": 256,
+        "height": 256,
+        "sha256": "de7e685c6ebfee7b0f58853184113caee37e345f76589b46b1a065fc0e5cc057"
+      },
+      {
+        "name": "tall-robot_eyes_sheet",
+        "width": 512,
+        "height": 512,
+        "sha256": "f7affa77b3b287aefacb279f8e7bb40dc6d85f44ae0014f37f3c8f20d9dc0657"
+      },
+      {
+        "name": "tall-robot_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "f30ecbc639e6e0325069308fd0d64f80aa6b54e2c6c643fcc601b77f26fce822"
+      }
+    ],
+    "file_size_bytes": 501668
+  },
+  {
+    "file": "villains/wizard.glb",
+    "triangle_count": 14104,
+    "lod0_triangle_count": 14104,
+    "draw_calls": 3,
+    "material_names": [
+      "eyes",
+      "mouth",
+      "wizard_main"
+    ],
+    "bounding_box_size_m": [
+      1.20638,
+      1.8,
+      0.74691
+    ],
+    "bounding_box_min_m": [
+      -0.64093,
+      0.0,
+      -0.37163
+    ],
+    "bounding_box_max_m": [
+      0.56545,
+      1.8,
+      0.37529
+    ],
+    "bone_count": 10,
+    "clips": [
+      {
+        "name": "idle",
+        "length": 2.0
+      },
+      {
+        "name": "teleport",
+        "length": 1.0
+      },
+      {
+        "name": "cast",
+        "length": 1.2
+      },
+      {
+        "name": "taunt",
+        "length": 1.5
+      },
+      {
+        "name": "hurt",
+        "length": 0.5
+      },
+      {
+        "name": "poof",
+        "length": 1.0
+      }
+    ],
+    "textures": [
+      {
+        "name": "wizard_eyes_sheet",
+        "width": 512,
+        "height": 512,
+        "sha256": "f664f0869741f0ab7a371422fe20edf154b0962d21f67d2187a9db9820cd763a"
+      },
+      {
+        "name": "wizard_mouth_sheet",
+        "width": 256,
+        "height": 256,
+        "sha256": "a16134458067be257e3fea9572c595a95dee5bef7ae3f14d87063f188f3da68c"
+      },
+      {
+        "name": "wizard_emissive",
+        "width": 512,
+        "height": 512,
+        "sha256": "d0f3402a394c92628f3adb2731982ecaf53ef85381fca5407b582b12fe484f85"
+      },
+      {
+        "name": "wizard_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "26ae22b717658eaeb8834849d47ddd9b20be4543d69d69575075f41bf08c67f0"
+      }
+    ],
+    "file_size_bytes": 930436
+  },
+  {
+    "file": "villains/yoyo.glb",
+    "triangle_count": 11804,
+    "lod0_triangle_count": 11804,
+    "draw_calls": 3,
+    "material_names": [
+      "eyes",
+      "mouth",
+      "yoyo_main"
+    ],
+    "bounding_box_size_m": [
+      2.34082,
+      1.59021,
+      0.70865
+    ],
+    "bounding_box_min_m": [
+      -1.1704,
+      0.0,
+      -0.35185
+    ],
+    "bounding_box_max_m": [
+      1.17042,
+      1.59021,
+      0.3568
+    ],
+    "bone_count": 9,
+    "clips": [
+      {
+        "name": "idle",
+        "length": 2.0
+      },
+      {
+        "name": "roll",
+        "length": 1.0
+      },
+      {
+        "name": "bounce",
+        "length": 0.8
+      },
+      {
+        "name": "taunt",
+        "length": 1.5
+      },
+      {
+        "name": "hurt",
+        "length": 0.5
+      },
+      {
+        "name": "unwind",
+        "length": 1.5
+      }
+    ],
+    "textures": [
+      {
+        "name": "yoyo_eyes_sheet",
+        "width": 512,
+        "height": 512,
+        "sha256": "82b28cbad9ef0dfd057b523ffc8d00b5571fe848db072d6a2703326c235d4158"
+      },
+      {
+        "name": "yoyo_mouth_sheet",
+        "width": 256,
+        "height": 256,
+        "sha256": "1e491238db6d00597acb5042a88266567313488149e8f36790ba0fa2585506ac"
+      },
+      {
+        "name": "yoyo_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "6e645301ab849f1d115934cd3efd9cdf6fc4e34602c5c5b9ff54dbec25ade115"
+      }
+    ],
+    "file_size_bytes": 1121820
+  },
+  {
+    "file": "vehicles/buggy.glb",
+    "triangle_count": 5824,
+    "lod0_triangle_count": 5824,
+    "draw_calls": 10,
+    "material_names": [
+      "buggy_main",
+      "paint"
+    ],
+    "bounding_box_size_m": [
+      1.6,
+      1.51132,
+      2.6
+    ],
+    "bounding_box_min_m": [
+      -0.8,
+      0.0,
+      -1.3
+    ],
+    "bounding_box_max_m": [
+      0.8,
+      1.51132,
+      1.3
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "buggy_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "e7ac5aad4cc5171769b3c1ca64b8e4b70ab365048154c01792b635f305493c0f"
+      },
+      {
+        "name": "buggy_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "397d8426e02626606964042d4d43df898caf428a7317d97b97044a461a11f4cd"
+      },
+      {
+        "name": "buggy_metallic_roughness",
+        "width": 256,
+        "height": 256,
+        "sha256": "abeadf7b5b2dedb94dc4c2f05ee992e0adf48c5151c854f37769a13a4b03466c"
+      }
+    ],
+    "file_size_bytes": 415624
+  },
+  {
+    "file": "vehicles/carpet.glb",
+    "triangle_count": 6828,
+    "lod0_triangle_count": 6828,
+    "draw_calls": 6,
+    "material_names": [
+      "carpet_main",
+      "paint",
+      "carpet_alpha"
+    ],
+    "bounding_box_size_m": [
+      1.6,
+      0.06697,
+      2.71437
+    ],
+    "bounding_box_min_m": [
+      -0.8,
+      -0.00497,
+      -1.35718
+    ],
+    "bounding_box_max_m": [
+      0.8,
+      0.062,
+      1.35718
+    ],
+    "bone_count": 6,
+    "clips": [
+      {
+        "name": "ripple",
+        "length": 1.0
+      }
+    ],
+    "textures": [
+      {
+        "name": "carpet_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "314d2f06bab36e23061fe55ccd5da7688a062c934b1ae50fd5c8561890e98306"
+      },
+      {
+        "name": "carpet_paint_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "2ae7463653975d74617802c8637af69303f2e1f203f57c90406af11caab10f7d"
+      },
+      {
+        "name": "carpet_fringe_RR_basecolor",
+        "width": 256,
+        "height": 256,
+        "sha256": "e9629b0e8d09df2d0205100d85d190dcea57798dc0de4c5b76396568d8496955"
+      }
+    ],
+    "file_size_bytes": 380844
+  },
+  {
+    "file": "vehicles/glider.glb",
+    "triangle_count": 5152,
+    "lod0_triangle_count": 5152,
+    "draw_calls": 4,
+    "material_names": [
+      "glider_main",
+      "paint"
+    ],
+    "bounding_box_size_m": [
+      3.48,
+      1.02173,
+      2.6
+    ],
+    "bounding_box_min_m": [
+      -1.74,
+      0.0,
+      -1.3
+    ],
+    "bounding_box_max_m": [
+      1.74,
+      1.02173,
+      1.3
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "glider_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "e2a2d8d37ac3196577b43099a59970786ef99a53d883b838321c0374b824c17e"
+      },
+      {
+        "name": "glider_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "47b718c1d62c0505abdee8767d0a1eebdcec171bda75efc07e155b9dcccf870b"
+      }
+    ],
+    "file_size_bytes": 516768
+  },
+  {
+    "file": "vehicles/kart.glb",
+    "triangle_count": 8500,
+    "lod0_triangle_count": 8500,
+    "draw_calls": 7,
+    "material_names": [
+      "kart_main",
+      "paint"
+    ],
+    "bounding_box_size_m": [
+      1.6,
+      1.50376,
+      2.6
+    ],
+    "bounding_box_min_m": [
+      -0.8,
+      0.0,
+      -1.24826
+    ],
+    "bounding_box_max_m": [
+      0.8,
+      1.50376,
+      1.35174
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "kart_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "14002c682eca465089b086707a0c33d4d90bfb0ded42bbaa870e14ff2162cca6"
+      },
+      {
+        "name": "kart_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "853fd540299932173b0c7c37712d17f9de1206c92124626686b6a95a7ca37ca5"
+      },
+      {
+        "name": "kart_metallic_roughness",
+        "width": 256,
+        "height": 256,
+        "sha256": "c8e4f5e727db260bcf5999b2bca5bcbb805e1f71a268216d798443f2b35e298c"
+      }
+    ],
+    "file_size_bytes": 499308
+  },
+  {
+    "file": "vehicles/snowmobile.glb",
+    "triangle_count": 6312,
+    "lod0_triangle_count": 6312,
+    "draw_calls": 6,
+    "material_names": [
+      "snowmobile_main",
+      "paint",
+      "belt"
+    ],
+    "bounding_box_size_m": [
+      1.6,
+      0.99009,
+      2.6
+    ],
+    "bounding_box_min_m": [
+      -0.8,
+      0.0,
+      -1.3
+    ],
+    "bounding_box_max_m": [
+      0.8,
+      0.99009,
+      1.3
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "snowmobile_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "a884bd0df190ed6ffeac92c3aeebb3539133887dc0ba009617f6f45d0e2232d0"
+      },
+      {
+        "name": "snowmobile_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "7684c3f96cdacf53a71962157d1fc67b62aa86187615cf9b96fe331d7ef14419"
+      }
+    ],
+    "file_size_bytes": 413444
+  },
+  {
+    "file": "vehicles/tractor.glb",
+    "triangle_count": 8500,
+    "lod0_triangle_count": 8500,
+    "draw_calls": 6,
+    "material_names": [
+      "tractor_main",
+      "paint"
+    ],
+    "bounding_box_size_m": [
+      1.6,
+      1.87675,
+      2.6
+    ],
+    "bounding_box_min_m": [
+      -0.8,
+      0.0,
+      -1.40335
+    ],
+    "bounding_box_max_m": [
+      0.8,
+      1.87675,
+      1.19665
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "tractor_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "1dc2e45cf3407acb048a3f9aca873e487147a3607fef24077ec9cca4f8ed2be5"
+      },
+      {
+        "name": "tractor_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "140d02323351c69b8cfc62b9abcfa90218df4401b97f017145bacd2107d8212a"
+      },
+      {
+        "name": "tractor_metallic_roughness",
+        "width": 256,
+        "height": 256,
+        "sha256": "9ecd7705cf11f58f9f77b8750a37ecf5bdea8c44fdbcfed03e35b4da9647d13e"
+      }
+    ],
+    "file_size_bytes": 514976
+  },
+  {
+    "file": "houses/house_bouncy.glb",
+    "triangle_count": 10020,
+    "lod0_triangle_count": 8054,
+    "draw_calls": 3,
+    "material_names": [
+      "house_bouncy_alpha",
+      "house_bouncy_main"
+    ],
+    "bounding_box_size_m": [
+      7.4781,
+      10.76148,
+      7.47717
+    ],
+    "bounding_box_min_m": [
+      -3.74344,
+      0.12939,
+      -3.74096
+    ],
+    "bounding_box_max_m": [
+      3.73466,
+      10.89088,
+      3.73621
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "house_bouncy_alpha_atlas",
+        "width": 512,
+        "height": 512,
+        "sha256": "6a985ed33b87f9f6f7609f7272f832691da9f1b742a6bc15eda740ae1bc72ca4"
+      },
+      {
+        "name": "house_bouncy_emissive",
+        "width": 512,
+        "height": 512,
+        "sha256": "ef18f6c95591e4617319593d988240b99101f45d318b542ae0e526e2b278faf0"
+      },
+      {
+        "name": "house_bouncy_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "430b255514b2026b3bd43ba443fa1085363ebe18f7936ea39e8f20521b47448b"
+      }
+    ],
+    "file_size_bytes": 867664
+  },
+  {
+    "file": "houses/house_frosty.glb",
+    "triangle_count": 9864,
+    "lod0_triangle_count": 7920,
+    "draw_calls": 3,
+    "material_names": [
+      "house_frosty_alpha",
+      "house_frosty_main"
+    ],
+    "bounding_box_size_m": [
+      7.28383,
+      9.8718,
+      7.3826
+    ],
+    "bounding_box_min_m": [
+      -3.64837,
+      0.0,
+      -3.64516
+    ],
+    "bounding_box_max_m": [
+      3.63546,
+      9.8718,
+      3.73744
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "house_frosty_alpha_atlas",
+        "width": 512,
+        "height": 512,
+        "sha256": "6a985ed33b87f9f6f7609f7272f832691da9f1b742a6bc15eda740ae1bc72ca4"
+      },
+      {
+        "name": "house_frosty_emissive",
+        "width": 512,
+        "height": 512,
+        "sha256": "692b6770cf1d013c3652b0f8edb25d0e1f918f41b15e6ef8bbf3602c18be4e77"
+      },
+      {
+        "name": "house_frosty_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "7e8e5775a67971716553496c8d9c0f06e68aef5944b595b09f65cbe296db0bdb"
+      }
+    ],
+    "file_size_bytes": 740396
+  },
+  {
+    "file": "houses/house_gear.glb",
+    "triangle_count": 9583,
+    "lod0_triangle_count": 7695,
+    "draw_calls": 3,
+    "material_names": [
+      "house_gear_alpha",
+      "house_gear_main"
+    ],
+    "bounding_box_size_m": [
+      7.28391,
+      9.8718,
+      7.2839
+    ],
+    "bounding_box_min_m": [
+      -3.64843,
+      0.0,
+      -3.64518
+    ],
+    "bounding_box_max_m": [
+      3.63548,
+      9.8718,
+      3.63871
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "house_gear_alpha_atlas",
+        "width": 512,
+        "height": 512,
+        "sha256": "6a985ed33b87f9f6f7609f7272f832691da9f1b742a6bc15eda740ae1bc72ca4"
+      },
+      {
+        "name": "house_gear_emissive",
+        "width": 512,
+        "height": 512,
+        "sha256": "ca309543f5cde450e8a087370235ab13daf353c213a0e279fda47c8e729acb88"
+      },
+      {
+        "name": "house_gear_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "59de1c507384ac793726be5b4664c37ae7c15c37fa8739f178faa4f944a94902"
+      }
+    ],
+    "file_size_bytes": 655160
+  },
+  {
+    "file": "houses/house_lava.glb",
+    "triangle_count": 9583,
+    "lod0_triangle_count": 7695,
+    "draw_calls": 3,
+    "material_names": [
+      "house_lava_alpha",
+      "house_lava_main"
+    ],
+    "bounding_box_size_m": [
+      7.28391,
+      9.8718,
+      7.2839
+    ],
+    "bounding_box_min_m": [
+      -3.64843,
+      0.0,
+      -3.64518
+    ],
+    "bounding_box_max_m": [
+      3.63548,
+      9.8718,
+      3.63871
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "house_lava_alpha_atlas",
+        "width": 512,
+        "height": 512,
+        "sha256": "6a985ed33b87f9f6f7609f7272f832691da9f1b742a6bc15eda740ae1bc72ca4"
+      },
+      {
+        "name": "house_lava_emissive",
+        "width": 512,
+        "height": 512,
+        "sha256": "6fdad844eaf94f92e2ac55800f7436a730712f77af2289dfbf7c3ad3421efe88"
+      },
+      {
+        "name": "house_lava_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "9627b7a3c467adf813cefd168da19f1bd662c7ff9dacef2b9395f201b2031a71"
+      }
+    ],
+    "file_size_bytes": 667532
+  },
+  {
+    "file": "houses/house_starry.glb",
+    "triangle_count": 9721,
+    "lod0_triangle_count": 7806,
+    "draw_calls": 3,
+    "material_names": [
+      "house_starry_alpha",
+      "house_starry_main"
+    ],
+    "bounding_box_size_m": [
+      6.95739,
+      9.61484,
+      7.0628
+    ],
+    "bounding_box_min_m": [
+      -3.47779,
+      0.0,
+      -3.4778
+    ],
+    "bounding_box_max_m": [
+      3.4796,
+      9.61484,
+      3.585
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "house_starry_alpha_atlas",
+        "width": 512,
+        "height": 512,
+        "sha256": "6a985ed33b87f9f6f7609f7272f832691da9f1b742a6bc15eda740ae1bc72ca4"
+      },
+      {
+        "name": "house_starry_emissive",
+        "width": 512,
+        "height": 512,
+        "sha256": "b5db617fa191ee33c88791c4c645cdcf3464a4ae0af8fe4e615c348d49968045"
+      },
+      {
+        "name": "house_starry_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "ded09623ec24c57a9d03a15b6d9edefdd28af05ebf370da4dc87160237503454"
+      }
+    ],
+    "file_size_bytes": 686332
+  },
+  {
+    "file": "houses/house_tower.glb",
+    "triangle_count": 9717,
+    "lod0_triangle_count": 7802,
+    "draw_calls": 3,
+    "material_names": [
+      "house_tower_alpha",
+      "house_tower_main"
+    ],
+    "bounding_box_size_m": [
+      7.38953,
+      15.7232,
+      7.38922
+    ],
+    "bounding_box_min_m": [
+      -3.70431,
+      0.0,
+      -3.69945
+    ],
+    "bounding_box_max_m": [
+      3.68521,
+      15.7232,
+      3.68977
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "house_tower_alpha_atlas",
+        "width": 512,
+        "height": 512,
+        "sha256": "6a985ed33b87f9f6f7609f7272f832691da9f1b742a6bc15eda740ae1bc72ca4"
+      },
+      {
+        "name": "house_tower_emissive",
+        "width": 512,
+        "height": 512,
+        "sha256": "cb860c61b77846e3b8dfab15cb952a9ef5a384aa03c92ba728f65f8a4057bf46"
+      },
+      {
+        "name": "house_tower_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "5dee29a3a4b2b01fac21d29d191d35861b0ffd9ea5ca05742665e99d2e8cfecf"
+      }
+    ],
+    "file_size_bytes": 671572
+  },
+  {
+    "file": "landmarks/landmark_crystal.glb",
+    "triangle_count": 6524,
+    "lod0_triangle_count": 5088,
+    "draw_calls": 1,
+    "material_names": [
+      "landmark_crystal_main"
+    ],
+    "bounding_box_size_m": [
+      5.67071,
+      13.79035,
+      4.2609
+    ],
+    "bounding_box_min_m": [
+      -2.83535,
+      -0.01985,
+      -2.13045
+    ],
+    "bounding_box_max_m": [
+      2.83535,
+      13.77049,
+      2.13045
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "landmark_crystal_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "a83258b832114e08abc15ca0edec90e96538c17eb0631c149909a081bef99ba9"
+      },
+      {
+        "name": "landmark_crystal_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "b83095fce3c4d49a2bda2f235b1a48b1e317072b3ee5bdac36b7fbf4d65d98a2"
+      }
+    ],
+    "file_size_bytes": 632120
+  },
+  {
+    "file": "landmarks/landmark_gear.glb",
+    "triangle_count": 8260,
+    "lod0_triangle_count": 6838,
+    "draw_calls": 2,
+    "material_names": [
+      "landmark_gear_main"
+    ],
+    "bounding_box_size_m": [
+      7.49465,
+      17.72924,
+      2.39998
+    ],
+    "bounding_box_min_m": [
+      -3.74726,
+      0.01804,
+      -1.19999
+    ],
+    "bounding_box_max_m": [
+      3.74739,
+      17.74727,
+      1.19999
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "landmark_gear_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "ca68ac0a7ee7d1d4fce96d5a8a3c457cace3fd19fe00c2fd15ac08ca9e338e1c"
+      }
+    ],
+    "file_size_bytes": 684312
+  },
+  {
+    "file": "landmarks/landmark_volcano.glb",
+    "triangle_count": 8456,
+    "lod0_triangle_count": 6652,
+    "draw_calls": 2,
+    "material_names": [
+      "landmark_volcano_main",
+      "lava"
+    ],
+    "bounding_box_size_m": [
+      24.0,
+      18.3,
+      24.0
+    ],
+    "bounding_box_min_m": [
+      -12.0,
+      0.0,
+      -12.0
+    ],
+    "bounding_box_max_m": [
+      12.0,
+      18.3,
+      12.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "landmark_volcano_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "727d39423fec7d1ce3e91988d0858d9c3b6677468de90c05144fd6ad84285952"
+      }
+    ],
+    "file_size_bytes": 950260
+  },
+  {
+    "file": "landmarks/landmark_yoyo.glb",
+    "triangle_count": 9036,
+    "lod0_triangle_count": 7702,
+    "draw_calls": 2,
+    "material_names": [
+      "landmark_yoyo_main"
+    ],
+    "bounding_box_size_m": [
+      6.80835,
+      21.98713,
+      1.0
+    ],
+    "bounding_box_min_m": [
+      -2.80835,
+      0.00644,
+      -0.5
+    ],
+    "bounding_box_max_m": [
+      4.0,
+      21.99356,
+      0.5
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "landmark_yoyo_basecolor",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "5c69666d1e93b6cd9c922419c8219d7ec2f427aad3ad7230b943a4c5941998b2"
+      }
+    ],
+    "file_size_bytes": 479604
+  },
+  {
+    "file": "pieces/boulder.glb",
+    "triangle_count": 1216,
+    "lod0_triangle_count": 1216,
+    "draw_calls": 1,
+    "material_names": [
+      "boulder_main"
+    ],
+    "bounding_box_size_m": [
+      3.2,
+      3.2,
+      3.2
+    ],
+    "bounding_box_min_m": [
+      -1.6,
+      0.0,
+      -1.6
+    ],
+    "bounding_box_max_m": [
+      1.6,
+      3.2,
+      1.6
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "boulder_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "b61019c84ba8ad9844dda5e6f8213ae460b5bde80703cd7d5e9ca2f04f996249"
+      }
+    ],
+    "file_size_bytes": 159856
+  },
+  {
+    "file": "pieces/button.glb",
+    "triangle_count": 2298,
+    "lod0_triangle_count": 2298,
+    "draw_calls": 2,
+    "material_names": [
+      "button_main"
+    ],
+    "bounding_box_size_m": [
+      4.4,
+      0.8,
+      4.4
+    ],
+    "bounding_box_min_m": [
+      -2.2,
+      0.0,
+      -2.2
+    ],
+    "bounding_box_max_m": [
+      2.2,
+      0.8,
+      2.2
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "button_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "1354d7e2605596a08d81bfb8f36cf82b85288130b6b976be9a1a5e1e5bd288f6"
+      }
+    ],
+    "file_size_bytes": 251948
+  },
+  {
+    "file": "pieces/conveyor.glb",
+    "triangle_count": 1988,
+    "lod0_triangle_count": 1988,
+    "draw_calls": 2,
+    "material_names": [
+      "belt",
+      "conveyor_main"
+    ],
+    "bounding_box_size_m": [
+      3.99479,
+      0.37187,
+      4.0
+    ],
+    "bounding_box_min_m": [
+      -1.9974,
+      0.00575,
+      -2.0
+    ],
+    "bounding_box_max_m": [
+      1.9974,
+      0.37762,
+      2.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "conveyor_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "7b2b301ce9216df10deeffa10b9f96c2bd085c3bb5e4fccfda44d7ed384c4bfa"
+      }
+    ],
+    "file_size_bytes": 64740
+  },
+  {
+    "file": "pieces/drawbridge_leaf.glb",
+    "triangle_count": 188,
+    "lod0_triangle_count": 188,
+    "draw_calls": 1,
+    "material_names": [
+      "drawbridge_leaf_main"
+    ],
+    "bounding_box_size_m": [
+      6.0,
+      0.24,
+      3.5
+    ],
+    "bounding_box_min_m": [
+      -3.0,
+      0.0,
+      0.0
+    ],
+    "bounding_box_max_m": [
+      3.0,
+      0.24,
+      3.5
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "drawbridge_leaf_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "fc436eff5bbe4bb53f58e2b8256f0622e52a682f25ffa5e407ae8661271434c4"
+      }
+    ],
+    "file_size_bytes": 172384
+  },
+  {
+    "file": "pieces/gate.glb",
+    "triangle_count": 1104,
+    "lod0_triangle_count": 1104,
+    "draw_calls": 2,
+    "material_names": [
+      "gate_main"
+    ],
+    "bounding_box_size_m": [
+      6.0,
+      3.0,
+      1.0
+    ],
+    "bounding_box_min_m": [
+      -3.0,
+      0.0,
+      -0.5
+    ],
+    "bounding_box_max_m": [
+      3.0,
+      3.0,
+      0.5
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gate_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "272ad37480fcb26884194c96056c478586cd0ae4eb5d95c9545f6103d3e6a7d7"
+      }
+    ],
+    "file_size_bytes": 197972
+  },
+  {
+    "file": "pieces/gear_roller.glb",
+    "triangle_count": 1798,
+    "lod0_triangle_count": 1798,
+    "draw_calls": 1,
+    "material_names": [
+      "gear_roller_main"
+    ],
+    "bounding_box_size_m": [
+      3.51948,
+      3.51857,
+      0.50001
+    ],
+    "bounding_box_min_m": [
+      -1.75974,
+      0.04047,
+      -0.25001
+    ],
+    "bounding_box_max_m": [
+      1.75974,
+      3.55904,
+      0.24999
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gear_roller_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "c4984def87e5ab18c79cba5b71374c3cca51eeb03c7105f30b5fcecb9fb9f25f"
+      }
+    ],
+    "file_size_bytes": 159488
+  },
+  {
+    "file": "pieces/portal.glb",
+    "triangle_count": 2300,
+    "lod0_triangle_count": 2300,
+    "draw_calls": 2,
+    "material_names": [
+      "swirl",
+      "portal_main"
+    ],
+    "bounding_box_size_m": [
+      5.0,
+      5.0,
+      0.6
+    ],
+    "bounding_box_min_m": [
+      -2.5,
+      0.0,
+      -0.3
+    ],
+    "bounding_box_max_m": [
+      2.5,
+      5.0,
+      0.3
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "portal_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "c2a5f8afdc0f00bc60cc701f9e971b679c94411312adb176e5ad112ae7d6965b"
+      }
+    ],
+    "file_size_bytes": 216340
+  },
+  {
+    "file": "pieces/spring_pad.glb",
+    "triangle_count": 2301,
+    "lod0_triangle_count": 2301,
+    "draw_calls": 3,
+    "material_names": [
+      "spring_pad_main"
+    ],
+    "bounding_box_size_m": [
+      4.00196,
+      1.2,
+      4.00196
+    ],
+    "bounding_box_min_m": [
+      -2.00098,
+      0.0,
+      -2.00098
+    ],
+    "bounding_box_max_m": [
+      2.00098,
+      1.2,
+      2.00098
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "spring_pad_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "e47252ecd2a10238d95fcb1036b30cee6a87524614c9124b9555abb71a469e38"
+      }
+    ],
+    "file_size_bytes": 226352
+  },
+  {
+    "file": "pieces/star_pickup.glb",
+    "triangle_count": 480,
+    "lod0_triangle_count": 480,
+    "draw_calls": 1,
+    "material_names": [
+      "star_pickup_main"
+    ],
+    "bounding_box_size_m": [
+      1.17669,
+      1.1191,
+      0.2
+    ],
+    "bounding_box_min_m": [
+      -0.58834,
+      0.09823,
+      -0.1
+    ],
+    "bounding_box_max_m": [
+      0.58834,
+      1.21732,
+      0.1
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "star_pickup_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "97b33db96c3a81e17c28c2eabbf2b1940f5844a1b1de85d9e00411c3810cc62e"
+      },
+      {
+        "name": "star_pickup_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "c744e2c270755593fbfa660d8905220155dda617d6c612021319e4082188058a"
+      }
+    ],
+    "file_size_bytes": 99840
+  },
+  {
+    "file": "pieces/stepping_stone.glb",
+    "triangle_count": 124,
+    "lod0_triangle_count": 124,
+    "draw_calls": 1,
+    "material_names": [
+      "stepping_stone_main"
+    ],
+    "bounding_box_size_m": [
+      2.0,
+      0.35,
+      2.0
+    ],
+    "bounding_box_min_m": [
+      -1.0,
+      -0.35,
+      -1.0
+    ],
+    "bounding_box_max_m": [
+      1.0,
+      0.0,
+      1.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "stepping_stone_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "67ed80e92ef3fbedff9800737bc0a749b7a222f2c471b3baad698fc415befcc7"
+      }
+    ],
+    "file_size_bytes": 119324
+  },
+  {
+    "file": "pieces/teleport_pad.glb",
+    "triangle_count": 1528,
+    "lod0_triangle_count": 1528,
+    "draw_calls": 3,
+    "material_names": [
+      "teleport_pad_main",
+      "pad_glow",
+      "swirl"
+    ],
+    "bounding_box_size_m": [
+      3.2,
+      0.32,
+      3.2
+    ],
+    "bounding_box_min_m": [
+      -1.6,
+      0.0,
+      -1.6
+    ],
+    "bounding_box_max_m": [
+      1.6,
+      0.32,
+      1.6
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "teleport_pad_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "50e6a0ccf086abd3217563c9cdbd2569e31fe7c51edba3a149b131a137397e81"
+      }
+    ],
+    "file_size_bytes": 186460
+  },
+  {
+    "file": "items/item_boots.glb",
+    "triangle_count": 1800,
+    "lod0_triangle_count": 1800,
+    "draw_calls": 1,
+    "material_names": [
+      "item_boots_main"
+    ],
+    "bounding_box_size_m": [
+      0.51684,
+      0.3953,
+      0.33159
+    ],
+    "bounding_box_min_m": [
+      -0.2585,
+      0.00457,
+      -0.10593
+    ],
+    "bounding_box_max_m": [
+      0.25834,
+      0.39987,
+      0.22566
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "item_boots_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "5e5afb1e5b2251e187254f45fdbd7b2ede6bd28ad3c64ba487c6e8bd39462123"
+      },
+      {
+        "name": "item_boots_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "d8645c0e6fc7231793c441ad3a1068c7613d3fb2a2bfab5af09c70b8e9b1ad8a"
+      }
+    ],
+    "file_size_bytes": 165652
+  },
+  {
+    "file": "items/item_hat.glb",
+    "triangle_count": 1800,
+    "lod0_triangle_count": 1800,
+    "draw_calls": 1,
+    "material_names": [
+      "item_hat_main"
+    ],
+    "bounding_box_size_m": [
+      0.55444,
+      0.57826,
+      0.45998
+    ],
+    "bounding_box_min_m": [
+      -0.27722,
+      0.01101,
+      -0.22999
+    ],
+    "bounding_box_max_m": [
+      0.27722,
+      0.58927,
+      0.22998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "item_hat_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "25a0789598d3468ca7751ce1df8ac7863e29c25e18066e219a92d8306aea52d2"
+      },
+      {
+        "name": "item_hat_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "5ad7551a2d8555e0239d988f2e804089063e82f7142d4e3f3e7588d7f567bfe2"
+      }
+    ],
+    "file_size_bytes": 128908
+  },
+  {
+    "file": "items/item_key.glb",
+    "triangle_count": 1016,
+    "lod0_triangle_count": 1016,
+    "draw_calls": 1,
+    "material_names": [
+      "item_key_main"
+    ],
+    "bounding_box_size_m": [
+      0.4,
+      0.58,
+      0.08
+    ],
+    "bounding_box_min_m": [
+      -0.2,
+      0.04,
+      -0.04
+    ],
+    "bounding_box_max_m": [
+      0.2,
+      0.62,
+      0.04
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "item_key_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "b6f8391cdfd83b872a28c2235d9fde46d0bbbb520e7f6b9160e492a10eca6b57"
+      },
+      {
+        "name": "item_key_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "3a2f5da44b36576a6a6a9ff32a7c6a39837a69a687250ee88e98ca401505821c"
+      }
+    ],
+    "file_size_bytes": 113932
+  },
+  {
+    "file": "items/item_map.glb",
+    "triangle_count": 1800,
+    "lod0_triangle_count": 1800,
+    "draw_calls": 1,
+    "material_names": [
+      "item_map_main"
+    ],
+    "bounding_box_size_m": [
+      0.5616,
+      0.43521,
+      0.08028
+    ],
+    "bounding_box_min_m": [
+      -0.2808,
+      0.0407,
+      -0.04014
+    ],
+    "bounding_box_max_m": [
+      0.2808,
+      0.47591,
+      0.04014
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "item_map_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "d47fde8aef9265970a9b625d954c821412199ce720ad481cd23be2d041257750"
+      },
+      {
+        "name": "item_map_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "d27d80996178030611e753a5468f4899768e838cafade850ecfceb22344ee617"
+      }
+    ],
+    "file_size_bytes": 122544
+  },
+  {
+    "file": "items/item_scale.glb",
+    "triangle_count": 1216,
+    "lod0_triangle_count": 1216,
+    "draw_calls": 1,
+    "material_names": [
+      "item_scale_main"
+    ],
+    "bounding_box_size_m": [
+      0.5,
+      0.6,
+      0.12
+    ],
+    "bounding_box_min_m": [
+      -0.25,
+      -0.05,
+      -0.06
+    ],
+    "bounding_box_max_m": [
+      0.25,
+      0.55,
+      0.06
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "item_scale_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "bd2622a9a0a95b749e6fa5cae5188a69502a899523dd7645e13d45a4be296957"
+      },
+      {
+        "name": "item_scale_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "cb223ea571f7031c8a1a77203f63743a7b18f127333f5518354c2ae193219ec8"
+      }
+    ],
+    "file_size_bytes": 116016
+  },
+  {
+    "file": "items/item_string.glb",
+    "triangle_count": 1800,
+    "lod0_triangle_count": 1800,
+    "draw_calls": 1,
+    "material_names": [
+      "item_string_main"
+    ],
+    "bounding_box_size_m": [
+      0.50106,
+      0.51993,
+      0.50106
+    ],
+    "bounding_box_min_m": [
+      -0.25053,
+      0.02002,
+      -0.25053
+    ],
+    "bounding_box_max_m": [
+      0.25053,
+      0.53995,
+      0.25053
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "item_string_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "7f459fcb7c5d3375b3aa464eedf224fecca3898fbfcfae952c7930c8c16beb1e"
+      },
+      {
+        "name": "item_string_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "c15fc06bb1b494d885cb6fe1514847a25ed28e56b66afcf353a4a71d9d05bcc0"
+      }
+    ],
+    "file_size_bytes": 176452
+  },
+  {
+    "file": "rooms/beam_emitter.glb",
+    "triangle_count": 1400,
+    "lod0_triangle_count": 1400,
+    "draw_calls": 1,
+    "material_names": [
+      "beam_emitter_main"
+    ],
+    "bounding_box_size_m": [
+      0.60704,
+      0.84114,
+      1.03186
+    ],
+    "bounding_box_min_m": [
+      -0.30352,
+      0.0,
+      -0.38199
+    ],
+    "bounding_box_max_m": [
+      0.30352,
+      0.84115,
+      0.64987
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "beam_emitter_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "2326a18686c2b29272d3403129059c0e8ab1c4b6aeb624a3495d283fd98cbc8e"
+      }
+    ],
+    "file_size_bytes": 153712
+  },
+  {
+    "file": "rooms/candle_big.glb",
+    "triangle_count": 124,
+    "lod0_triangle_count": 124,
+    "draw_calls": 1,
+    "material_names": [
+      "candle_big_main"
+    ],
+    "bounding_box_size_m": [
+      0.4,
+      0.9,
+      0.4
+    ],
+    "bounding_box_min_m": [
+      -0.2,
+      0.0,
+      -0.2
+    ],
+    "bounding_box_max_m": [
+      0.2,
+      0.9,
+      0.2
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "candle_big_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "0b0f924efe3f1f26a9a8fb909438eaaa2d25938e8de217e5beaa99aac428573e"
+      }
+    ],
+    "file_size_bytes": 94836
+  },
+  {
+    "file": "rooms/cobweb_corner.glb",
+    "triangle_count": 2,
+    "lod0_triangle_count": 2,
+    "draw_calls": 1,
+    "material_names": [
+      "room_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      2.0,
+      2.0,
+      0.0
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "bounding_box_max_m": [
+      2.0,
+      2.0,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "room_props_alpha_atlas",
+        "width": 512,
+        "height": 512,
+        "sha256": "6a985ed33b87f9f6f7609f7272f832691da9f1b742a6bc15eda740ae1bc72ca4"
+      }
+    ],
+    "file_size_bytes": 31548
+  },
+  {
+    "file": "rooms/crystal_target.glb",
+    "triangle_count": 168,
+    "lod0_triangle_count": 168,
+    "draw_calls": 2,
+    "material_names": [
+      "crystal_target_main",
+      "crystal_glow"
+    ],
+    "bounding_box_size_m": [
+      0.9,
+      1.8,
+      0.9
+    ],
+    "bounding_box_min_m": [
+      -0.45,
+      0.0,
+      -0.45
+    ],
+    "bounding_box_max_m": [
+      0.45,
+      1.8,
+      0.45
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "crystal_target_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "ba54346554cd6a6ef43b1764272cb91281f86894dd4867b4f28dfdcd2fa0f3c2"
+      }
+    ],
+    "file_size_bytes": 117988
+  },
+  {
+    "file": "rooms/hex_stone.glb",
+    "triangle_count": 40,
+    "lod0_triangle_count": 40,
+    "draw_calls": 2,
+    "material_names": [
+      "hex_stone_main",
+      "hex_top"
+    ],
+    "bounding_box_size_m": [
+      2.0,
+      0.36,
+      1.73205
+    ],
+    "bounding_box_min_m": [
+      -1.0,
+      -0.35,
+      -0.86603
+    ],
+    "bounding_box_max_m": [
+      1.0,
+      0.01,
+      0.86603
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "hex_stone_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "5fac21e17ef624d98ff2b1136c650c7ee90b35043733396b1aa075f8a07cac57"
+      }
+    ],
+    "file_size_bytes": 143908
+  },
+  {
+    "file": "rooms/ice_rock.glb",
+    "triangle_count": 1216,
+    "lod0_triangle_count": 1216,
+    "draw_calls": 1,
+    "material_names": [
+      "ice_rock_main"
+    ],
+    "bounding_box_size_m": [
+      1.8,
+      1.8,
+      1.8
+    ],
+    "bounding_box_min_m": [
+      -0.9,
+      0.0,
+      -0.9
+    ],
+    "bounding_box_max_m": [
+      0.9,
+      1.8,
+      0.9
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "ice_rock_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "1563dbd2c6600c2c795fbb03ce08e56d8c9410957b43280e872083fbed2eacc4"
+      }
+    ],
+    "file_size_bytes": 155396
+  },
+  {
+    "file": "rooms/lever.glb",
+    "triangle_count": 1396,
+    "lod0_triangle_count": 1396,
+    "draw_calls": 3,
+    "material_names": [
+      "lever_main",
+      "lever_lamp"
+    ],
+    "bounding_box_size_m": [
+      0.8,
+      1.52617,
+      0.7
+    ],
+    "bounding_box_min_m": [
+      -0.4,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.4,
+      1.52617,
+      0.35
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "lever_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "3c1b30ba6a4f75f23fcc6978642ed7663bd25ad4dd8992f666703eab588c86e6"
+      }
+    ],
+    "file_size_bytes": 73056
+  },
+  {
+    "file": "rooms/mirror_stand.glb",
+    "triangle_count": 1398,
+    "lod0_triangle_count": 1398,
+    "draw_calls": 2,
+    "material_names": [
+      "mirror_glass",
+      "mirror_main"
+    ],
+    "bounding_box_size_m": [
+      2.2,
+      2.15,
+      0.7818
+    ],
+    "bounding_box_min_m": [
+      -1.1,
+      -0.0,
+      -0.3909
+    ],
+    "bounding_box_max_m": [
+      1.1,
+      2.15,
+      0.3909
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "mirror_stand_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "790c253cb1b5d7778f101cb5e40e4afd7cd2817c6d174768d8ed7386520e7a7e"
+      }
+    ],
+    "file_size_bytes": 102820
+  },
+  {
+    "file": "rooms/room_floor_ice.glb",
+    "triangle_count": 188,
+    "lod0_triangle_count": 188,
+    "draw_calls": 1,
+    "material_names": [
+      "room_floor_ice_main"
+    ],
+    "bounding_box_size_m": [
+      2.0,
+      0.1,
+      2.0
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.0,
+      -2.0
+    ],
+    "bounding_box_max_m": [
+      2.0,
+      0.1,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "room_floor_ice_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "fde16a17083b5766b9cb9fb91cf63ec402b937deb96c3833e4f6f7f6905b6568"
+      }
+    ],
+    "file_size_bytes": 113764
+  },
+  {
+    "file": "rooms/room_floor_magic.glb",
+    "triangle_count": 188,
+    "lod0_triangle_count": 188,
+    "draw_calls": 1,
+    "material_names": [
+      "room_floor_magic_main"
+    ],
+    "bounding_box_size_m": [
+      2.0,
+      0.1,
+      2.0
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.0,
+      -2.0
+    ],
+    "bounding_box_max_m": [
+      2.0,
+      0.1,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "room_floor_magic_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "ade1c03d5c80e40d4991d4cdfbdff5b64234204201a4a1f58b0412c052769ba4"
+      }
+    ],
+    "file_size_bytes": 109900
+  },
+  {
+    "file": "rooms/room_floor_stone.glb",
+    "triangle_count": 188,
+    "lod0_triangle_count": 188,
+    "draw_calls": 1,
+    "material_names": [
+      "room_floor_stone_main"
+    ],
+    "bounding_box_size_m": [
+      2.0,
+      0.1,
+      2.0
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.0,
+      -2.0
+    ],
+    "bounding_box_max_m": [
+      2.0,
+      0.1,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "room_floor_stone_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "24bdd176ebec162a36e9648506db88775dc4619a99e216da321fcf14fe854d61"
+      }
+    ],
+    "file_size_bytes": 103384
+  },
+  {
+    "file": "rooms/room_floor_wood.glb",
+    "triangle_count": 188,
+    "lod0_triangle_count": 188,
+    "draw_calls": 1,
+    "material_names": [
+      "room_floor_wood_main"
+    ],
+    "bounding_box_size_m": [
+      2.0,
+      0.1,
+      2.0
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.0,
+      -2.0
+    ],
+    "bounding_box_max_m": [
+      2.0,
+      0.1,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "room_floor_wood_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "bb6b33177c78eba7cc27a92d9efb8d81d6518896ca3d0d726fb64a1fb037399c"
+      }
+    ],
+    "file_size_bytes": 104800
+  },
+  {
+    "file": "rooms/room_torch.glb",
+    "triangle_count": 404,
+    "lod0_triangle_count": 404,
+    "draw_calls": 1,
+    "material_names": [
+      "room_torch_main"
+    ],
+    "bounding_box_size_m": [
+      0.26688,
+      0.94486,
+      0.19645
+    ],
+    "bounding_box_min_m": [
+      -0.13344,
+      0.02293,
+      -0.09822
+    ],
+    "bounding_box_max_m": [
+      0.13344,
+      0.96779,
+      0.09822
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "room_torch_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "d289e9ed2491735be84b2701589d72134a928efcd2460ce75626334e9f190b5b"
+      }
+    ],
+    "file_size_bytes": 87532
+  },
+  {
+    "file": "rooms/room_wall_ice.glb",
+    "triangle_count": 188,
+    "lod0_triangle_count": 188,
+    "draw_calls": 1,
+    "material_names": [
+      "room_wall_ice_main"
+    ],
+    "bounding_box_size_m": [
+      2.0,
+      4.0,
+      0.24
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.0,
+      -0.24
+    ],
+    "bounding_box_max_m": [
+      2.0,
+      4.0,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "room_wall_ice_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "f60242e4abdfd251e71cbb050db8d8eeab4bff7932129bb31467ce672287b616"
+      }
+    ],
+    "file_size_bytes": 160516
+  },
+  {
+    "file": "rooms/room_wall_lava.glb",
+    "triangle_count": 188,
+    "lod0_triangle_count": 188,
+    "draw_calls": 1,
+    "material_names": [
+      "room_wall_lava_main"
+    ],
+    "bounding_box_size_m": [
+      2.0,
+      4.0,
+      0.24
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.0,
+      -0.24
+    ],
+    "bounding_box_max_m": [
+      2.0,
+      4.0,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "room_wall_lava_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "7aea37992b4445843b84ae4b728e41d2e34c536c559e27a34e41965887c49cd8"
+      }
+    ],
+    "file_size_bytes": 135036
+  },
+  {
+    "file": "rooms/room_wall_lever.glb",
+    "triangle_count": 188,
+    "lod0_triangle_count": 188,
+    "draw_calls": 1,
+    "material_names": [
+      "room_wall_lever_main"
+    ],
+    "bounding_box_size_m": [
+      2.0,
+      4.0,
+      0.24
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.0,
+      -0.24
+    ],
+    "bounding_box_max_m": [
+      2.0,
+      4.0,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "room_wall_lever_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "7aea37992b4445843b84ae4b728e41d2e34c536c559e27a34e41965887c49cd8"
+      }
+    ],
+    "file_size_bytes": 135036
+  },
+  {
+    "file": "rooms/room_wall_mirror.glb",
+    "triangle_count": 188,
+    "lod0_triangle_count": 188,
+    "draw_calls": 1,
+    "material_names": [
+      "room_wall_mirror_main"
+    ],
+    "bounding_box_size_m": [
+      2.0,
+      4.0,
+      0.24
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.0,
+      -0.24
+    ],
+    "bounding_box_max_m": [
+      2.0,
+      4.0,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "room_wall_mirror_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "7aea37992b4445843b84ae4b728e41d2e34c536c559e27a34e41965887c49cd8"
+      }
+    ],
+    "file_size_bytes": 135040
+  },
+  {
+    "file": "rooms/snowflake_pickup.glb",
+    "triangle_count": 264,
+    "lod0_triangle_count": 264,
+    "draw_calls": 1,
+    "material_names": [
+      "snowflake_pickup_main"
+    ],
+    "bounding_box_size_m": [
+      1.0,
+      0.90103,
+      0.07
+    ],
+    "bounding_box_min_m": [
+      -0.5,
+      0.04949,
+      -0.035
+    ],
+    "bounding_box_max_m": [
+      0.5,
+      0.95051,
+      0.035
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "snowflake_pickup_basecolor",
+        "width": 512,
+        "height": 512,
+        "sha256": "48c538953aca524dfeb946358cb8451ed8c66eabc8fa46fcb40d66c4a8537714"
+      }
+    ],
+    "file_size_bytes": 114084
+  },
+  {
+    "file": "scenery/bouncy/bush_a.glb",
+    "triangle_count": 284,
+    "lod0_triangle_count": 272,
+    "draw_calls": 1,
+    "material_names": [
+      "bouncy_props"
+    ],
+    "bounding_box_size_m": [
+      1.9991,
+      1.18649,
+      0.79973
+    ],
+    "bounding_box_min_m": [
+      -0.99955,
+      0.01322,
+      -0.39994
+    ],
+    "bounding_box_max_m": [
+      0.99955,
+      1.19971,
+      0.39978
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "bouncy_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c6caf5be10a329861570861061b0d622b0823dfce734ab917e99ef18e4904064"
+      }
+    ],
+    "file_size_bytes": 430896
+  },
+  {
+    "file": "scenery/bouncy/bush_b.glb",
+    "triangle_count": 284,
+    "lod0_triangle_count": 272,
+    "draw_calls": 1,
+    "material_names": [
+      "bouncy_props"
+    ],
+    "bounding_box_size_m": [
+      1.9991,
+      1.18649,
+      0.79973
+    ],
+    "bounding_box_min_m": [
+      -0.99955,
+      0.01322,
+      -0.39994
+    ],
+    "bounding_box_max_m": [
+      0.99955,
+      1.19971,
+      0.39978
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "bouncy_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c6caf5be10a329861570861061b0d622b0823dfce734ab917e99ef18e4904064"
+      }
+    ],
+    "file_size_bytes": 430896
+  },
+  {
+    "file": "scenery/bouncy/fence_wood.glb",
+    "triangle_count": 162,
+    "lod0_triangle_count": 150,
+    "draw_calls": 1,
+    "material_names": [
+      "bouncy_props"
+    ],
+    "bounding_box_size_m": [
+      1.9955,
+      1.09927,
+      0.03825
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.0,
+      -0.03825
+    ],
+    "bounding_box_max_m": [
+      1.9955,
+      1.09927,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "bouncy_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c6caf5be10a329861570861061b0d622b0823dfce734ab917e99ef18e4904064"
+      }
+    ],
+    "file_size_bytes": 430372
+  },
+  {
+    "file": "scenery/bouncy/flower_patch.glb",
+    "triangle_count": 60,
+    "lod0_triangle_count": 60,
+    "draw_calls": 1,
+    "material_names": [
+      "bouncy_props"
+    ],
+    "bounding_box_size_m": [
+      0.75482,
+      0.42339,
+      0.13317
+    ],
+    "bounding_box_min_m": [
+      -0.34295,
+      0.0,
+      -0.06588
+    ],
+    "bounding_box_max_m": [
+      0.41187,
+      0.42339,
+      0.06729
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "bouncy_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c6caf5be10a329861570861061b0d622b0823dfce734ab917e99ef18e4904064"
+      }
+    ],
+    "file_size_bytes": 425000
+  },
+  {
+    "file": "scenery/bouncy/grass_tuft_a.glb",
+    "triangle_count": 20,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "bouncy_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.73998,
+      0.7,
+      0.73998
+    ],
+    "bounding_box_min_m": [
+      -0.35,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.38998,
+      0.7,
+      0.38998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "bouncy_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c6caf5be10a329861570861061b0d622b0823dfce734ab917e99ef18e4904064"
+      }
+    ],
+    "file_size_bytes": 422712
+  },
+  {
+    "file": "scenery/bouncy/grass_tuft_b.glb",
+    "triangle_count": 20,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "bouncy_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.73998,
+      0.7,
+      0.73998
+    ],
+    "bounding_box_min_m": [
+      -0.35,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.38998,
+      0.7,
+      0.38998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "bouncy_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c6caf5be10a329861570861061b0d622b0823dfce734ab917e99ef18e4904064"
+      }
+    ],
+    "file_size_bytes": 422712
+  },
+  {
+    "file": "scenery/bouncy/hedge.glb",
+    "triangle_count": 284,
+    "lod0_triangle_count": 272,
+    "draw_calls": 1,
+    "material_names": [
+      "bouncy_props"
+    ],
+    "bounding_box_size_m": [
+      1.9991,
+      1.18649,
+      0.79973
+    ],
+    "bounding_box_min_m": [
+      -0.99955,
+      0.01322,
+      -0.39994
+    ],
+    "bounding_box_max_m": [
+      0.99955,
+      1.19971,
+      0.39978
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "bouncy_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c6caf5be10a329861570861061b0d622b0823dfce734ab917e99ef18e4904064"
+      }
+    ],
+    "file_size_bytes": 430896
+  },
+  {
+    "file": "scenery/bouncy/mushroom_bouncy.glb",
+    "triangle_count": 505,
+    "lod0_triangle_count": 493,
+    "draw_calls": 1,
+    "material_names": [
+      "bouncy_props"
+    ],
+    "bounding_box_size_m": [
+      1.29932,
+      1.16707,
+      1.12991
+    ],
+    "bounding_box_min_m": [
+      -0.64966,
+      0.01315,
+      -0.56495
+    ],
+    "bounding_box_max_m": [
+      0.64966,
+      1.18022,
+      0.56495
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "bouncy_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c6caf5be10a329861570861061b0d622b0823dfce734ab917e99ef18e4904064"
+      }
+    ],
+    "file_size_bytes": 438592
+  },
+  {
+    "file": "scenery/bouncy/tree_round_a.glb",
+    "triangle_count": 1824,
+    "lod0_triangle_count": 1395,
+    "draw_calls": 2,
+    "material_names": [
+      "bouncy_props",
+      "bouncy_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      3.32025,
+      4.88199,
+      2.28158
+    ],
+    "bounding_box_min_m": [
+      -1.68453,
+      0.0,
+      -1.09018
+    ],
+    "bounding_box_max_m": [
+      1.63573,
+      4.88199,
+      1.1914
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "bouncy_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c6caf5be10a329861570861061b0d622b0823dfce734ab917e99ef18e4904064"
+      }
+    ],
+    "file_size_bytes": 484856
+  },
+  {
+    "file": "scenery/bouncy/tree_round_b.glb",
+    "triangle_count": 1824,
+    "lod0_triangle_count": 1395,
+    "draw_calls": 2,
+    "material_names": [
+      "bouncy_props",
+      "bouncy_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      3.32025,
+      4.88199,
+      2.28158
+    ],
+    "bounding_box_min_m": [
+      -1.68453,
+      0.0,
+      -1.09018
+    ],
+    "bounding_box_max_m": [
+      1.63573,
+      4.88199,
+      1.1914
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "bouncy_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c6caf5be10a329861570861061b0d622b0823dfce734ab917e99ef18e4904064"
+      }
+    ],
+    "file_size_bytes": 484952
+  },
+  {
+    "file": "scenery/bouncy/tree_round_c.glb",
+    "triangle_count": 1824,
+    "lod0_triangle_count": 1395,
+    "draw_calls": 2,
+    "material_names": [
+      "bouncy_props",
+      "bouncy_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      3.32009,
+      4.97146,
+      2.27925
+    ],
+    "bounding_box_min_m": [
+      -1.68437,
+      0.0,
+      -1.08785
+    ],
+    "bounding_box_max_m": [
+      1.63573,
+      4.97146,
+      1.1914
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "bouncy_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c6caf5be10a329861570861061b0d622b0823dfce734ab917e99ef18e4904064"
+      }
+    ],
+    "file_size_bytes": 486456
+  },
+  {
+    "file": "scenery/bouncy/windmill_small.glb",
+    "triangle_count": 1826,
+    "lod0_triangle_count": 1396,
+    "draw_calls": 1,
+    "material_names": [
+      "bouncy_props"
+    ],
+    "bounding_box_size_m": [
+      3.00964,
+      4.11228,
+      1.34874
+    ],
+    "bounding_box_min_m": [
+      -1.5048,
+      0.01445,
+      -0.6745
+    ],
+    "bounding_box_max_m": [
+      1.50485,
+      4.12673,
+      0.67424
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "bouncy_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c6caf5be10a329861570861061b0d622b0823dfce734ab917e99ef18e4904064"
+      }
+    ],
+    "file_size_bytes": 485812
+  },
+  {
+    "file": "scenery/everywhere/grass_tuft_a.glb",
+    "triangle_count": 20,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "everywhere_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.73998,
+      0.7,
+      0.73998
+    ],
+    "bounding_box_min_m": [
+      -0.35,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.38998,
+      0.7,
+      0.38998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "everywhere_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "9b3e20dd9cd3229123aef3af3379f950a28dea8a3d4b6e70f12816ac6a525df1"
+      }
+    ],
+    "file_size_bytes": 428548
+  },
+  {
+    "file": "scenery/everywhere/grass_tuft_b.glb",
+    "triangle_count": 20,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "everywhere_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.73998,
+      0.7,
+      0.73998
+    ],
+    "bounding_box_min_m": [
+      -0.35,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.38998,
+      0.7,
+      0.38998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "everywhere_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "9b3e20dd9cd3229123aef3af3379f950a28dea8a3d4b6e70f12816ac6a525df1"
+      }
+    ],
+    "file_size_bytes": 428548
+  },
+  {
+    "file": "scenery/everywhere/pebble.glb",
+    "triangle_count": 32,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "everywhere_props"
+    ],
+    "bounding_box_size_m": [
+      2.13656,
+      1.51487,
+      1.81682
+    ],
+    "bounding_box_min_m": [
+      -1.09931,
+      0.0,
+      -0.85927
+    ],
+    "bounding_box_max_m": [
+      1.03725,
+      1.51487,
+      0.95755
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "everywhere_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "9b3e20dd9cd3229123aef3af3379f950a28dea8a3d4b6e70f12816ac6a525df1"
+      }
+    ],
+    "file_size_bytes": 430136
+  },
+  {
+    "file": "scenery/frosty/cliff_snow.glb",
+    "triangle_count": 3262,
+    "lod0_triangle_count": 2500,
+    "draw_calls": 1,
+    "material_names": [
+      "frosty_props"
+    ],
+    "bounding_box_size_m": [
+      9.95485,
+      5.98018,
+      3.59728
+    ],
+    "bounding_box_min_m": [
+      -4.97739,
+      0.0,
+      -1.79864
+    ],
+    "bounding_box_max_m": [
+      4.97746,
+      5.98018,
+      1.79864
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "frosty_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c35e94453014076a7275712537002048b3b486f264224261004fa359aa89d0ae"
+      }
+    ],
+    "file_size_bytes": 886228
+  },
+  {
+    "file": "scenery/frosty/grass_tuft_a.glb",
+    "triangle_count": 20,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "frosty_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.73998,
+      0.7,
+      0.73998
+    ],
+    "bounding_box_min_m": [
+      -0.35,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.38998,
+      0.7,
+      0.38998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "frosty_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c35e94453014076a7275712537002048b3b486f264224261004fa359aa89d0ae"
+      }
+    ],
+    "file_size_bytes": 802496
+  },
+  {
+    "file": "scenery/frosty/grass_tuft_b.glb",
+    "triangle_count": 20,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "frosty_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.73998,
+      0.7,
+      0.73998
+    ],
+    "bounding_box_min_m": [
+      -0.35,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.38998,
+      0.7,
+      0.38998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "frosty_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c35e94453014076a7275712537002048b3b486f264224261004fa359aa89d0ae"
+      }
+    ],
+    "file_size_bytes": 802496
+  },
+  {
+    "file": "scenery/frosty/ice_rock_a.glb",
+    "triangle_count": 508,
+    "lod0_triangle_count": 496,
+    "draw_calls": 1,
+    "material_names": [
+      "frosty_props"
+    ],
+    "bounding_box_size_m": [
+      2.15377,
+      1.57851,
+      1.66576
+    ],
+    "bounding_box_min_m": [
+      -1.0771,
+      0.0,
+      -0.83006
+    ],
+    "bounding_box_max_m": [
+      1.07666,
+      1.57851,
+      0.8357
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "frosty_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c35e94453014076a7275712537002048b3b486f264224261004fa359aa89d0ae"
+      }
+    ],
+    "file_size_bytes": 816768
+  },
+  {
+    "file": "scenery/frosty/ice_rock_b.glb",
+    "triangle_count": 511,
+    "lod0_triangle_count": 499,
+    "draw_calls": 1,
+    "material_names": [
+      "frosty_props"
+    ],
+    "bounding_box_size_m": [
+      2.3436,
+      1.76207,
+      1.67436
+    ],
+    "bounding_box_min_m": [
+      -1.17184,
+      0.0,
+      -0.8373
+    ],
+    "bounding_box_max_m": [
+      1.17176,
+      1.76207,
+      0.83707
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "frosty_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c35e94453014076a7275712537002048b3b486f264224261004fa359aa89d0ae"
+      }
+    ],
+    "file_size_bytes": 816728
+  },
+  {
+    "file": "scenery/frosty/igloo.glb",
+    "triangle_count": 1960,
+    "lod0_triangle_count": 1499,
+    "draw_calls": 1,
+    "material_names": [
+      "frosty_props"
+    ],
+    "bounding_box_size_m": [
+      3.9728,
+      3.57562,
+      4.3937
+    ],
+    "bounding_box_min_m": [
+      -1.98468,
+      0.0,
+      -1.99395
+    ],
+    "bounding_box_max_m": [
+      1.98812,
+      3.57562,
+      2.39975
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "frosty_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c35e94453014076a7275712537002048b3b486f264224261004fa359aa89d0ae"
+      }
+    ],
+    "file_size_bytes": 856316
+  },
+  {
+    "file": "scenery/frosty/rock_snow_a.glb",
+    "triangle_count": 508,
+    "lod0_triangle_count": 496,
+    "draw_calls": 1,
+    "material_names": [
+      "frosty_props"
+    ],
+    "bounding_box_size_m": [
+      2.1589,
+      1.66716,
+      1.66818
+    ],
+    "bounding_box_min_m": [
+      -1.07669,
+      0.0,
+      -0.83364
+    ],
+    "bounding_box_max_m": [
+      1.08221,
+      1.66716,
+      0.83454
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "frosty_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c35e94453014076a7275712537002048b3b486f264224261004fa359aa89d0ae"
+      }
+    ],
+    "file_size_bytes": 819108
+  },
+  {
+    "file": "scenery/frosty/rock_snow_b.glb",
+    "triangle_count": 511,
+    "lod0_triangle_count": 499,
+    "draw_calls": 1,
+    "material_names": [
+      "frosty_props"
+    ],
+    "bounding_box_size_m": [
+      2.34112,
+      1.76389,
+      1.67292
+    ],
+    "bounding_box_min_m": [
+      -1.17064,
+      0.0,
+      -0.8372
+    ],
+    "bounding_box_max_m": [
+      1.17048,
+      1.76389,
+      0.83572
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "frosty_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c35e94453014076a7275712537002048b3b486f264224261004fa359aa89d0ae"
+      }
+    ],
+    "file_size_bytes": 819544
+  },
+  {
+    "file": "scenery/frosty/rock_snow_c.glb",
+    "triangle_count": 510,
+    "lod0_triangle_count": 498,
+    "draw_calls": 1,
+    "material_names": [
+      "frosty_props"
+    ],
+    "bounding_box_size_m": [
+      2.53253,
+      1.95026,
+      1.67306
+    ],
+    "bounding_box_min_m": [
+      -1.26283,
+      0.0,
+      -0.8369
+    ],
+    "bounding_box_max_m": [
+      1.2697,
+      1.95026,
+      0.83615
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "frosty_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c35e94453014076a7275712537002048b3b486f264224261004fa359aa89d0ae"
+      }
+    ],
+    "file_size_bytes": 818444
+  },
+  {
+    "file": "scenery/frosty/snowdrift.glb",
+    "triangle_count": 161,
+    "lod0_triangle_count": 149,
+    "draw_calls": 1,
+    "material_names": [
+      "frosty_props"
+    ],
+    "bounding_box_size_m": [
+      2.1875,
+      1.57232,
+      1.66187
+    ],
+    "bounding_box_min_m": [
+      -1.09337,
+      0.0,
+      -0.82714
+    ],
+    "bounding_box_max_m": [
+      1.09413,
+      1.57232,
+      0.83472
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "frosty_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c35e94453014076a7275712537002048b3b486f264224261004fa359aa89d0ae"
+      }
+    ],
+    "file_size_bytes": 808192
+  },
+  {
+    "file": "scenery/frosty/tree_pine_a.glb",
+    "triangle_count": 1820,
+    "lod0_triangle_count": 1391,
+    "draw_calls": 2,
+    "material_names": [
+      "frosty_props",
+      "frosty_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      2.38605,
+      4.95583,
+      2.38994
+    ],
+    "bounding_box_min_m": [
+      -1.18869,
+      0.01046,
+      -1.1905
+    ],
+    "bounding_box_max_m": [
+      1.19736,
+      4.96629,
+      1.19944
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "frosty_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c35e94453014076a7275712537002048b3b486f264224261004fa359aa89d0ae"
+      }
+    ],
+    "file_size_bytes": 892316
+  },
+  {
+    "file": "scenery/frosty/tree_pine_b.glb",
+    "triangle_count": 1820,
+    "lod0_triangle_count": 1391,
+    "draw_calls": 2,
+    "material_names": [
+      "frosty_props",
+      "frosty_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      2.38605,
+      4.95583,
+      2.38994
+    ],
+    "bounding_box_min_m": [
+      -1.18869,
+      0.01046,
+      -1.1905
+    ],
+    "bounding_box_max_m": [
+      1.19736,
+      4.96629,
+      1.19944
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "frosty_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c35e94453014076a7275712537002048b3b486f264224261004fa359aa89d0ae"
+      }
+    ],
+    "file_size_bytes": 892316
+  },
+  {
+    "file": "scenery/frosty/tree_pine_c.glb",
+    "triangle_count": 1822,
+    "lod0_triangle_count": 1393,
+    "draw_calls": 2,
+    "material_names": [
+      "frosty_props",
+      "frosty_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      2.3891,
+      4.96001,
+      2.38992
+    ],
+    "bounding_box_min_m": [
+      -1.19195,
+      0.01046,
+      -1.1905
+    ],
+    "bounding_box_max_m": [
+      1.19715,
+      4.97047,
+      1.19942
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "frosty_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "c35e94453014076a7275712537002048b3b486f264224261004fa359aa89d0ae"
+      }
+    ],
+    "file_size_bytes": 889640
+  },
+  {
+    "file": "scenery/gear/barrel.glb",
+    "triangle_count": 272,
+    "lod0_triangle_count": 260,
+    "draw_calls": 1,
+    "material_names": [
+      "gear_props"
+    ],
+    "bounding_box_size_m": [
+      0.56332,
+      0.97674,
+      0.5633
+    ],
+    "bounding_box_min_m": [
+      -0.28166,
+      0.02165,
+      -0.28164
+    ],
+    "bounding_box_max_m": [
+      0.28166,
+      0.99839,
+      0.28166
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gear_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "07a926cf1bb8d96ca501aeccd4e661b1269743d279cdafbd3fe6f90db14b0e2b"
+      },
+      {
+        "name": "gear_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "387325ada0bcc4020ce8753a99f7290415851a441d1eb9539d0e3f3c073af6eb"
+      }
+    ],
+    "file_size_bytes": 402372
+  },
+  {
+    "file": "scenery/gear/building_a.glb",
+    "triangle_count": 3181,
+    "lod0_triangle_count": 2438,
+    "draw_calls": 1,
+    "material_names": [
+      "gear_props"
+    ],
+    "bounding_box_size_m": [
+      4.19456,
+      8.88667,
+      4.19456
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.01331,
+      -4.19456
+    ],
+    "bounding_box_max_m": [
+      4.19456,
+      8.89998,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gear_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "07a926cf1bb8d96ca501aeccd4e661b1269743d279cdafbd3fe6f90db14b0e2b"
+      },
+      {
+        "name": "gear_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "387325ada0bcc4020ce8753a99f7290415851a441d1eb9539d0e3f3c073af6eb"
+      }
+    ],
+    "file_size_bytes": 486136
+  },
+  {
+    "file": "scenery/gear/building_b.glb",
+    "triangle_count": 3180,
+    "lod0_triangle_count": 2438,
+    "draw_calls": 1,
+    "material_names": [
+      "gear_props"
+    ],
+    "bounding_box_size_m": [
+      4.19392,
+      10.88668,
+      4.19394
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.01331,
+      -4.19394
+    ],
+    "bounding_box_max_m": [
+      4.19392,
+      10.89999,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gear_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "07a926cf1bb8d96ca501aeccd4e661b1269743d279cdafbd3fe6f90db14b0e2b"
+      },
+      {
+        "name": "gear_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "387325ada0bcc4020ce8753a99f7290415851a441d1eb9539d0e3f3c073af6eb"
+      }
+    ],
+    "file_size_bytes": 486576
+  },
+  {
+    "file": "scenery/gear/building_c.glb",
+    "triangle_count": 3180,
+    "lod0_triangle_count": 2437,
+    "draw_calls": 1,
+    "material_names": [
+      "gear_props"
+    ],
+    "bounding_box_size_m": [
+      4.1922,
+      12.88668,
+      4.1922
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.01331,
+      -4.1922
+    ],
+    "bounding_box_max_m": [
+      4.1922,
+      12.89999,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gear_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "07a926cf1bb8d96ca501aeccd4e661b1269743d279cdafbd3fe6f90db14b0e2b"
+      },
+      {
+        "name": "gear_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "387325ada0bcc4020ce8753a99f7290415851a441d1eb9539d0e3f3c073af6eb"
+      }
+    ],
+    "file_size_bytes": 488524
+  },
+  {
+    "file": "scenery/gear/building_d.glb",
+    "triangle_count": 3181,
+    "lod0_triangle_count": 2438,
+    "draw_calls": 1,
+    "material_names": [
+      "gear_props"
+    ],
+    "bounding_box_size_m": [
+      4.19456,
+      14.88666,
+      4.19455
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.01331,
+      -4.19455
+    ],
+    "bounding_box_max_m": [
+      4.19456,
+      14.89997,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gear_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "07a926cf1bb8d96ca501aeccd4e661b1269743d279cdafbd3fe6f90db14b0e2b"
+      },
+      {
+        "name": "gear_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "387325ada0bcc4020ce8753a99f7290415851a441d1eb9539d0e3f3c073af6eb"
+      }
+    ],
+    "file_size_bytes": 484784
+  },
+  {
+    "file": "scenery/gear/crate_a.glb",
+    "triangle_count": 190,
+    "lod0_triangle_count": 178,
+    "draw_calls": 1,
+    "material_names": [
+      "gear_props"
+    ],
+    "bounding_box_size_m": [
+      0.99712,
+      0.9744,
+      0.99719
+    ],
+    "bounding_box_min_m": [
+      -0.49857,
+      0.02485,
+      -0.49866
+    ],
+    "bounding_box_max_m": [
+      0.49855,
+      0.99924,
+      0.49853
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gear_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "07a926cf1bb8d96ca501aeccd4e661b1269743d279cdafbd3fe6f90db14b0e2b"
+      },
+      {
+        "name": "gear_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "387325ada0bcc4020ce8753a99f7290415851a441d1eb9539d0e3f3c073af6eb"
+      }
+    ],
+    "file_size_bytes": 400088
+  },
+  {
+    "file": "scenery/gear/crate_b.glb",
+    "triangle_count": 190,
+    "lod0_triangle_count": 178,
+    "draw_calls": 1,
+    "material_names": [
+      "gear_props"
+    ],
+    "bounding_box_size_m": [
+      0.99712,
+      0.9744,
+      0.99719
+    ],
+    "bounding_box_min_m": [
+      -0.49857,
+      0.02485,
+      -0.49866
+    ],
+    "bounding_box_max_m": [
+      0.49855,
+      0.99924,
+      0.49853
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gear_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "07a926cf1bb8d96ca501aeccd4e661b1269743d279cdafbd3fe6f90db14b0e2b"
+      },
+      {
+        "name": "gear_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "387325ada0bcc4020ce8753a99f7290415851a441d1eb9539d0e3f3c073af6eb"
+      }
+    ],
+    "file_size_bytes": 400088
+  },
+  {
+    "file": "scenery/gear/fence_metal.glb",
+    "triangle_count": 162,
+    "lod0_triangle_count": 150,
+    "draw_calls": 1,
+    "material_names": [
+      "gear_props"
+    ],
+    "bounding_box_size_m": [
+      1.9955,
+      1.09927,
+      0.03825
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.0,
+      -0.03825
+    ],
+    "bounding_box_max_m": [
+      1.9955,
+      1.09927,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gear_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "07a926cf1bb8d96ca501aeccd4e661b1269743d279cdafbd3fe6f90db14b0e2b"
+      },
+      {
+        "name": "gear_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "387325ada0bcc4020ce8753a99f7290415851a441d1eb9539d0e3f3c073af6eb"
+      }
+    ],
+    "file_size_bytes": 402236
+  },
+  {
+    "file": "scenery/gear/gear_small.glb",
+    "triangle_count": 402,
+    "lod0_triangle_count": 390,
+    "draw_calls": 1,
+    "material_names": [
+      "gear_props"
+    ],
+    "bounding_box_size_m": [
+      1.22483,
+      1.16723,
+      0.23877
+    ],
+    "bounding_box_min_m": [
+      -0.61242,
+      0.00015,
+      -0.11939
+    ],
+    "bounding_box_max_m": [
+      0.61242,
+      1.16738,
+      0.11939
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gear_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "07a926cf1bb8d96ca501aeccd4e661b1269743d279cdafbd3fe6f90db14b0e2b"
+      },
+      {
+        "name": "gear_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "387325ada0bcc4020ce8753a99f7290415851a441d1eb9539d0e3f3c073af6eb"
+      }
+    ],
+    "file_size_bytes": 407116
+  },
+  {
+    "file": "scenery/gear/grass_tuft_a.glb",
+    "triangle_count": 20,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "gear_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.73998,
+      0.7,
+      0.73998
+    ],
+    "bounding_box_min_m": [
+      -0.35,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.38998,
+      0.7,
+      0.38998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gear_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "07a926cf1bb8d96ca501aeccd4e661b1269743d279cdafbd3fe6f90db14b0e2b"
+      },
+      {
+        "name": "gear_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "387325ada0bcc4020ce8753a99f7290415851a441d1eb9539d0e3f3c073af6eb"
+      }
+    ],
+    "file_size_bytes": 394576
+  },
+  {
+    "file": "scenery/gear/grass_tuft_b.glb",
+    "triangle_count": 20,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "gear_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.73998,
+      0.7,
+      0.73998
+    ],
+    "bounding_box_min_m": [
+      -0.35,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.38998,
+      0.7,
+      0.38998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gear_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "07a926cf1bb8d96ca501aeccd4e661b1269743d279cdafbd3fe6f90db14b0e2b"
+      },
+      {
+        "name": "gear_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "387325ada0bcc4020ce8753a99f7290415851a441d1eb9539d0e3f3c073af6eb"
+      }
+    ],
+    "file_size_bytes": 394576
+  },
+  {
+    "file": "scenery/gear/pipe_bend.glb",
+    "triangle_count": 302,
+    "lod0_triangle_count": 290,
+    "draw_calls": 1,
+    "material_names": [
+      "gear_props"
+    ],
+    "bounding_box_size_m": [
+      1.07344,
+      1.14855,
+      0.35715
+    ],
+    "bounding_box_min_m": [
+      -0.17708,
+      0.01808,
+      -0.17853
+    ],
+    "bounding_box_max_m": [
+      0.89636,
+      1.16662,
+      0.17862
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gear_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "07a926cf1bb8d96ca501aeccd4e661b1269743d279cdafbd3fe6f90db14b0e2b"
+      },
+      {
+        "name": "gear_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "387325ada0bcc4020ce8753a99f7290415851a441d1eb9539d0e3f3c073af6eb"
+      }
+    ],
+    "file_size_bytes": 403988
+  },
+  {
+    "file": "scenery/gear/robot_tree.glb",
+    "triangle_count": 1816,
+    "lod0_triangle_count": 1389,
+    "draw_calls": 2,
+    "material_names": [
+      "gear_props",
+      "gear_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      2.38445,
+      4.5436,
+      0.41531
+    ],
+    "bounding_box_min_m": [
+      -1.24094,
+      0.00377,
+      -0.20684
+    ],
+    "bounding_box_max_m": [
+      1.1435,
+      4.54737,
+      0.20847
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gear_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "07a926cf1bb8d96ca501aeccd4e661b1269743d279cdafbd3fe6f90db14b0e2b"
+      },
+      {
+        "name": "gear_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "387325ada0bcc4020ce8753a99f7290415851a441d1eb9539d0e3f3c073af6eb"
+      }
+    ],
+    "file_size_bytes": 465180
+  },
+  {
+    "file": "scenery/gear/street_lamp.glb",
+    "triangle_count": 412,
+    "lod0_triangle_count": 400,
+    "draw_calls": 1,
+    "material_names": [
+      "gear_props"
+    ],
+    "bounding_box_size_m": [
+      0.57341,
+      4.30478,
+      0.57499
+    ],
+    "bounding_box_min_m": [
+      -0.28668,
+      0.0,
+      -0.28748
+    ],
+    "bounding_box_max_m": [
+      0.28673,
+      4.30478,
+      0.28751
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gear_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "07a926cf1bb8d96ca501aeccd4e661b1269743d279cdafbd3fe6f90db14b0e2b"
+      },
+      {
+        "name": "gear_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "387325ada0bcc4020ce8753a99f7290415851a441d1eb9539d0e3f3c073af6eb"
+      }
+    ],
+    "file_size_bytes": 407020
+  },
+  {
+    "file": "scenery/gecko/flower_a.glb",
+    "triangle_count": 42,
+    "lod0_triangle_count": 42,
+    "draw_calls": 1,
+    "material_names": [
+      "gecko_props"
+    ],
+    "bounding_box_size_m": [
+      0.13399,
+      0.01275,
+      0.12823
+    ],
+    "bounding_box_min_m": [
+      -0.34136,
+      0.00542,
+      -0.06412
+    ],
+    "bounding_box_max_m": [
+      -0.20737,
+      0.01817,
+      0.06412
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gecko_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4e8000753c8aba85de734328e01b97e061b29ff2de7c9a45957a6de77bd7d5ab"
+      }
+    ],
+    "file_size_bytes": 418684
+  },
+  {
+    "file": "scenery/gecko/flower_b.glb",
+    "triangle_count": 42,
+    "lod0_triangle_count": 42,
+    "draw_calls": 1,
+    "material_names": [
+      "gecko_props"
+    ],
+    "bounding_box_size_m": [
+      0.13399,
+      0.01275,
+      0.12823
+    ],
+    "bounding_box_min_m": [
+      -0.34136,
+      0.00542,
+      -0.06412
+    ],
+    "bounding_box_max_m": [
+      -0.20737,
+      0.01817,
+      0.06412
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gecko_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4e8000753c8aba85de734328e01b97e061b29ff2de7c9a45957a6de77bd7d5ab"
+      }
+    ],
+    "file_size_bytes": 418684
+  },
+  {
+    "file": "scenery/gecko/flower_c.glb",
+    "triangle_count": 42,
+    "lod0_triangle_count": 42,
+    "draw_calls": 1,
+    "material_names": [
+      "gecko_props"
+    ],
+    "bounding_box_size_m": [
+      0.13399,
+      0.01275,
+      0.12823
+    ],
+    "bounding_box_min_m": [
+      -0.34136,
+      0.00542,
+      -0.06412
+    ],
+    "bounding_box_max_m": [
+      -0.20737,
+      0.01817,
+      0.06412
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gecko_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4e8000753c8aba85de734328e01b97e061b29ff2de7c9a45957a6de77bd7d5ab"
+      }
+    ],
+    "file_size_bytes": 418684
+  },
+  {
+    "file": "scenery/gecko/gecko_house.glb",
+    "triangle_count": 3181,
+    "lod0_triangle_count": 2438,
+    "draw_calls": 1,
+    "material_names": [
+      "gecko_props"
+    ],
+    "bounding_box_size_m": [
+      4.19393,
+      4.88666,
+      4.19393
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.01331,
+      -4.19393
+    ],
+    "bounding_box_max_m": [
+      4.19393,
+      4.89997,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gecko_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4e8000753c8aba85de734328e01b97e061b29ff2de7c9a45957a6de77bd7d5ab"
+      }
+    ],
+    "file_size_bytes": 513544
+  },
+  {
+    "file": "scenery/gecko/grass_tuft_a.glb",
+    "triangle_count": 20,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "gecko_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.73998,
+      0.7,
+      0.73998
+    ],
+    "bounding_box_min_m": [
+      -0.35,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.38998,
+      0.7,
+      0.38998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gecko_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4e8000753c8aba85de734328e01b97e061b29ff2de7c9a45957a6de77bd7d5ab"
+      }
+    ],
+    "file_size_bytes": 417576
+  },
+  {
+    "file": "scenery/gecko/grass_tuft_b.glb",
+    "triangle_count": 20,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "gecko_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.73998,
+      0.7,
+      0.73998
+    ],
+    "bounding_box_min_m": [
+      -0.35,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.38998,
+      0.7,
+      0.38998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gecko_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4e8000753c8aba85de734328e01b97e061b29ff2de7c9a45957a6de77bd7d5ab"
+      }
+    ],
+    "file_size_bytes": 417576
+  },
+  {
+    "file": "scenery/gecko/picnic_blanket.glb",
+    "triangle_count": 54,
+    "lod0_triangle_count": 54,
+    "draw_calls": 1,
+    "material_names": [
+      "gecko_props"
+    ],
+    "bounding_box_size_m": [
+      1.7386,
+      0.0,
+      1.7386
+    ],
+    "bounding_box_min_m": [
+      -0.8693,
+      0.0,
+      -0.8693
+    ],
+    "bounding_box_max_m": [
+      0.8693,
+      0.0,
+      0.8693
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gecko_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4e8000753c8aba85de734328e01b97e061b29ff2de7c9a45957a6de77bd7d5ab"
+      }
+    ],
+    "file_size_bytes": 418628
+  },
+  {
+    "file": "scenery/gecko/tree_lush_a.glb",
+    "triangle_count": 1824,
+    "lod0_triangle_count": 1395,
+    "draw_calls": 2,
+    "material_names": [
+      "gecko_props",
+      "gecko_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      3.32025,
+      4.88199,
+      2.28158
+    ],
+    "bounding_box_min_m": [
+      -1.68453,
+      0.0,
+      -1.09018
+    ],
+    "bounding_box_max_m": [
+      1.63573,
+      4.88199,
+      1.1914
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gecko_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4e8000753c8aba85de734328e01b97e061b29ff2de7c9a45957a6de77bd7d5ab"
+      }
+    ],
+    "file_size_bytes": 479716
+  },
+  {
+    "file": "scenery/gecko/tree_lush_b.glb",
+    "triangle_count": 1824,
+    "lod0_triangle_count": 1395,
+    "draw_calls": 2,
+    "material_names": [
+      "gecko_props",
+      "gecko_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      3.32025,
+      4.88199,
+      2.28158
+    ],
+    "bounding_box_min_m": [
+      -1.68453,
+      0.0,
+      -1.09018
+    ],
+    "bounding_box_max_m": [
+      1.63573,
+      4.88199,
+      1.1914
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "gecko_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4e8000753c8aba85de734328e01b97e061b29ff2de7c9a45957a6de77bd7d5ab"
+      }
+    ],
+    "file_size_bytes": 479716
+  },
+  {
+    "file": "scenery/lava/bones_silly.glb",
+    "triangle_count": 114,
+    "lod0_triangle_count": 102,
+    "draw_calls": 1,
+    "material_names": [
+      "lava_props"
+    ],
+    "bounding_box_size_m": [
+      1.43919,
+      0.00266,
+      0.52853
+    ],
+    "bounding_box_min_m": [
+      -0.7196,
+      0.0,
+      -0.26427
+    ],
+    "bounding_box_max_m": [
+      0.7196,
+      0.00266,
+      0.26427
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "lava_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "8d79fa1c3b151f46ae317cff639985071822ca9a04c1fe888417b686781ea8b1"
+      }
+    ],
+    "file_size_bytes": 418616
+  },
+  {
+    "file": "scenery/lava/grass_tuft_a.glb",
+    "triangle_count": 20,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "lava_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.73998,
+      0.7,
+      0.73998
+    ],
+    "bounding_box_min_m": [
+      -0.35,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.38998,
+      0.7,
+      0.38998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "lava_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "8d79fa1c3b151f46ae317cff639985071822ca9a04c1fe888417b686781ea8b1"
+      }
+    ],
+    "file_size_bytes": 411392
+  },
+  {
+    "file": "scenery/lava/grass_tuft_b.glb",
+    "triangle_count": 20,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "lava_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.73998,
+      0.7,
+      0.73998
+    ],
+    "bounding_box_min_m": [
+      -0.35,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.38998,
+      0.7,
+      0.38998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "lava_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "8d79fa1c3b151f46ae317cff639985071822ca9a04c1fe888417b686781ea8b1"
+      }
+    ],
+    "file_size_bytes": 411392
+  },
+  {
+    "file": "scenery/lava/lava_crack.glb",
+    "triangle_count": 52,
+    "lod0_triangle_count": 52,
+    "draw_calls": 1,
+    "material_names": [
+      "lava"
+    ],
+    "bounding_box_size_m": [
+      1.7386,
+      0.0,
+      0.83859
+    ],
+    "bounding_box_min_m": [
+      -0.8693,
+      0.0,
+      -0.4193
+    ],
+    "bounding_box_max_m": [
+      0.8693,
+      0.0,
+      0.4193
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "lava_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "8d79fa1c3b151f46ae317cff639985071822ca9a04c1fe888417b686781ea8b1"
+      }
+    ],
+    "file_size_bytes": 412396
+  },
+  {
+    "file": "scenery/lava/rock_volcanic_a.glb",
+    "triangle_count": 508,
+    "lod0_triangle_count": 496,
+    "draw_calls": 1,
+    "material_names": [
+      "lava_props"
+    ],
+    "bounding_box_size_m": [
+      2.15377,
+      1.57851,
+      1.66576
+    ],
+    "bounding_box_min_m": [
+      -1.0771,
+      0.0,
+      -0.83006
+    ],
+    "bounding_box_max_m": [
+      1.07666,
+      1.57851,
+      0.8357
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "lava_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "8d79fa1c3b151f46ae317cff639985071822ca9a04c1fe888417b686781ea8b1"
+      }
+    ],
+    "file_size_bytes": 425664
+  },
+  {
+    "file": "scenery/lava/rock_volcanic_b.glb",
+    "triangle_count": 511,
+    "lod0_triangle_count": 499,
+    "draw_calls": 1,
+    "material_names": [
+      "lava_props"
+    ],
+    "bounding_box_size_m": [
+      2.3436,
+      1.76207,
+      1.67436
+    ],
+    "bounding_box_min_m": [
+      -1.17184,
+      0.0,
+      -0.8373
+    ],
+    "bounding_box_max_m": [
+      1.17176,
+      1.76207,
+      0.83707
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "lava_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "8d79fa1c3b151f46ae317cff639985071822ca9a04c1fe888417b686781ea8b1"
+      }
+    ],
+    "file_size_bytes": 425624
+  },
+  {
+    "file": "scenery/lava/rock_volcanic_c.glb",
+    "triangle_count": 507,
+    "lod0_triangle_count": 495,
+    "draw_calls": 1,
+    "material_names": [
+      "lava_props"
+    ],
+    "bounding_box_size_m": [
+      2.53286,
+      1.94955,
+      1.67651
+    ],
+    "bounding_box_min_m": [
+      -1.26316,
+      0.01152,
+      -0.8369
+    ],
+    "bounding_box_max_m": [
+      1.2697,
+      1.96107,
+      0.83961
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "lava_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "8d79fa1c3b151f46ae317cff639985071822ca9a04c1fe888417b686781ea8b1"
+      }
+    ],
+    "file_size_bytes": 425744
+  },
+  {
+    "file": "scenery/lava/steam_vent.glb",
+    "triangle_count": 110,
+    "lod0_triangle_count": 98,
+    "draw_calls": 1,
+    "material_names": [
+      "lava_props"
+    ],
+    "bounding_box_size_m": [
+      0.01427,
+      0.91527,
+      0.01427
+    ],
+    "bounding_box_min_m": [
+      -0.00713,
+      0.0,
+      -0.00713
+    ],
+    "bounding_box_max_m": [
+      0.00713,
+      0.91527,
+      0.00713
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "lava_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "8d79fa1c3b151f46ae317cff639985071822ca9a04c1fe888417b686781ea8b1"
+      }
+    ],
+    "file_size_bytes": 415960
+  },
+  {
+    "file": "scenery/lava/tree_dead_a.glb",
+    "triangle_count": 1038,
+    "lod0_triangle_count": 790,
+    "draw_calls": 2,
+    "material_names": [
+      "lava_props",
+      "lava_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      1.8,
+      3.95663,
+      0.41531
+    ],
+    "bounding_box_min_m": [
+      -0.9,
+      0.00377,
+      -0.20684
+    ],
+    "bounding_box_max_m": [
+      0.9,
+      3.9604,
+      0.20847
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "lava_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "8d79fa1c3b151f46ae317cff639985071822ca9a04c1fe888417b686781ea8b1"
+      }
+    ],
+    "file_size_bytes": 451232
+  },
+  {
+    "file": "scenery/lava/tree_dead_b.glb",
+    "triangle_count": 1038,
+    "lod0_triangle_count": 790,
+    "draw_calls": 2,
+    "material_names": [
+      "lava_props",
+      "lava_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      1.8,
+      4.48409,
+      0.41531
+    ],
+    "bounding_box_min_m": [
+      -0.9,
+      0.00377,
+      -0.20684
+    ],
+    "bounding_box_max_m": [
+      0.9,
+      4.48786,
+      0.20847
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "lava_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "8d79fa1c3b151f46ae317cff639985071822ca9a04c1fe888417b686781ea8b1"
+      }
+    ],
+    "file_size_bytes": 450820
+  },
+  {
+    "file": "scenery/starry/fern.glb",
+    "triangle_count": 162,
+    "lod0_triangle_count": 150,
+    "draw_calls": 2,
+    "material_names": [
+      "starry_props",
+      "starry_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.49147,
+      0.915,
+      0.06186
+    ],
+    "bounding_box_min_m": [
+      -0.24574,
+      0.0,
+      -0.03096
+    ],
+    "bounding_box_max_m": [
+      0.24574,
+      0.915,
+      0.0309
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "starry_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "f351145a9877d86d3192b6287ffbfd473646ea8b633825861c75335c3e6e6e65"
+      },
+      {
+        "name": "starry_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4c1b8db55a719429b9708237eb985d50db446250a7e4174444e1c5c2c25bb95b"
+      }
+    ],
+    "file_size_bytes": 414588
+  },
+  {
+    "file": "scenery/starry/firefly_jar.glb",
+    "triangle_count": 311,
+    "lod0_triangle_count": 299,
+    "draw_calls": 1,
+    "material_names": [
+      "starry_props"
+    ],
+    "bounding_box_size_m": [
+      0.57542,
+      1.32349,
+      0.57726
+    ],
+    "bounding_box_min_m": [
+      -0.28771,
+      0.0,
+      -0.28866
+    ],
+    "bounding_box_max_m": [
+      0.28771,
+      1.32349,
+      0.2886
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "starry_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "f351145a9877d86d3192b6287ffbfd473646ea8b633825861c75335c3e6e6e65"
+      },
+      {
+        "name": "starry_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4c1b8db55a719429b9708237eb985d50db446250a7e4174444e1c5c2c25bb95b"
+      }
+    ],
+    "file_size_bytes": 417480
+  },
+  {
+    "file": "scenery/starry/grass_tuft_a.glb",
+    "triangle_count": 20,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "starry_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.73998,
+      0.7,
+      0.73998
+    ],
+    "bounding_box_min_m": [
+      -0.35,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.38998,
+      0.7,
+      0.38998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "starry_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "f351145a9877d86d3192b6287ffbfd473646ea8b633825861c75335c3e6e6e65"
+      },
+      {
+        "name": "starry_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4c1b8db55a719429b9708237eb985d50db446250a7e4174444e1c5c2c25bb95b"
+      }
+    ],
+    "file_size_bytes": 407164
+  },
+  {
+    "file": "scenery/starry/grass_tuft_b.glb",
+    "triangle_count": 20,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "starry_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.73998,
+      0.7,
+      0.73998
+    ],
+    "bounding_box_min_m": [
+      -0.35,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.38998,
+      0.7,
+      0.38998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "starry_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "f351145a9877d86d3192b6287ffbfd473646ea8b633825861c75335c3e6e6e65"
+      },
+      {
+        "name": "starry_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4c1b8db55a719429b9708237eb985d50db446250a7e4174444e1c5c2c25bb95b"
+      }
+    ],
+    "file_size_bytes": 407164
+  },
+  {
+    "file": "scenery/starry/hedge_dark.glb",
+    "triangle_count": 284,
+    "lod0_triangle_count": 272,
+    "draw_calls": 1,
+    "material_names": [
+      "starry_props"
+    ],
+    "bounding_box_size_m": [
+      1.9991,
+      1.18649,
+      0.79973
+    ],
+    "bounding_box_min_m": [
+      -0.99955,
+      0.01322,
+      -0.39994
+    ],
+    "bounding_box_max_m": [
+      0.99955,
+      1.19971,
+      0.39978
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "starry_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "f351145a9877d86d3192b6287ffbfd473646ea8b633825861c75335c3e6e6e65"
+      },
+      {
+        "name": "starry_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4c1b8db55a719429b9708237eb985d50db446250a7e4174444e1c5c2c25bb95b"
+      }
+    ],
+    "file_size_bytes": 415348
+  },
+  {
+    "file": "scenery/starry/log.glb",
+    "triangle_count": 290,
+    "lod0_triangle_count": 278,
+    "draw_calls": 1,
+    "material_names": [
+      "starry_props"
+    ],
+    "bounding_box_size_m": [
+      2.00114,
+      0.66681,
+      0.64951
+    ],
+    "bounding_box_min_m": [
+      -1.00057,
+      0.00013,
+      -0.32475
+    ],
+    "bounding_box_max_m": [
+      1.00057,
+      0.66693,
+      0.32475
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "starry_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "f351145a9877d86d3192b6287ffbfd473646ea8b633825861c75335c3e6e6e65"
+      },
+      {
+        "name": "starry_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4c1b8db55a719429b9708237eb985d50db446250a7e4174444e1c5c2c25bb95b"
+      }
+    ],
+    "file_size_bytes": 415808
+  },
+  {
+    "file": "scenery/starry/mushroom_glow_a.glb",
+    "triangle_count": 505,
+    "lod0_triangle_count": 493,
+    "draw_calls": 1,
+    "material_names": [
+      "starry_props"
+    ],
+    "bounding_box_size_m": [
+      1.29932,
+      1.16707,
+      1.12991
+    ],
+    "bounding_box_min_m": [
+      -0.64966,
+      0.01315,
+      -0.56495
+    ],
+    "bounding_box_max_m": [
+      0.64966,
+      1.18022,
+      0.56495
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "starry_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "f351145a9877d86d3192b6287ffbfd473646ea8b633825861c75335c3e6e6e65"
+      },
+      {
+        "name": "starry_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4c1b8db55a719429b9708237eb985d50db446250a7e4174444e1c5c2c25bb95b"
+      }
+    ],
+    "file_size_bytes": 423044
+  },
+  {
+    "file": "scenery/starry/mushroom_glow_b.glb",
+    "triangle_count": 505,
+    "lod0_triangle_count": 493,
+    "draw_calls": 1,
+    "material_names": [
+      "starry_props"
+    ],
+    "bounding_box_size_m": [
+      1.29932,
+      1.16707,
+      1.12991
+    ],
+    "bounding_box_min_m": [
+      -0.64966,
+      0.01315,
+      -0.56495
+    ],
+    "bounding_box_max_m": [
+      0.64966,
+      1.18022,
+      0.56495
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "starry_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "f351145a9877d86d3192b6287ffbfd473646ea8b633825861c75335c3e6e6e65"
+      },
+      {
+        "name": "starry_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4c1b8db55a719429b9708237eb985d50db446250a7e4174444e1c5c2c25bb95b"
+      }
+    ],
+    "file_size_bytes": 423044
+  },
+  {
+    "file": "scenery/starry/mushroom_glow_c.glb",
+    "triangle_count": 505,
+    "lod0_triangle_count": 493,
+    "draw_calls": 1,
+    "material_names": [
+      "starry_props"
+    ],
+    "bounding_box_size_m": [
+      1.29932,
+      1.16707,
+      1.12991
+    ],
+    "bounding_box_min_m": [
+      -0.64966,
+      0.01315,
+      -0.56495
+    ],
+    "bounding_box_max_m": [
+      0.64966,
+      1.18022,
+      0.56495
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "starry_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "f351145a9877d86d3192b6287ffbfd473646ea8b633825861c75335c3e6e6e65"
+      },
+      {
+        "name": "starry_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4c1b8db55a719429b9708237eb985d50db446250a7e4174444e1c5c2c25bb95b"
+      }
+    ],
+    "file_size_bytes": 423044
+  },
+  {
+    "file": "scenery/starry/tree_crooked_a.glb",
+    "triangle_count": 1824,
+    "lod0_triangle_count": 1395,
+    "draw_calls": 2,
+    "material_names": [
+      "starry_props",
+      "starry_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      3.32025,
+      4.88199,
+      2.28158
+    ],
+    "bounding_box_min_m": [
+      -1.68453,
+      0.0,
+      -1.09018
+    ],
+    "bounding_box_max_m": [
+      1.63573,
+      4.88199,
+      1.1914
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "starry_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "f351145a9877d86d3192b6287ffbfd473646ea8b633825861c75335c3e6e6e65"
+      },
+      {
+        "name": "starry_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4c1b8db55a719429b9708237eb985d50db446250a7e4174444e1c5c2c25bb95b"
+      }
+    ],
+    "file_size_bytes": 469420
+  },
+  {
+    "file": "scenery/starry/tree_crooked_b.glb",
+    "triangle_count": 1824,
+    "lod0_triangle_count": 1395,
+    "draw_calls": 2,
+    "material_names": [
+      "starry_props",
+      "starry_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      3.32025,
+      4.88199,
+      2.28158
+    ],
+    "bounding_box_min_m": [
+      -1.68453,
+      0.0,
+      -1.09018
+    ],
+    "bounding_box_max_m": [
+      1.63573,
+      4.88199,
+      1.1914
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "starry_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "f351145a9877d86d3192b6287ffbfd473646ea8b633825861c75335c3e6e6e65"
+      },
+      {
+        "name": "starry_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4c1b8db55a719429b9708237eb985d50db446250a7e4174444e1c5c2c25bb95b"
+      }
+    ],
+    "file_size_bytes": 469388
+  },
+  {
+    "file": "scenery/starry/tree_crooked_c.glb",
+    "triangle_count": 1824,
+    "lod0_triangle_count": 1395,
+    "draw_calls": 2,
+    "material_names": [
+      "starry_props",
+      "starry_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      3.32009,
+      4.97146,
+      2.27925
+    ],
+    "bounding_box_min_m": [
+      -1.68437,
+      0.0,
+      -1.08785
+    ],
+    "bounding_box_max_m": [
+      1.63573,
+      4.97146,
+      1.1914
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "starry_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "f351145a9877d86d3192b6287ffbfd473646ea8b633825861c75335c3e6e6e65"
+      },
+      {
+        "name": "starry_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "4c1b8db55a719429b9708237eb985d50db446250a7e4174444e1c5c2c25bb95b"
+      }
+    ],
+    "file_size_bytes": 470988
+  },
+  {
+    "file": "scenery/tower/banner.glb",
+    "triangle_count": 299,
+    "lod0_triangle_count": 287,
+    "draw_calls": 1,
+    "material_names": [
+      "tower_props"
+    ],
+    "bounding_box_size_m": [
+      1.03578,
+      1.92313,
+      0.03
+    ],
+    "bounding_box_min_m": [
+      -0.51789,
+      0.0,
+      -0.015
+    ],
+    "bounding_box_max_m": [
+      0.51789,
+      1.92313,
+      0.015
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "tower_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "d60d8df256f15275992ddad4affb11b956a28e640de607f8325b0ea07ad47569"
+      },
+      {
+        "name": "tower_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "cc8acc942ffb02cf919df7750cb6fe82237715877d2e86bf5c1e1e84b182d014"
+      }
+    ],
+    "file_size_bytes": 427060
+  },
+  {
+    "file": "scenery/tower/book_pile.glb",
+    "triangle_count": 380,
+    "lod0_triangle_count": 368,
+    "draw_calls": 1,
+    "material_names": [
+      "tower_props"
+    ],
+    "bounding_box_size_m": [
+      0.95696,
+      0.67827,
+      0.68635
+    ],
+    "bounding_box_min_m": [
+      -0.47848,
+      0.02141,
+      -0.34318
+    ],
+    "bounding_box_max_m": [
+      0.47848,
+      0.69969,
+      0.34318
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "tower_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "d60d8df256f15275992ddad4affb11b956a28e640de607f8325b0ea07ad47569"
+      },
+      {
+        "name": "tower_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "cc8acc942ffb02cf919df7750cb6fe82237715877d2e86bf5c1e1e84b182d014"
+      }
+    ],
+    "file_size_bytes": 433392
+  },
+  {
+    "file": "scenery/tower/crystal_a.glb",
+    "triangle_count": 374,
+    "lod0_triangle_count": 362,
+    "draw_calls": 1,
+    "material_names": [
+      "tower_props"
+    ],
+    "bounding_box_size_m": [
+      0.71208,
+      1.76137,
+      0.71413
+    ],
+    "bounding_box_min_m": [
+      -0.35693,
+      0.01716,
+      -0.35727
+    ],
+    "bounding_box_max_m": [
+      0.35516,
+      1.77853,
+      0.35686
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "tower_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "d60d8df256f15275992ddad4affb11b956a28e640de607f8325b0ea07ad47569"
+      },
+      {
+        "name": "tower_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "cc8acc942ffb02cf919df7750cb6fe82237715877d2e86bf5c1e1e84b182d014"
+      }
+    ],
+    "file_size_bytes": 429988
+  },
+  {
+    "file": "scenery/tower/crystal_b.glb",
+    "triangle_count": 374,
+    "lod0_triangle_count": 362,
+    "draw_calls": 1,
+    "material_names": [
+      "tower_props"
+    ],
+    "bounding_box_size_m": [
+      0.71208,
+      1.76137,
+      0.71413
+    ],
+    "bounding_box_min_m": [
+      -0.35693,
+      0.01716,
+      -0.35727
+    ],
+    "bounding_box_max_m": [
+      0.35516,
+      1.77853,
+      0.35686
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "tower_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "d60d8df256f15275992ddad4affb11b956a28e640de607f8325b0ea07ad47569"
+      },
+      {
+        "name": "tower_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "cc8acc942ffb02cf919df7750cb6fe82237715877d2e86bf5c1e1e84b182d014"
+      }
+    ],
+    "file_size_bytes": 429988
+  },
+  {
+    "file": "scenery/tower/crystal_c.glb",
+    "triangle_count": 374,
+    "lod0_triangle_count": 362,
+    "draw_calls": 1,
+    "material_names": [
+      "tower_props"
+    ],
+    "bounding_box_size_m": [
+      0.71208,
+      1.76137,
+      0.71413
+    ],
+    "bounding_box_min_m": [
+      -0.35693,
+      0.01716,
+      -0.35727
+    ],
+    "bounding_box_max_m": [
+      0.35516,
+      1.77853,
+      0.35686
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "tower_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "d60d8df256f15275992ddad4affb11b956a28e640de607f8325b0ea07ad47569"
+      },
+      {
+        "name": "tower_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "cc8acc942ffb02cf919df7750cb6fe82237715877d2e86bf5c1e1e84b182d014"
+      }
+    ],
+    "file_size_bytes": 429988
+  },
+  {
+    "file": "scenery/tower/grass_tuft_a.glb",
+    "triangle_count": 20,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "tower_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.73998,
+      0.7,
+      0.73998
+    ],
+    "bounding_box_min_m": [
+      -0.35,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.38998,
+      0.7,
+      0.38998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "tower_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "d60d8df256f15275992ddad4affb11b956a28e640de607f8325b0ea07ad47569"
+      },
+      {
+        "name": "tower_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "cc8acc942ffb02cf919df7750cb6fe82237715877d2e86bf5c1e1e84b182d014"
+      }
+    ],
+    "file_size_bytes": 418348
+  },
+  {
+    "file": "scenery/tower/grass_tuft_b.glb",
+    "triangle_count": 20,
+    "lod0_triangle_count": 20,
+    "draw_calls": 1,
+    "material_names": [
+      "tower_props_alpha"
+    ],
+    "bounding_box_size_m": [
+      0.73998,
+      0.7,
+      0.73998
+    ],
+    "bounding_box_min_m": [
+      -0.35,
+      0.0,
+      -0.35
+    ],
+    "bounding_box_max_m": [
+      0.38998,
+      0.7,
+      0.38998
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "tower_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "d60d8df256f15275992ddad4affb11b956a28e640de607f8325b0ea07ad47569"
+      },
+      {
+        "name": "tower_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "cc8acc942ffb02cf919df7750cb6fe82237715877d2e86bf5c1e1e84b182d014"
+      }
+    ],
+    "file_size_bytes": 418348
+  },
+  {
+    "file": "scenery/tower/torch_stand.glb",
+    "triangle_count": 312,
+    "lod0_triangle_count": 300,
+    "draw_calls": 1,
+    "material_names": [
+      "tower_props"
+    ],
+    "bounding_box_size_m": [
+      0.57496,
+      2.12714,
+      0.5765
+    ],
+    "bounding_box_min_m": [
+      -0.28748,
+      0.0,
+      -0.28825
+    ],
+    "bounding_box_max_m": [
+      0.28748,
+      2.12714,
+      0.28825
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "tower_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "d60d8df256f15275992ddad4affb11b956a28e640de607f8325b0ea07ad47569"
+      },
+      {
+        "name": "tower_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "cc8acc942ffb02cf919df7750cb6fe82237715877d2e86bf5c1e1e84b182d014"
+      }
+    ],
+    "file_size_bytes": 428660
+  },
+  {
+    "file": "scenery/tower/wall_stone.glb",
+    "triangle_count": 292,
+    "lod0_triangle_count": 280,
+    "draw_calls": 1,
+    "material_names": [
+      "tower_props"
+    ],
+    "bounding_box_size_m": [
+      1.98194,
+      1.9722,
+      0.29994
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.00968,
+      -0.29994
+    ],
+    "bounding_box_max_m": [
+      1.98194,
+      1.98188,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "tower_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "d60d8df256f15275992ddad4affb11b956a28e640de607f8325b0ea07ad47569"
+      },
+      {
+        "name": "tower_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "cc8acc942ffb02cf919df7750cb6fe82237715877d2e86bf5c1e1e84b182d014"
+      }
+    ],
+    "file_size_bytes": 427476
+  },
+  {
+    "file": "scenery/tower/wall_stone_corner.glb",
+    "triangle_count": 289,
+    "lod0_triangle_count": 277,
+    "draw_calls": 1,
+    "material_names": [
+      "tower_props"
+    ],
+    "bounding_box_size_m": [
+      1.9877,
+      1.98176,
+      1.98775
+    ],
+    "bounding_box_min_m": [
+      0.0,
+      0.00285,
+      -1.98775
+    ],
+    "bounding_box_max_m": [
+      1.9877,
+      1.98461,
+      0.0
+    ],
+    "bone_count": 0,
+    "clips": [],
+    "textures": [
+      {
+        "name": "tower_props_emissive",
+        "width": 256,
+        "height": 256,
+        "sha256": "d60d8df256f15275992ddad4affb11b956a28e640de607f8325b0ea07ad47569"
+      },
+      {
+        "name": "tower_props_atlas",
+        "width": 1024,
+        "height": 1024,
+        "sha256": "cc8acc942ffb02cf919df7750cb6fe82237715877d2e86bf5c1e1e84b182d014"
+      }
+    ],
+    "file_size_bytes": 428060
+  }
+]

@@ -1,0 +1,157 @@
+[
+  {
+    "file": "assets/textures/ground_ash.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/ground_ash_variation.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/ground_grass.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/ground_grass_variation.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/ground_night.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/ground_night_variation.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/ground_plates.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/ground_plates_variation.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/ground_rock.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/ground_rock_variation.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/ground_snow.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/ground_snow_variation.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/ground_stone.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/ground_stone_variation.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/lava.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/road_bouncy.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/road_bouncy_variation.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/road_frosty.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/road_frosty_variation.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/road_gear.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/road_gear_variation.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/road_gecko.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/road_gecko_variation.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/road_lava.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/road_lava_variation.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/road_starry.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/road_starry_variation.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/road_tower.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/road_tower_variation.png",
+    "width": 1024,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/sky_clouds.png",
+    "width": 2048,
+    "height": 1024
+  },
+  {
+    "file": "assets/textures/water.png",
+    "width": 1024,
+    "height": 1024
+  }
+]
