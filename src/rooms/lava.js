@@ -9,7 +9,8 @@
 // Miss a round three times and the ghost leaves the path glowing a little.
 
 import * as THREE from 'three';
-import { roomBase, gridMover, makeEnding, mat } from './common.js';
+import { roomBase, gridMover, makeEnding, mat, tileFloor } from './common.js';
+import { makeModel } from '../models.js';
 
 export const LAVA_EASY = {
   cols: 5, rows: 6, fireEvery: 0,
@@ -39,22 +40,28 @@ export function createLavaRoom(ctx, cfg) {
   const COLS = cfg.cols, ROWS = cfg.rows, GAP = 2.2;
   const sx = (c) => (c - (COLS - 1) / 2) * GAP;
   const sz = (r) => r < 0 ? 2.8 : r >= ROWS ? -ROWS * GAP - 0.8 : -r * GAP;
-  const base = roomBase({ wall: '#4a3b78', villain: 'dragon', villainZ: sz(ROWS) - 2.2 });
+  const base = roomBase({ theme: 'lava', wall: '#4a3b78', villain: 'dragon', villainZ: sz(ROWS) - 2.2 });
   const { scene } = base;
 
   const lavaMat = mat('#ff5a1f', { emissive: '#c43a00' });
   const lava = new THREE.Mesh(new THREE.PlaneGeometry(26, 36), lavaMat);
   lava.rotation.x = -Math.PI / 2; lava.position.set(0, -0.6, -6); scene.add(lava);
   for (const z of [sz(-1) + 0.6, sz(ROWS) - 1.6]) {
-    const ledge = new THREE.Mesh(new THREE.BoxGeometry(14, 1, 4), mat('#7a6a9c'));
-    ledge.position.set(0, -0.5, z); ledge.receiveShadow = true; scene.add(ledge);
+    const ledge = new THREE.Mesh(new THREE.BoxGeometry(14, 1, 4), mat('#4a3f5c'));
+    ledge.position.set(0, -0.6, z); ledge.receiveShadow = true; scene.add(ledge);
+    tileFloor(scene, 'stone', -7, z - 2, 7, z + 2, 0);
   }
   const stones = [];
   for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
-    const m = new THREE.Mesh(new THREE.CylinderGeometry(0.95, 1.05, 0.6, 6), mat('#8d8a99'));
-    m.position.set(sx(c), -0.3, sz(r)); m.castShadow = m.receiveShadow = true;
+    // Hex stepping stone: its top face has its own material (hex_top) that we light up.
+    const m = makeModel('rooms/hex_stone');
+    m.position.set(sx(c), 0, sz(r));
     scene.add(m);
-    stones.push({ c, r, mesh: m, sink: 0, sinking: false, stood: 0 });
+    let top = null;
+    m.traverse(o => { if (o.isMesh && o.material.name === 'hex_top') top = o.material; });
+    if (!top) top = mat('#8d8a99');
+    top.emissive = new THREE.Color('#000000');
+    stones.push({ c, r, mesh: m, top, sink: 0, sinking: false, stood: 0 });
   }
   const stoneAt = (c, r) => stones.find(s => s.c === c && s.r === r);
   const fireball = new THREE.Mesh(new THREE.SphereGeometry(0.8, 14, 10), mat('#ffb000', { emissive: '#ff5000' }));
@@ -72,8 +79,8 @@ export function createLavaRoom(ctx, cfg) {
   function resetStones() {
     stones.forEach(s => {
       s.sink = 0; s.sinking = false; s.stood = 0;
-      s.mesh.position.y = -0.3; s.mesh.rotation.set(0, 0, 0);
-      s.mark = '#000000'; s.mesh.material.emissive.set(s.mark);
+      s.mesh.position.y = 0; s.mesh.rotation.set(0, 0, 0);
+      s.mark = '#000000'; s.top.emissive.set(s.mark);
     });
   }
   function startRound(fresh) {
@@ -102,7 +109,7 @@ export function createLavaRoom(ctx, cfg) {
     }
     if (r < 0) return;
     const s = stoneAt(c, r);
-    if (R.safe.has(c + ',' + r)) { s.mark = '#1f9a3a'; s.mesh.material.emissive.set(s.mark); s.stood = 0; ctx.sound('tick'); }
+    if (R.safe.has(c + ',' + r)) { s.mark = '#1f9a3a'; s.top.emissive.set(s.mark); s.stood = 0; ctx.sound('tick'); }
     else { s.sinking = true; fall(); }
   };
 
@@ -118,11 +125,11 @@ export function createLavaRoom(ctx, cfg) {
       const i = Math.floor(R.t / rule.show) - 1;
       if (i !== R.showIndex && i >= 0 && i < R.path.length) {
         R.showIndex = i;
-        stoneAt(R.path[i][0], R.path[i][1]).mesh.material.emissive.set('#ffd23f');
+        stoneAt(R.path[i][0], R.path[i][1]).top.emissive.set('#ffd23f');
         ctx.sound('tick');
       }
       if (R.t > rule.show * (R.path.length + 2)) {
-        stones.forEach(s => { s.mark = R.fails >= 3 && R.safe.has(s.c + ',' + s.r) ? '#3a3010' : '#000000'; s.mesh.material.emissive.set(s.mark); });
+        stones.forEach(s => { s.mark = R.fails >= 3 && R.safe.has(s.c + ',' + s.r) ? '#3a3010' : '#000000'; s.top.emissive.set(s.mark); });
         R.phase = 'play'; R.t = 0;
         ctx.say('🦎 Go! Hop across!');
       }
@@ -153,8 +160,8 @@ export function createLavaRoom(ctx, cfg) {
         else { R.phase = 'end'; ending.start(); }
       }
     }
-    stones.forEach(s => { if (s.sinking) { s.sink += dt; s.mesh.position.y = -0.3 - s.sink * 2; s.mesh.rotation.z = s.sink; } });
-    if (R.phase !== 'end') player.userData.animate(t, mover.hop ? 'walk' : null);
+    stones.forEach(s => { if (s.sinking) { s.sink += dt; s.mesh.position.y = -s.sink * 2; s.mesh.rotation.z = s.sink; } });
+    if (R.phase !== 'end') player.userData.animate(t, R.phase === 'fall' ? 'oops' : R.phase === 'won' ? 'happy' : mover.hop ? 'walk' : null);
   }
 
   // World 5: a fireball rolls across one row. The row glows first.
@@ -171,9 +178,9 @@ export function createLavaRoom(ctx, cfg) {
     const f = R.fire;
     f.t += dt;
     const row = stones.filter(s => s.r === f.row);
-    if (f.t < 1) row.forEach(s => { if (!s.sinking) s.mesh.material.emissive.set(Math.floor(f.t * 8) % 2 ? '#ff3000' : s.mark); });
+    if (f.t < 1) row.forEach(s => { if (!s.sinking) s.top.emissive.set(Math.floor(f.t * 8) % 2 ? '#ff3000' : s.mark); });
     else {
-      row.forEach(s => { if (!s.sinking) s.mesh.material.emissive.set(s.mark); });
+      row.forEach(s => { if (!s.sinking) s.top.emissive.set(s.mark); });
       const k = (f.t - 1) / 1.4;
       fireball.visible = true;
       fireball.position.set(-7 + k * 14, 0.6, sz(f.row));

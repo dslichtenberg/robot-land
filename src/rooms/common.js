@@ -4,12 +4,25 @@
 // where the villain spins away and you pick up the prize.
 
 import * as THREE from 'three';
-import { makeModel, makeItem } from '../models.js';
+import { makeModel, makeItem, makeScatter } from '../models.js';
 import { move } from '../input.js';
 
 export const mat = (color, extra) => new THREE.MeshStandardMaterial(Object.assign({ color, roughness: 0.8 }, extra));
 
-// opts: { wall, floor, villain, villainZ, width, depth }
+// Floor tiles (2 x 2 m) covering a rectangle, with their top at height y.
+// kind: 'stone', 'ice', 'wood' or 'magic'. cell: tile size (stretches the tiles).
+export function tileFloor(scene, kind, x1, z1, x2, z2, y, cell) {
+  cell = cell || 2;
+  const spots = [], s = cell / 2;
+  for (let x = x1; x < x2 - 0.01; x += cell) for (let z = z2; z > z1 + 0.01; z -= cell) spots.push({ x, y: y - 0.1 * s, z, rot: 0, scale: new THREE.Vector3(s, 1, s) });
+  const sc = makeScatter('rooms/room_floor_' + kind, spots);
+  sc.update(0, 0);
+  scene.add(sc.group);
+  return sc.group;
+}
+
+// opts: { theme ('lava', 'ice', 'lever' or 'mirror'), wall (color for the fog), villain, villainZ }
+// The room runs from x -13 to 13 and z -24 (back wall) to 12 (open front).
 export function roomBase(opts) {
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(opts.wall);
@@ -20,16 +33,23 @@ export function roomBase(opts) {
   sun.shadow.mapSize.set(1024, 1024);
   Object.assign(sun.shadow.camera, { left: -14, right: 14, top: 14, bottom: -20 });
   scene.add(sun);
-  const room = new THREE.Mesh(new THREE.BoxGeometry(opts.width || 26, 14, opts.depth || 36), mat(opts.wall, { side: THREE.BackSide }));
-  room.position.set(0, 5, -6); room.receiveShadow = true; scene.add(room);
-  if (opts.floor) {
-    const floor = new THREE.Mesh(new THREE.PlaneGeometry(opts.width || 26, opts.depth || 36), mat(opts.floor));
-    floor.rotation.x = -Math.PI / 2; floor.position.set(0, -0.6, -6); floor.receiveShadow = true; scene.add(floor);
+  // Walls: 2 m wide wall pieces along the back and both sides, stretched to 8 m tall.
+  const wallName = 'rooms/room_wall_' + opts.theme, spots = [], tall = new THREE.Vector3(1, 2, 1);
+  for (let i = 0; i < 13; i++) spots.push({ x: -13 + i * 2, y: -0.6, z: -24, rot: 0, scale: tall });
+  for (let i = 0; i < 18; i++) spots.push({ x: -13, y: -0.6, z: 12 - i * 2, rot: Math.PI / 2, scale: tall });
+  for (let i = 0; i < 18; i++) spots.push({ x: 13, y: -0.6, z: -24 + i * 2, rot: -Math.PI / 2, scale: tall });
+  const walls = makeScatter(wallName, spots);
+  walls.update(0, 0); scene.add(walls.group);
+  if (opts.theme !== 'lava') tileFloor(scene, { ice: 'ice', lever: 'wood', mirror: 'magic' }[opts.theme], -13, -24, 13, 12, -0.6);
+  for (const [x, z, rot] of [[-12.9, -2, Math.PI / 2], [12.9, -2, -Math.PI / 2], [-12.9, -13, Math.PI / 2], [12.9, -13, -Math.PI / 2], [-6, -23.8, 0], [6, -23.8, 0]]) {
+    const torch = makeModel('rooms/room_torch');
+    torch.scale.setScalar(1.6); torch.position.set(x, 3.4, z); torch.rotation.y = rot; scene.add(torch);
   }
-  for (const [x, z] of [[-12, -2], [12, -2], [-12, -13], [12, -13]]) {
-    const flame = new THREE.Mesh(new THREE.SphereGeometry(0.4, 10, 8), mat('#ffd23f', { emissive: '#ffa000' }));
-    flame.position.set(x, 4, z); scene.add(flame);
+  for (const [x, rot] of [[-13, 0], [13, -Math.PI / 2]]) {
+    const web = makeModel('rooms/cobweb_corner');
+    web.scale.setScalar(1.6); web.position.set(x, 4.2, -23.7); web.rotation.y = rot; scene.add(web);
   }
+  const glow = new THREE.PointLight('#ffb050', 25, 30); glow.position.set(0, 6, -16); scene.add(glow);
   const ghost = makeModel('ghost', 1.6);
   ghost.position.set(-9, 3, 1); ghost.rotation.y = 0.6; scene.add(ghost);
   const villain = makeModel(opts.villain, 3.2);
@@ -102,6 +122,7 @@ export function makeEnding(base, player, ctx) {
     e.t += dt;
     const v = base.villain;
     if (e.phase === 'defeat') {
+      v.userData.animate(t, 'defeat');
       v.rotation.y += dt * 14;
       v.scale.setScalar(Math.max(0.01, 1 - e.t / 1.6));
       if (e.t > 1.6) {
@@ -123,7 +144,7 @@ export function makeEnding(base, player, ctx) {
       e.item.rotation.y += dt * 3;
       e.item.position.set(player.position.x, 2.6 + Math.sin(t * 3) * 0.2, player.position.z);
       player.rotation.y = 0;
-      player.userData.animate(t, 'happy');
+      player.userData.animate(t, 'victory');
     }
     return true;
   };

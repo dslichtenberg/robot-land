@@ -9,7 +9,7 @@
 // more yo-yos each time.
 
 import * as THREE from 'three';
-import { roomBase, gridMover, makeEnding, label, mat } from './common.js';
+import { roomBase, gridMover, makeEnding, label, mat, tileFloor } from './common.js';
 import { makeModel } from '../models.js';
 const placeAt = (obj, x, y, z) => { obj.position.set(x, y, z); return obj; };
 
@@ -23,10 +23,11 @@ const COLORS = ['#ff4d4d', '#4da6ff', '#ffd23f', '#5fd257', '#c86bff'];
 
 export function createLeverRoom(ctx) {
   const sx = (c) => (c - (COLS - 1) / 2) * GAP, sz = (r) => -r * GAP + 2;
-  const base = roomBase({ wall: '#5a3d6a', floor: '#8a6440', villain: 'yoyo', villainZ: sz(ROWS) - 2.5 });
+  const base = roomBase({ theme: 'lever', wall: '#5a3d6a', villain: 'yoyo', villainZ: sz(ROWS) - 2.5 });
   const { scene } = base;
-  const floor = new THREE.Mesh(new THREE.BoxGeometry(COLS * GAP, 0.3, ROWS * GAP), mat('#b08a5a'));
-  floor.position.set(0, -0.15, sz((ROWS - 1) / 2)); floor.receiveShadow = true; scene.add(floor);
+  const floor = new THREE.Mesh(new THREE.BoxGeometry(COLS * GAP, 0.5, ROWS * GAP), mat('#6a4a2a'));
+  floor.position.set(0, -0.35, sz((ROWS - 1) / 2)); floor.receiveShadow = true; scene.add(floor);
+  tileFloor(scene, 'wood', sx(0) - GAP / 2, sz(ROWS - 1) - GAP / 2, sx(COLS - 1) + GAP / 2, sz(0) + GAP / 2, 0, GAP);
   const door = new THREE.Mesh(new THREE.BoxGeometry(2.4, 3.4, 0.4), mat('#2b2140', { emissive: '#1a0f33' }));
   door.position.set(sx(EXIT_C), 1.7, sz(ROWS) + 0.6); scene.add(door);
   const wall = new THREE.Mesh(new THREE.BoxGeometry(COLS * GAP + 4, 4, 0.5), mat('#3f2a4a'));
@@ -52,14 +53,24 @@ export function createLeverRoom(ctx) {
       const c = Math.floor(Math.random() * COLS), r = 2 + Math.floor(Math.random() * (ROWS - 3));
       if (R.levers.some(l => Math.abs(l.c - c) <= 1 && Math.abs(l.r - r) <= 1)) continue;
       const i = R.levers.length, g = new THREE.Group();
-      g.add(placeAt(new THREE.Mesh(new THREE.BoxGeometry(1, 0.5, 1), mat('#4b5263')), 0, 0.25, 0));
-      const handle = new THREE.Group(); handle.position.y = 0.5;
-      handle.add(placeAt(new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 1.4), mat('#cccccc')), 0, 0.7, 0));
-      handle.add(placeAt(new THREE.Mesh(new THREE.SphereGeometry(0.3, 12, 10), mat(COLORS[i])), 0, 1.4, 0));
-      handle.rotation.x = -0.6; g.add(handle);
-      const lamp = new THREE.Mesh(new THREE.SphereGeometry(0.45, 14, 10), mat(COLORS[i], { emissive: '#000000' }));
-      lamp.position.y = 2.8; g.add(lamp);
-      const num = label('?'); num.position.y = 4; num.visible = false; g.add(num);
+      // The lever model: 'handle' tips forward when pulled; its lamp (lever_lamp) shows the lever's color.
+      const model = makeModel('rooms/lever');
+      model.scale.setScalar(2); g.add(model);
+      const handle = model.userData.part('handle') || new THREE.Group();
+      handle.userData.rest = handle.rotation.x;
+      handle.rotation.x = handle.userData.rest - 0.5;
+      let lampMat = null;
+      model.traverse(o => { if (o.isMesh && o.material.name === 'lever_lamp') lampMat = o.material; });
+      if (!lampMat) lampMat = mat(COLORS[i]);
+      lampMat.color.set(COLORS[i]); lampMat.emissive = new THREE.Color('#000000');
+      // A big colored orb above each lever, so its color is easy to see and remember.
+      const orb = new THREE.Mesh(new THREE.SphereGeometry(0.5, 20, 14), mat(COLORS[i], { emissive: '#000000', roughness: 0.3 }));
+      orb.position.y = 3; orb.castShadow = true; g.add(orb);
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(0.62, 0.08, 10, 28), mat('#ffd23f', { metalness: 0.6, roughness: 0.3 }));
+      ring.position.y = 3; ring.rotation.x = Math.PI / 2; g.add(ring);
+      const both = [lampMat, orb.material];
+      const lamp = { material: { emissive: { set: (c) => both.forEach(m => m.emissive.set(c)) } } };
+      const num = label('?'); num.position.y = 4.1; num.visible = false; g.add(num);
       g.position.set(sx(c), 0, sz(r)); g.traverse(o => { o.castShadow = true; });
       roundStuff.add(g);
       R.levers.push({ c, r, handle, lamp, num, color: COLORS[i], pulled: false });
@@ -67,7 +78,7 @@ export function createLeverRoom(ctx) {
     R.order = R.levers.map((l, i) => i).sort(() => Math.random() - 0.5);
     R.order.forEach((li, k) => {
       const l = R.levers[li], old = l.num;
-      l.num = label(String(k + 1)); l.num.position.y = 4; l.num.visible = false; old.parent.add(l.num); old.parent.remove(old);
+      l.num = label(String(k + 1)); l.num.position.y = 4.1; l.num.visible = false; old.parent.add(l.num); old.parent.remove(old);
     });
     const rows = [1, 2, 3, 4, 5, 6, 7].sort(() => Math.random() - 0.5).slice(0, rule.yoyos);
     R.yoyos = rows.map((row, i) => {
@@ -81,7 +92,7 @@ export function createLeverRoom(ctx) {
   }
   function resetLevers() {
     R.next = 0;
-    R.levers.forEach(l => { l.pulled = false; l.handle.rotation.x = -0.6; l.lamp.material.emissive.set('#000000'); });
+    R.levers.forEach(l => { l.pulled = false; l.handle.rotation.x = l.handle.userData.rest - 0.5; l.lamp.material.emissive.set('#000000'); });
     status();
   }
   function showOrder() {
@@ -101,7 +112,7 @@ export function createLeverRoom(ctx) {
     if (!lever) { ctx.sound('hop'); return 'go'; }
     if (lever.pulled) return 'bump';
     if (R.levers.indexOf(lever) === R.order[R.next]) {
-      lever.pulled = true; lever.handle.rotation.x = 0.6; lever.lamp.material.emissive.set(lever.color);
+      lever.pulled = true; lever.handle.rotation.x = lever.handle.userData.rest + 0.5; lever.lamp.material.emissive.set(lever.color);
       R.next++; ctx.sound('clank'); status();
       if (R.next === R.order.length) { ctx.sound('ding'); ctx.say('🚪 The door is open! Hop out the top!'); }
     } else {

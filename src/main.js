@@ -7,9 +7,9 @@
 // Type `state` in the browser console to look at it.
 
 import * as THREE from 'three';
-import { preloadModels, makeModel, makeVehicle, VEHICLES } from './models.js';
+import { loadModels, CORE_MODELS, makeModel, makeVehicle, makeScatter, VEHICLES } from './models.js';
 import { WORLDS, worldHint } from './worlds.js';
-import { buildWorld, resolve, inBox, setWorldNumber } from './world.js';
+import { buildWorld, resolve, inBox, setWorldNumber, worldModels } from './world.js';
 import { createLavaRoom, LAVA_EASY, LAVA_HARD } from './rooms/lava.js';
 import { createIceRoom } from './rooms/ice.js';
 import { createLeverRoom } from './rooms/levers.js';
@@ -112,18 +112,70 @@ function clearSave() { try { localStorage.removeItem(SAVE_KEY); } catch (e) { /*
 // ---------- Title and character screens ----------
 
 let titleScene = null;
+// The launch screen: a little sunny island with the whole cast, the first
+// haunted house behind them, and a kart doing laps.
+const TITLE_MODELS = ['vehicles/kart', 'houses/house_gear', 'scenery/gecko/tree_lush_a', 'scenery/gecko/tree_lush_b',
+  'scenery/gecko/flower_a', 'scenery/gecko/flower_b', 'scenery/gecko/flower_c', 'scenery/gecko/grass_tuft_a', 'scenery/gecko/grass_tuft_b'];
 function makeTitleScene() {
   const s = new THREE.Scene();
-  s.background = new THREE.Color('#8fb3d9');
-  s.add(new THREE.HemisphereLight('#ffffff', '#556644', 1.4));
-  const sun = new THREE.DirectionalLight('#ffffff', 1.5); sun.position.set(5, 10, 6); s.add(sun);
-  const disc = new THREE.Mesh(new THREE.CircleGeometry(9, 48), new THREE.MeshStandardMaterial({ color: '#6acb5c' }));
-  disc.rotation.x = -Math.PI / 2; s.add(disc);
-  const cast = [['robot', -4.2, 2.2], ['dragon', 4.2, 2.6], ['ghost', 0, 1.6], ['snowgun', -6.5, 2], ['wizard', 6.5, 2], ['yoyo', 0, 1.6]].map(([n, x, h], i) => {
-    const m = makeModel(n, h); m.position.set(x, n === 'ghost' ? 0.6 : 0, i > 2 ? -3.5 : n === 'ghost' ? -2 : 0); s.add(m); return m;
+  // Sky: deep blue at the top fading to a warm horizon.
+  const sky = document.createElement('canvas'); sky.width = 2; sky.height = 256;
+  const g = sky.getContext('2d'), grad = g.createLinearGradient(0, 0, 0, 256);
+  grad.addColorStop(0, '#4f9ff0'); grad.addColorStop(0.55, '#9fd3ff'); grad.addColorStop(1, '#ffe7c4');
+  g.fillStyle = grad; g.fillRect(0, 0, 2, 256);
+  const skyTex = new THREE.CanvasTexture(sky); skyTex.colorSpace = THREE.SRGBColorSpace;
+  s.background = skyTex;
+  s.fog = new THREE.Fog('#cfe8ff', 26, 60);
+  s.add(new THREE.HemisphereLight('#e8f4ff', '#5a8a4a', 1.25));
+  const sun = new THREE.DirectionalLight('#fff1d6', 2.2);
+  sun.position.set(-6, 12, 9); sun.castShadow = true;
+  sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0005;
+  Object.assign(sun.shadow.camera, { left: -16, right: 16, top: 16, bottom: -16, near: 1, far: 40 });
+  s.add(sun);
+  const rim = new THREE.DirectionalLight('#b9d8ff', 0.8); rim.position.set(6, 5, -10); s.add(rim);
+  // The island: grass on top, a rocky rim, flowers and tufts.
+  const grassTex = new THREE.TextureLoader().load('assets/textures/ground_grass.webp');
+  grassTex.colorSpace = THREE.SRGBColorSpace; grassTex.wrapS = grassTex.wrapT = THREE.RepeatWrapping; grassTex.repeat.set(5, 5);
+  const top = new THREE.Mesh(new THREE.CircleGeometry(16, 64), new THREE.MeshStandardMaterial({ map: grassTex, roughness: 0.9 }));
+  top.rotation.x = -Math.PI / 2; top.receiveShadow = true; s.add(top);
+  const cliff = new THREE.Mesh(new THREE.CylinderGeometry(16, 13, 4, 64, 1, true), new THREE.MeshStandardMaterial({ color: '#8a6a4a', roughness: 1 }));
+  cliff.position.y = -2; s.add(cliff);
+  const spots = (n, rMin, rMax, avoid) => {
+    const out = [];
+    while (out.length < n) {
+      const a = Math.random() * Math.PI * 2, r = rMin + Math.random() * (rMax - rMin), x = Math.cos(a) * r, z = Math.sin(a) * r;
+      if (avoid && avoid(x, z)) continue;
+      out.push({ x, y: 0, z, rot: Math.random() * 6, scale: 0.8 + Math.random() * 0.6 });
+    }
+    return out;
+  };
+  const clearStage = (x, z) => (Math.abs(x) < 7 && z > -1 && z < 5) || z > 5.5 || Math.hypot(x + 10, z + 12) < 5;
+  for (const f of ['flower_a', 'flower_b', 'flower_c']) { const sc = makeScatter('scenery/gecko/' + f, spots(70, 2, 15, clearStage), { shadows: false }); sc.update(0, 0); s.add(sc.group); }
+  for (const f of ['grass_tuft_a', 'grass_tuft_b']) { const sp = spots(70, 3, 15.5, clearStage); sp.forEach(o => { o.scale *= 0.55; }); const sc = makeScatter('scenery/gecko/' + f, sp, { shadows: false }); sc.update(0, 0); s.add(sc.group); }
+  for (const [x, z, k] of [[-13, -2, 'a'], [10.5, -6, 'b'], [-13.5, 3, 'b'], [13.5, 2, 'a'], [3, -13, 'a'], [9, -12, 'b'], [-2, -14, 'b']]) {
+    const tree = makeModel('scenery/gecko/tree_lush_' + k); tree.position.set(x, 0, z); tree.rotation.y = Math.random() * 6; tree.scale.setScalar(1.2); s.add(tree);
+  }
+  const house = makeModel('houses/house_gear'); house.position.set(-10, 0, -12); house.rotation.y = 0.5; s.add(house);
+  // The cast. Villains and the robot stand behind the six friends.
+  const cast = [];
+  const put = (name, x, z, rotY, mood, y) => { const m = makeModel(name); m.position.set(x, y || 0, z); m.rotation.y = rotY || 0; m.userData.titleMood = mood; s.add(m); cast.push(m); return m; };
+  put('robot', -6.2, -2.5, 0.5, 'wave');
+  put('dragon', 5.8, -3, -0.4, 'taunt');
+  put('snowgun', -3.4, -4.5, 0.3, 'idle');
+  put('wizard', 3.2, -5, -0.2, 'taunt');
+  put('yoyo', 0, -5.2, 0, 'idle');
+  const ghost = put('ghost', -8.6, -10.4, 0.4, 'wave', 7.5);
+  ghost.userData.float = true;
+  const moods = ['cheer', 'wave', 'cheer', 'idle', 'wave', 'cheer'];
+  CHARACTERS.forEach((ch, i) => {
+    const x = -5 + i * 2, z = 2.6 - Math.abs(x) * 0.18;
+    put(ch.id, x, z, -x * 0.06, moods[i]);
   });
-  CHARACTERS.forEach((ch, i) => { const m = makeModel(ch.id, 1); m.position.set(-3.75 + i * 1.5, 0, 3); s.add(m); cast.push(m); });
-  s.userData.cast = cast;
+  // A kart doing laps behind the line-up.
+  const kart = makeVehicle('kart', CHARACTERS[0]);
+  const driver = makeModel('pip'); kart.userData.seat.add(driver);
+  s.add(kart);
+  s.userData = { cast, kart, driver, sun };
   return s;
 }
 
@@ -179,11 +231,14 @@ function startGame(charId, saved) {
   state.worldIndex = saved ? saved.worldIndex : 0;
   state.flags = saved ? { switches: saved.flags.switches || [], houseDone: !!saved.flags.houseDone } : { switches: [], houseDone: false };
   if (!saved) clearSave();
-  enterWorld(true);
+  return enterWorld(true);
 }
 
-// Build the current world and put the car in it.
-function enterWorld(greet) {
+// Load the current world's models, build it, and put the car in it.
+async function enterWorld(greet) {
+  state.screen = 'loading';
+  show('loading', true);
+  await loadModels(worldModels(WORLDS[state.worldIndex]));
   if (worldScene) disposeScene(worldScene);
   buildCurrentWorld();
   const w = world.data;
@@ -202,10 +257,15 @@ function enterWorld(greet) {
   }
 }
 
+// Free a world's graphics memory, but keep parts shared with the loaded model files.
 function disposeScene(scene) {
   scene.traverse(o => {
-    if (o.geometry) o.geometry.dispose();
-    if (o.material) [].concat(o.material).forEach(m => { if (m.map) m.map.dispose(); m.dispose(); });
+    if (o.geometry && !o.geometry.userData.shared) o.geometry.dispose();
+    if (o.material) [].concat(o.material).forEach(m => {
+      if (m.userData.shared) return;
+      if (m.map && !m.map.userData.shared) m.map.dispose();
+      m.dispose();
+    });
   });
 }
 
@@ -223,7 +283,7 @@ function buildCurrentWorld() {
   worldScene.add(sunLight, sunLight.target);
   world = buildWorld(worldScene, w, state.flags);
   car = makeVehicle(w.vehicle, charOf());
-  driver = makeModel(state.charId, 1.25);
+  driver = makeModel(state.charId);
   car.userData.seat.add(driver);
   if (th.night || VEHICLES[w.vehicle].light) {
     const lamp = new THREE.PointLight('#fff2c0', th.night ? 60 : 20, 22);
@@ -260,6 +320,7 @@ function updateDriving(dt) {
     let d = Math.atan2(c.vx, c.vz) - c.heading;
     d = Math.atan2(Math.sin(d), Math.cos(d));
     c.heading += d * Math.min(1, dt * 10);
+    c.turn = d;
   }
   engine(speed / top);
 }
@@ -441,10 +502,10 @@ async function finishWorld() {
     state.worldIndex++;
     state.flags = { switches: [], houseDone: false };
     save();
-    enterWorld(true);
+    await enterWorld(true);
   } else {
     clearSave();
-    showHome();
+    await showHome();
   }
   await fade(false);
 }
@@ -459,24 +520,18 @@ function makeHomeScene() {
   const sun = new THREE.DirectionalLight('#fff4d0', 1.8); sun.position.set(6, 14, 8); sun.castShadow = true; s.add(sun);
   const ground = new THREE.Mesh(new THREE.CircleGeometry(60, 64), new THREE.MeshStandardMaterial({ color: '#5fd257' }));
   ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; s.add(ground);
-  const petal = new THREE.SphereGeometry(0.12, 8, 6), colors = ['#ff6fa8', '#ffd23f', '#ffffff', '#b583ff', '#ff8c42'];
-  colors.forEach((col, ci) => {
-    const flowers = new THREE.InstancedMesh(petal, new THREE.MeshStandardMaterial({ color: col, emissive: col, emissiveIntensity: 0.25 }), 160);
-    const m = new THREE.Matrix4();
-    for (let i = 0; i < 160; i++) {
-      const a = Math.random() * Math.PI * 2, r = 4 + Math.random() * 30;
-      m.makeTranslation(Math.cos(a) * r, 0.15, Math.sin(a) * r); flowers.setMatrixAt(i, m);
-    }
-    s.add(flowers);
-  });
+  const colors = ['#ff6fa8', '#ffd23f', '#ffffff', '#b583ff', '#ff8c42'];
+  const spots = (n, rMin, rMax) => Array.from({ length: n }, () => { const a = Math.random() * Math.PI * 2, r = rMin + Math.random() * (rMax - rMin); return { x: Math.cos(a) * r, y: 0, z: Math.sin(a) * r, rot: Math.random() * 6, scale: 0.8 + Math.random() * 0.5 }; });
+  for (const f of ['flower_a', 'flower_b', 'flower_c']) { const sc = makeScatter('scenery/gecko/' + f, spots(140, 3, 30), { shadows: false }); sc.update(0, 0); s.add(sc.group); }
+  for (const g of ['grass_tuft_a', 'grass_tuft_b']) { const sc = makeScatter('scenery/gecko/' + g, spots(120, 3, 30), { shadows: false }); sc.update(0, 0); s.add(sc.group); }
   for (let i = 0; i < 14; i++) {
-    const a = i / 14 * Math.PI * 2, tree = new THREE.Group();
-    tree.add(placeAt(new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.5, 2.4), new THREE.MeshStandardMaterial({ color: '#7a5230' })), 0, 1.2, 0));
-    tree.add(placeAt(new THREE.Mesh(new THREE.SphereGeometry(2.2, 14, 10), new THREE.MeshStandardMaterial({ color: '#3fae4a' })), 0, 3.6, 0));
-    tree.position.set(Math.cos(a) * 22, 0, Math.sin(a) * 22); s.add(tree);
+    const a = i / 14 * Math.PI * 2, tree = makeModel('scenery/gecko/' + (i % 2 ? 'tree_lush_a' : 'tree_lush_b'));
+    tree.position.set(Math.cos(a) * 22, 0, Math.sin(a) * 22); tree.rotation.y = -a; s.add(tree);
   }
+  const home = makeModel('scenery/gecko/gecko_house'); home.position.set(-2, 0, -9); s.add(home);
+  const blanket = makeModel('scenery/gecko/picnic_blanket'); blanket.scale.setScalar(1.6); blanket.position.set(0, 0.02, -1); s.add(blanket);
   const friends = [charOf()].concat(CHARACTERS.filter(c => c.id !== state.charId)).map((ch, i) => {
-    const m = makeModel(ch.id, i === 0 ? 1.6 : 1.3);
+    const m = makeModel(ch.id, i === 0 ? 1.4 : 1.15);
     const a = (i - 2.5) * 0.45;
     m.position.set(Math.sin(a) * 5, 0, Math.cos(a) * 5 - 3);
     if (i === 0) m.position.set(0, 0, 1);
@@ -492,7 +547,9 @@ function makeHomeScene() {
   return s;
 }
 
-function showHome() {
+async function showHome() {
+  await loadModels(['scenery/gecko/flower_a', 'scenery/gecko/flower_b', 'scenery/gecko/flower_c', 'scenery/gecko/grass_tuft_a', 'scenery/gecko/grass_tuft_b',
+    'scenery/gecko/tree_lush_a', 'scenery/gecko/tree_lush_b', 'scenery/gecko/gecko_house', 'scenery/gecko/picnic_blanket']);
   if (worldScene) { disposeScene(worldScene); worldScene = null; world = null; }
   homeScene = makeHomeScene();
   setScreen('home');
@@ -568,9 +625,12 @@ function placeCarMesh(t) {
   car.rotation.set(-pitch, c.heading, roll, 'YXZ');
   car.visible = !(state.safe > 0 && Math.floor(t * 10) % 2 === 0);
   const speed = Math.hypot(c.vx, c.vz);
-  car.userData.animate(t, speed);
+  const turn = c.turn || 0;
+  car.userData.animate(t, speed, Math.max(-1, Math.min(1, turn * 2)));
+  c.turn = 0;
   if (car.userData.rainbow) car.userData.rainbow.forEach(m => m.color.setHSL((t * 0.1) % 1, 0.8, 0.6));
-  driver.userData.animate(t, speed > 2 || state.jump ? 'happy' : null);
+  const hurtNow = state.safe > state.stats.safeTime - 0.9;
+  driver.userData.animate(t, hurtNow ? 'oops' : state.jump ? 'happy' : turn > 0.08 ? 'drive_left' : turn < -0.08 ? 'drive_right' : 'drive');
 }
 
 let last = performance.now();
@@ -580,10 +640,22 @@ function frame(now) {
   state.time += dt;
   const t = state.time;
   if (state.screen === 'title' || state.screen === 'select') {
-    const a = t * 0.15;
-    camera.position.set(Math.sin(a) * 12, 5, Math.cos(a) * 12);
-    camera.lookAt(0, 1, 0);
-    if (titleScene) titleScene.userData.cast.forEach((m, i) => m.userData.animate(t + i, null));
+    // A slow, gentle sway (never all the way around, so we always see faces).
+    const sway = Math.sin(t * 0.18);
+    camera.position.set(sway * 2.5, 2.7 + Math.sin(t * 0.25) * 0.25, 11.5);
+    camera.lookAt(sway * 0.6, 3.1, -2);
+    if (titleScene) {
+      const T = titleScene.userData;
+      T.cast.forEach(m => {
+        m.userData.animate(t, m.userData.titleMood || 'idle');
+        if (m.userData.float) m.position.y = 7.3 + Math.sin(t * 1.6) * 0.25;
+      });
+      const a = t * 0.45, kx = Math.cos(a) * 10, kz = -4.5 + Math.sin(a) * 3.2;
+      T.kart.position.set(kx, 0, kz);
+      T.kart.rotation.y = Math.atan2(-Math.sin(a) * 10, Math.cos(a) * 3.2);
+      T.kart.userData.animate(t, 8, 0.6);
+      T.driver.userData.animate(t, 'drive_left');
+    }
     if (state.screen === 'select') drawCards();
   }
   if (state.screen === 'home' && homeScene) {
@@ -612,11 +684,14 @@ function frame(now) {
 window.game = {
   state, placeCar, sound, WORLDS,
   get world() { return world; }, get room() { return room; }, get car() { return car; },
-  goToWorld(i) { state.worldIndex = i; state.flags = { switches: [], houseDone: false }; enterWorld(false); },
+  goToWorld(i) { state.worldIndex = i; state.flags = { switches: [], houseDone: false }; return enterWorld(false); },
 };
 
 resize();
-preloadModels().then(() => {
+// Load the cast, then fade from the loading screen to the launch screen.
+loadModels([...CORE_MODELS, ...TITLE_MODELS]).then(async () => {
+  await fade(true);
   showTitle();
   requestAnimationFrame(frame);
+  setTimeout(() => fade(false), 250);
 });

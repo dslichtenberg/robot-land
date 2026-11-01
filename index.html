@@ -25,14 +25,21 @@
 
   <div id="joystick" class="hidden"><div id="knob"></div></div>
 
-  <div id="loading" class="screen"><p>Loading…</p></div>
+  <div id="loading" class="screen"><div class="loader">🦎</div><p>Loading…</p></div>
 
   <div id="title-screen" class="screen hidden">
-    <h1>Robot Land <span>to</span> Gecko Land</h1>
-    <p id="title-hint" class="blink">Press any key or tap to start.</p>
-    <div id="title-buttons" class="hidden">
-      <button id="btn-continue" class="big-btn">▶ Continue</button>
-      <button id="btn-new" class="big-btn alt">New Game</button>
+    <div class="logo">
+      <div class="logo-robot">Robot Land</div>
+      <div class="logo-to">to</div>
+      <div class="logo-gecko">Gecko Land</div>
+      <p class="tagline">Six haunted houses. One long drive home.</p>
+    </div>
+    <div class="title-bottom">
+      <p id="title-hint" class="start-pill">▶ Press any key or tap to start</p>
+      <div id="title-buttons" class="hidden">
+        <button id="btn-continue" class="big-btn">▶ Continue</button>
+        <button id="btn-new" class="big-btn alt">New Game</button>
+      </div>
     </div>
   </div>
 

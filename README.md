@@ -23,15 +23,17 @@ Keys: arrows or WASD to drive and hop, `P` phone, `M` sound. On a touch screen, 
 
 ## 3D models
 
-Put `.glb` files in `assets/models/`. The names the game looks for are in `MODEL_FILES` at the top of `src/models.js`:
+All models follow [`docs/MODEL_SPEC.md`](docs/MODEL_SPEC.md) and live in `assets/models/` by kind (`characters/`, `villains/`, `vehicles/`, `houses/`, `landmarks/`, `pieces/`, `items/`, `rooms/`, `scenery/<world>/`). Ground, road, water and lava textures are in `assets/textures/`.
 
-- Characters: `tyler`, `skyler`, `nick`, `pip`, `mo`, `zazz`, `dragon`, `snowgun`, `yoyo`, `wizard`, `ghost`, `tall-robot`
-- Vehicles: `kart`, `snowmobile`, `buggy`, `glider`, `tractor`, `carpet`
+**Adding or replacing models:**
 
-Any missing model is replaced by a simple stand-in, so the game always runs. (The browser console shows a "404" for each missing file; that is expected.) Models should be Y up, facing +Z, standing on y = 0. The game scales them to the right size. Static models are fine: the game moves named parts in code:
+1. Check the source files against the spec (needs only Node):
+   `node tools/check-models.mjs path/to/new/models`
+2. Compress them for the web (WebP textures, compressed meshes; part names are kept):
+   `tools/compress-models.sh path/to/new/models assets/models`
+3. Reload the game. A missing or broken file falls back to a simple stand-in, so the game always runs.
 
-- Characters: the dragon's `stubby-wing`, the ghost's `waving-arm`, the robot's `red-bulb`
-- Vehicles: every `wheel` spins, every `wing` flaps, `paint` is tinted the driver's color, and an empty node called `seat` marks where the driver sits
+What the game does with each model (animations, faces, wheel spin, steering, paint tint, the `col` collision box, the `lod1` far-away copy) is described in section 10 of the spec and in `src/models.js`.
 
 ## Files
 
@@ -42,10 +44,12 @@ Any missing model is replaced by a simple stand-in, so the game always runs. (Th
 | `src/worlds.js` | Each world's layout as plain numbers, and what the robots say |
 | `src/world.js` | Builds a world and runs its moving parts and collisions |
 | `src/rooms/` | The puzzle rooms: `lava.js`, `ice.js`, `levers.js`, `mirrors.js`, and `common.js` (shared room pieces) |
-| `src/models.js` | Loads the `.glb` files and builds stand-ins, vehicles and prize items |
+| `src/models.js` | Loads the `.glb` files; animations, faces, vehicles, prize items, and cheap many-copy scenery |
 | `src/roster.js` | The six friends, their perks, and their 2D card portraits |
 | `src/input.js`, `src/audio.js` | Keyboard, touch joystick, and sounds |
-| `vendor/three/` | A copy of three.js 0.170.0, so nothing loads from the internet |
+| `vendor/three/` | A copy of three.js 0.170.0 (plus its glTF, mesh-decompression and skeleton helpers), so nothing loads from the internet |
+| `tools/` | `check-models.mjs` (spec checker) and `compress-models.sh` (web compression) |
+| `docs/MODEL_SPEC.md` | The spec for every model and texture |
 | `v1-2d/` | The original 2D version (open its `index.html` directly) |
 
 Type `state` in the browser console to see what the game knows. While testing, `game.goToWorld(2)` jumps to World 3 and `game.placeCar(x, z)` moves the car.

@@ -9,7 +9,8 @@
 // Every board is made fresh and checked by the computer to be solvable.
 
 import * as THREE from 'three';
-import { roomBase, gridMover, makeEnding, mat } from './common.js';
+import { roomBase, gridMover, makeEnding, mat, tileFloor } from './common.js';
+import { makeModel } from '../models.js';
 
 const N = 7, GAP = 2;
 const ROUNDS = [
@@ -70,11 +71,12 @@ export function makeBoard(round) {
 
 export function createIceRoom(ctx) {
   const sx = (c) => (c - (N - 1) / 2) * GAP, sz = (r) => -r * GAP;
-  const base = roomBase({ wall: '#3d5f8a', floor: '#2b3f5a', villain: 'snowgun', villainZ: sz(N) - 1.5 });
+  const base = roomBase({ theme: 'ice', wall: '#3d5f8a', villain: 'snowgun', villainZ: sz(N) - 1.5 });
   const { scene } = base;
   base.villain.rotation.y = 0;
-  const ice = new THREE.Mesh(new THREE.BoxGeometry(N * GAP, 0.4, N * GAP), mat('#cfefff', { roughness: 0.05, metalness: 0.2 }));
-  ice.position.set(0, -0.2, sz((N - 1) / 2)); ice.receiveShadow = true; scene.add(ice);
+  const slab = new THREE.Mesh(new THREE.BoxGeometry(N * GAP, 0.5, N * GAP), mat('#9fc3e0'));
+  slab.position.set(0, -0.35, sz((N - 1) / 2)); slab.receiveShadow = true; scene.add(slab);
+  tileFloor(scene, 'ice', sx(0) - GAP / 2, sz(N - 1) - GAP / 2, sx(N - 1) + GAP / 2, sz(0) + GAP / 2, 0, GAP);
   const lines = new THREE.GridHelper(N * GAP, N, '#9fd6ff', '#9fd6ff');
   lines.position.set(0, 0.01, sz((N - 1) / 2)); scene.add(lines);
 
@@ -97,8 +99,9 @@ export function createIceRoom(ctx) {
     R.board = makeBoard(R.round);
     R.board.rocks.forEach(k => {
       const [c, r] = k.split(',').map(Number);
-      const rock = new THREE.Mesh(new THREE.DodecahedronGeometry(0.9), mat('#9fc3e0', { roughness: 0.3 }));
-      rock.position.set(sx(c), 0.7, sz(r)); rock.castShadow = true; things.add(rock);
+      const rock = makeModel('rooms/ice_rock');
+      rock.scale.setScalar(0.95); rock.rotation.y = (c * 7 + r * 3) % 6;
+      rock.position.set(sx(c), 0, sz(r)); things.add(rock);
     });
     const ex = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 0.9, 0.1, 24), mat('#3f3168', { emissive: '#7a3fe0' }));
     ex.position.set(sx(R.board.exit[0]), 0.05, sz(R.board.exit[1])); things.add(ex);
@@ -108,8 +111,8 @@ export function createIceRoom(ctx) {
     R.mask = 0;
     R.flakeMeshes.forEach(m => things.remove(m));
     R.flakeMeshes = R.board.flakes.map(([c, r]) => {
-      const f = new THREE.Mesh(new THREE.OctahedronGeometry(0.5), mat('#ffffff', { emissive: '#88ccff' }));
-      f.position.set(sx(c), 1, sz(r)); things.add(f); return f;
+      const f = makeModel('rooms/snowflake_pickup');
+      f.scale.setScalar(1.2); f.position.set(sx(c), 0.4, sz(r)); things.add(f); return f;
     });
     mover.place(R.board.start[0], R.board.start[1]);
     player.rotation.y = Math.PI;

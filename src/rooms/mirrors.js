@@ -10,7 +10,8 @@
 // Every puzzle is made fresh, built backward from a real solution.
 
 import * as THREE from 'three';
-import { roomBase, gridMover, makeEnding, mat } from './common.js';
+import { roomBase, gridMover, makeEnding, mat, tileFloor } from './common.js';
+import { makeModel } from '../models.js';
 const placeAt = (obj, x, y, z) => { obj.position.set(x, y, z); return obj; };
 
 export const MIRRORS_EASY = {
@@ -103,17 +104,20 @@ function scramble(p) {
 export function createMirrorRoom(ctx, cfg) {
   const N = cfg.n, GAP = 2;
   const sx = (c) => (c - (N - 1) / 2) * GAP, sz = (r) => -r * GAP + 2;
-  const base = roomBase({ wall: '#2b2150', floor: '#3a3060', villain: 'wizard', villainZ: sz(N) - 1.5 });
+  const base = roomBase({ theme: 'mirror', wall: '#2b2150', villain: 'wizard', villainZ: sz(N) - 1.5 });
   const { scene } = base;
-  const floor = new THREE.Mesh(new THREE.BoxGeometry(N * GAP, 0.3, N * GAP), mat('#5a4f78'));
-  floor.position.set(0, -0.15, sz((N - 1) / 2)); floor.receiveShadow = true; scene.add(floor);
-  const grid = new THREE.GridHelper(N * GAP, N, '#8a7ab8', '#8a7ab8');
-  grid.position.set(0, 0.02, sz((N - 1) / 2)); scene.add(grid);
+  const floor = new THREE.Mesh(new THREE.BoxGeometry(N * GAP, 0.5, N * GAP), mat('#3a3060'));
+  floor.position.set(0, -0.35, sz((N - 1) / 2)); floor.receiveShadow = true; scene.add(floor);
+  tileFloor(scene, 'magic', sx(0) - GAP / 2, sz(N - 1) - GAP / 2, sx(N - 1) + GAP / 2, sz(0) + GAP / 2, 0, GAP);
 
+  // The candle model: its 'wax' part shrinks as time runs out.
   const candle = new THREE.Group();
-  const wax = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 1, 16), mat('#fff3d6'));
+  const candleModel = makeModel('rooms/candle_big');
+  candleModel.scale.setScalar(1.8); candle.add(candleModel);
+  const wax = candleModel.userData.part('wax') || candleModel;
+  const waxRest = wax.scale.y;
   const flame = new THREE.Mesh(new THREE.SphereGeometry(0.3, 10, 8), mat('#ffd23f', { emissive: '#ff9000' }));
-  candle.add(wax, flame);
+  candle.add(flame);
   candle.position.set(sx(N - 1) + 3.2, 0, sz(0));
   scene.add(candle);
 
@@ -136,23 +140,28 @@ export function createMirrorRoom(ctx, cfg) {
     const p = R.p = makePuzzle(N, cfg.rounds[R.round]);
     p.rocks.forEach(k => {
       const [c, r] = k.split(',').map(Number);
-      const rock = new THREE.Mesh(new THREE.BoxGeometry(1.6, 1.4, 1.6), mat('#3a3050'));
-      rock.position.set(sx(c), 0.7, sz(r)); rock.castShadow = true; stuff.add(rock);
+      // A stone block that stops the light (a wall piece squashed into a cube).
+      const rock = makeModel('rooms/room_wall_mirror');
+      rock.scale.set(0.8, 0.4, 6.5); rock.position.set(sx(c) - 0.8, 0, sz(r) + 0.78); stuff.add(rock);
     });
     p.mirrors.forEach((type, k) => {
       const [c, r] = k.split(',').map(Number), g = new THREE.Group();
-      g.add(placeAt(new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.4, 0.4, 12), mat('#8a7ab8')), 0, 0.2, 0));
-      const glass = new THREE.Mesh(new THREE.BoxGeometry(2.2, 1.4, 0.15), mat('#dff4ff', { metalness: 0.8, roughness: 0.05, emissive: '#305070' }));
-      glass.position.y = 1; g.add(glass);
+      const stand = makeModel('rooms/mirror_stand');
+      stand.traverse(o => { if (o.isMesh && o.material.name === 'mirror_glass') { o.material.emissive = new THREE.Color('#5aa0d0'); o.material.emissiveIntensity = 0.6; } });
+      g.add(stand);
       g.position.set(sx(c), 0, sz(r));
       g.rotation.y = type === '/' ? Math.PI / 4 : -Math.PI / 4;
       g.userData.goal = g.rotation.y;
       stuff.add(g); R.mirrorMeshes.set(k, g);
     });
-    const shooter = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.7, 1.4, 12), mat('#ffd23f', { emissive: '#aa7700' }));
-    shooter.position.set(sx(-1), 0.7, sz(p.row)); stuff.add(shooter);
-    R.crystal = new THREE.Mesh(new THREE.OctahedronGeometry(0.9), mat('#7dfff0', { emissive: '#108080' }));
-    R.crystal.position.set(sx(p.crystal[0]), 1.2, sz(p.crystal[1])); R.crystal.scale.y = 1.5; stuff.add(R.crystal);
+    const shooter = makeModel('rooms/beam_emitter');
+    shooter.scale.setScalar(1.6); shooter.rotation.y = Math.PI / 2;
+    shooter.position.set(sx(-1), 0, sz(p.row)); stuff.add(shooter);
+    R.crystal = makeModel('rooms/crystal_target');
+    R.crystal.position.set(sx(p.crystal[0]), 0, sz(p.crystal[1])); stuff.add(R.crystal);
+    R.crystalMat = null;
+    R.crystal.traverse(o => { if (o.isMesh && o.material.name === 'crystal_glow') R.crystalMat = o.material; });
+    if (R.crystalMat) R.crystalMat.emissive = new THREE.Color('#108080');
     mover.place(p.start[0], p.start[1]); player.rotation.y = Math.PI;
     R.left = cfg.rounds[R.round].time;
     drawBeam();
@@ -187,7 +196,7 @@ export function createMirrorRoom(ctx, cfg) {
     return 'go';
   }
   function win() {
-    ctx.sound('ding'); R.crystal.material.emissive.set('#40ffe0');
+    ctx.sound('ding'); if (R.crystalMat) R.crystalMat.emissive.set('#60fff0');
     R.round++; base.villain.userData.hurt = 1;
     if (R.round >= 3) { R.phase = 'end'; setTimeout(() => ending.start(), 800); }
     else { R.phase = 'between'; R.t = 0; ctx.say('Zap! The crystal is glowing! The next one is trickier.'); }
@@ -207,7 +216,7 @@ export function createMirrorRoom(ctx, cfg) {
     // The candle burns down. When it runs out, the wizard mixes up the mirrors.
     R.left -= dt;
     const k = Math.max(0, R.left / cfg.rounds[R.round].time);
-    wax.scale.y = 0.2 + k * 1.8; wax.position.y = wax.scale.y / 2; flame.position.y = wax.scale.y + 0.25;
+    wax.scale.y = waxRest * (0.2 + k * 0.8); flame.position.y = 1.8 * 0.9 * (0.2 + k * 0.8) + 0.25;
     flame.scale.setScalar(0.8 + Math.sin(t * 20) * 0.2);
     if (Math.floor(R.left + dt) !== Math.floor(R.left)) status();
     if (R.left <= 0) {
