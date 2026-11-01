@@ -523,12 +523,12 @@ function makeHomeScene() {
   const colors = ['#ff6fa8', '#ffd23f', '#ffffff', '#b583ff', '#ff8c42'];
   const spots = (n, rMin, rMax) => Array.from({ length: n }, () => { const a = Math.random() * Math.PI * 2, r = rMin + Math.random() * (rMax - rMin); return { x: Math.cos(a) * r, y: 0, z: Math.sin(a) * r, rot: Math.random() * 6, scale: 0.8 + Math.random() * 0.5 }; });
   for (const f of ['flower_a', 'flower_b', 'flower_c']) { const sc = makeScatter('scenery/gecko/' + f, spots(140, 3, 30), { shadows: false }); sc.update(0, 0); s.add(sc.group); }
-  for (const g of ['grass_tuft_a', 'grass_tuft_b']) { const sc = makeScatter('scenery/gecko/' + g, spots(120, 3, 30), { shadows: false }); sc.update(0, 0); s.add(sc.group); }
+  for (const g of ['grass_tuft_a', 'grass_tuft_b']) { const sp = spots(90, 6, 30); sp.forEach(o => { o.scale *= 0.55; }); const sc = makeScatter('scenery/gecko/' + g, sp, { shadows: false }); sc.update(0, 0); s.add(sc.group); }
   for (let i = 0; i < 14; i++) {
     const a = i / 14 * Math.PI * 2, tree = makeModel('scenery/gecko/' + (i % 2 ? 'tree_lush_a' : 'tree_lush_b'));
     tree.position.set(Math.cos(a) * 22, 0, Math.sin(a) * 22); tree.rotation.y = -a; s.add(tree);
   }
-  const home = makeModel('scenery/gecko/gecko_house'); home.position.set(-2, 0, -9); s.add(home);
+  const home = makeModel('scenery/gecko/gecko_house'); home.position.set(-2, 0, -16); s.add(home);
   const blanket = makeModel('scenery/gecko/picnic_blanket'); blanket.scale.setScalar(1.6); blanket.position.set(0, 0.02, -1); s.add(blanket);
   const friends = [charOf()].concat(CHARACTERS.filter(c => c.id !== state.charId)).map((ch, i) => {
     const m = makeModel(ch.id, i === 0 ? 1.4 : 1.15);
