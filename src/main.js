@@ -191,6 +191,59 @@ let titleScene = null;
 // haunted house behind them, and a kart doing laps.
 const TITLE_MODELS = ['vehicles/kart', 'houses/house_gear', 'scenery/gecko/tree_lush_a', 'scenery/gecko/tree_lush_b',
   'scenery/gecko/flower_a', 'scenery/gecko/flower_b', 'scenery/gecko/flower_c', 'scenery/gecko/grass_tuft_a', 'scenery/gecko/grass_tuft_b'];
+// ---------- Cheering jumps (title screen and the Gecko Land ending) ----------
+// The cheer clip floats the body up and down like a slow wave. Here we take the up and down away from the clip (keeping its arms) and
+// jump for real: crouch, spring up, fall with gravity, squash on landing.
+const GRAVITY = 24;
+function makeJumper(m) {
+  const hips = m.getObjectByName('hips');
+  if (!hips) return;
+  m.userData.animate(0, 'idle'); m.updateMatrixWorld(true);
+  const v = new THREE.Vector3();
+  m.userData.jumper = {
+    hips, v, base: m.worldToLocal(hips.getWorldPosition(v)).y,
+    phase: 'wait', timer: 0.2 + Math.random() * 1.2,
+    y: 0, vy: 0,
+    squash: 0, squashV: 0,   // a springy squash: below 0 is squashed flat, above 0 is stretched tall
+    groundY: m.position.y,
+  };
+}
+function jumpStep(m, dt) {
+  const J = m.userData.jumper;
+  J.timer -= dt;
+  if (J.phase === 'wait' && J.timer <= 0) { J.phase = 'crouch'; J.timer = 0.13; }
+  if (J.phase === 'crouch') {
+    J.squash += (-0.22 - J.squash) * Math.min(1, dt * 30);
+    if (J.timer <= 0) {
+      const height = 0.55 + Math.random() * 0.6;
+      J.vy = Math.sqrt(2 * GRAVITY * height);
+      J.phase = 'air'; J.squashV = 6;
+    }
+  }
+  if (J.phase === 'air') {
+    J.vy -= GRAVITY * dt; J.y += J.vy * dt;
+    if (J.y <= 0) {
+      J.y = 0; J.phase = 'wait';
+      J.squashV = -Math.min(9, Math.abs(J.vy) * 0.9);
+      J.timer = Math.random() < 0.3 ? 0.08 : 0.35 + Math.random() * 1.1;   // sometimes a quick double hop
+      J.vy = 0;
+    }
+  }
+  if (J.phase !== 'crouch') {
+    // A damped spring pulls the squash back to normal.
+    J.squashV += (-90 * J.squash - 9 * J.squashV) * dt;
+    J.squash += J.squashV * dt;
+    // Stretch a little while rising fast, as cartoons do.
+    if (J.phase === 'air') J.squash += (Math.max(-0.05, Math.min(0.12, J.vy * 0.012)) - J.squash) * Math.min(1, dt * 12);
+  }
+  const sy = 1 + J.squash, sxz = 1 / Math.sqrt(sy);
+  m.scale.set(sxz, sy, sxz);
+  // Take out the clip's own float so only our jump moves the body.
+  m.updateMatrixWorld(true);
+  const lift = m.worldToLocal(J.hips.getWorldPosition(J.v)).y - J.base;
+  m.position.y = J.groundY + J.y - lift * sy;
+}
+
 function makeTitleScene() {
   const s = new THREE.Scene();
   // Sky: deep blue at the top fading to a warm horizon.
@@ -244,7 +297,8 @@ function makeTitleScene() {
   const moods = ['cheer', 'wave', 'cheer', 'idle', 'wave', 'cheer'];
   CHARACTERS.forEach((ch, i) => {
     const x = -5 + i * 2, z = 2.6 - Math.abs(x) * 0.18;
-    put(ch.id, x, z, -x * 0.06, moods[i]);
+    const m = put(ch.id, x, z, -x * 0.06, moods[i]);
+    if (moods[i] === 'cheer') makeJumper(m);
   });
   // A kart doing laps behind the line-up.
   const kart = makeVehicle('kart', CHARACTERS[0]);
@@ -627,7 +681,7 @@ function makeHomeScene() {
     const a = (i - 2.5) * 0.45;
     m.position.set(Math.sin(a) * 5, 0, Math.cos(a) * 5 - 3);
     if (i === 0) m.position.set(0, 0, 1);
-    s.add(m); return m;
+    s.add(m); makeJumper(m); return m;
   });
   const confetti = [];
   for (let i = 0; i < 160; i++) {
@@ -743,6 +797,7 @@ function frame(now) {
       const T = titleScene.userData;
       T.cast.forEach(m => {
         m.userData.animate(t, m.userData.titleMood || 'idle');
+        if (m.userData.jumper) jumpStep(m, dt);
         if (m.userData.float) m.position.y = 7.3 + Math.sin(t * 1.6) * 0.25;
       });
       const a = t * 0.45, kx = Math.cos(a) * 10, kz = -4.5 + Math.sin(a) * 3.2;
@@ -757,7 +812,7 @@ function frame(now) {
     const a = t * 0.1;
     camera.position.set(Math.sin(a) * 10, 3.5, Math.cos(a) * 10);
     camera.lookAt(0, 3, 0);
-    homeScene.userData.friends.forEach((m, i) => m.userData.animate(t + i * 0.3, 'happy'));
+    homeScene.userData.friends.forEach((m, i) => { m.userData.animate(t + i * 0.3, 'happy'); if (m.userData.jumper) jumpStep(m, dt); });
     homeScene.userData.confetti.forEach((p, i) => { p.position.y -= dt * (1.5 + (i % 5) * 0.3); p.rotation.x += dt * 3; p.rotation.y += dt * 2; if (p.position.y < 0) p.position.y = 12; });
   }
   if (world && worldScene && (state.screen === 'world' || state.screen === 'entering' || state.screen === 'leaving')) {
