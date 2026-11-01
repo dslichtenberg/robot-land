@@ -1,23 +1,38 @@
 # Robot Land to Gecko Land
 
-A browser game for a 7 year old. Drive a little car through Robot Land, solve the puzzles in six haunted houses, and get home to Gecko Land. Open `index.html` in a browser to play. No install and no internet needed.
+A 3D driving and puzzle game for a 7 year old. Drive through six worlds, find each haunted house, beat the villain's puzzle room, and take the portal to the next world. The last one leads home to Gecko Land.
 
-Keyboard: arrow keys or WASD to drive, `P` for the phone, `M` for sound, number keys to answer puzzles. On an iPad, use the arrow buttons in the corner.
+**Status:** World 1 (Gear City) and its Dragon lava room are playable. Worlds 2 to 6 are next.
+
+## Play it
+
+- **Online:** turn on GitHub Pages (Settings → Pages → Deploy from a branch → `main`, `/ (root)`), then open `https://dslichtenberg.github.io/robot-land/`.
+- **On your computer:** the game must be served by a web server (browsers block 3D models from a double-clicked file). From this folder run `python3 -m http.server` and open http://localhost:8000.
+- **iPad:** open the link in Safari, tap Share, then Add to Home Screen.
+
+Keys: arrows or WASD to drive and hop, `P` phone, `M` sound. On a touch screen, use the joystick in the corner.
+
+## 3D models
+
+Put `.glb` files in `assets/models/`. The names the game looks for are in `MODEL_FILES` at the top of `src/models.js`:
+
+`tyler`, `skyler`, `nick`, `pip`, `mo`, `zazz`, `dragon`, `snowgun`, `yoyo`, `wizard`, `ghost`, `tall-robot`
+
+Any missing model is replaced by a simple stand-in, so the game always runs. (The browser console shows a "404" for each missing file; that is expected.) Models should be Y up, facing +Z, standing on y = 0. The game scales them to the right height. Static models are fine: the game wiggles named parts (like the dragon's `stubby-wing` and the robot's `red-bulb`) in code.
 
 ## Files
 
 | File | What it holds |
 |---|---|
-| `index.html` | The page, the buttons and boxes on top of the game |
-| `style.css` | How the buttons and boxes look |
-| `characters.js` | The six friends, their perks, and drawing code for every creature |
-| `map.js` | The world map (edit the letters to change it), robot hints, road villains, tile drawing |
-| `puzzles.js` | The six puzzles and the haunted house room |
-| `game.js` | The game loop, screens, driving, houses, saving and sound |
+| `index.html`, `style.css` | The page, buttons and pop-ups |
+| `src/main.js` | Screens, driving, robots and phone, entering houses, saving, camera |
+| `src/worlds.js` | Each world's layout as plain numbers, and what the robots say |
+| `src/world.js` | Builds a world and runs its moving parts and collisions |
+| `src/rooms/lava.js` | The Dragon's lava stepping-stone room |
+| `src/models.js` | Loads the `.glb` files and builds stand-ins, the car and items |
+| `src/roster.js` | The six friends, their perks, and their 2D card portraits |
+| `src/input.js`, `src/audio.js` | Keyboard, touch joystick, and sounds |
+| `vendor/three/` | A copy of three.js 0.170.0, so nothing loads from the internet |
+| `v1-2d/` | The original 2D version (open its `index.html` directly) |
 
-Type `state` in the browser console to see everything the game knows.
-
-## Putting it on S3
-
-1. In the S3 console, open the bucket, go to Properties, turn on Static website hosting, and set the index document to `index.html`.
-2. Under Permissions, turn off "Block all public access" and add a bucket policy that allows `s3:GetObject` for everyone, then run `./deploy.sh your-bucket-name`.
+Type `state` in the browser console to see what the game knows, or `game.placeCar(x, z)` to jump around while testing.
