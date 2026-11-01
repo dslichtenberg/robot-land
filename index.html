@@ -4,83 +4,79 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <title>Robot Land to Gecko Land</title>
   <link rel="stylesheet" href="style.css">
+  <!-- three.js is copied into vendor/ so the game never needs the internet. -->
+  <script type="importmap">
+    { "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/addons/" } }
+  </script>
 </head>
 <body>
-  <!-- The stage keeps a 4:3 shape. The canvas draws the world; the boxes
-       on top of it are buttons and words. game.js shows and hides them. -->
-  <div id="stage">
-    <canvas id="game"></canvas>
+  <canvas id="game"></canvas>
 
-    <div id="hud" class="hidden">
-      <div id="hearts"></div>
-      <div id="hud-right">
-        <button id="btn-mute" class="icon-btn" aria-label="Sound on or off">🔊</button>
-        <button id="btn-phone" class="icon-btn" aria-label="Phone">📱</button>
-      </div>
-    </div>
-
-    <div id="dpad" class="hidden">
-      <button data-dir="up" class="dp-up" aria-label="Up">▲</button>
-      <button data-dir="left" class="dp-left" aria-label="Left">◀</button>
-      <button data-dir="right" class="dp-right" aria-label="Right">▶</button>
-      <button data-dir="down" class="dp-down" aria-label="Down">▼</button>
-    </div>
-
-    <div id="title-screen" class="screen">
-      <h1>Robot Land <span>to</span> Gecko Land</h1>
-      <p id="title-hint" class="blink">Press any key or tap to start.</p>
-      <div id="title-buttons" class="hidden">
-        <button id="btn-continue" class="big-btn">▶ Continue</button>
-        <button id="btn-new" class="big-btn alt">New Game</button>
-      </div>
-    </div>
-
-    <div id="select-screen" class="screen hidden">
-      <h2>Pick your driver!</h2>
-      <div id="cards"></div>
-    </div>
-
-    <div id="phone" class="overlay hidden">
-      <div class="phone-body">
-        <div class="phone-top">📱 Robot Phone</div>
-        <div id="phone-status"></div>
-        <div id="phone-items"></div>
-        <div id="phone-answer" class="hidden">
-          <div class="bubble-icon">🤖</div>
-          <p id="phone-hint"></p>
-        </div>
-        <button id="btn-call" class="big-btn">📞 Call a Robot</button>
-        <button id="btn-close" class="big-btn alt">Close</button>
-      </div>
-    </div>
-
-    <div id="dialog" class="overlay hidden">
-      <div class="bubble">
-        <div class="bubble-icon">🤖</div>
-        <p id="dialog-text"></p>
-        <button id="dialog-ok" class="big-btn">OK!</button>
-      </div>
-    </div>
-
-    <div id="speech" class="hidden"></div>
-    <div id="puzzle" class="hidden"></div>
-    <div id="banner" class="hidden">
-      <p id="banner-text"></p>
-      <button id="btn-banner" class="big-btn">Yay! ▶</button>
-    </div>
-    <div id="toast" class="hidden"></div>
-
-    <div id="ending-ui" class="screen hidden">
-      <h2 id="ending-text"></h2>
-      <button id="btn-again" class="big-btn">Play Again</button>
+  <div id="hud" class="hidden">
+    <div id="hearts"></div>
+    <div id="hud-right">
+      <button id="btn-mute" class="icon-btn" aria-label="Sound on or off">🔊</button>
+      <button id="btn-phone" class="icon-btn" aria-label="Phone">📱</button>
     </div>
   </div>
 
-  <script src="characters.js"></script>
-  <script src="map.js"></script>
-  <script src="puzzles.js"></script>
-  <script src="game.js"></script>
+  <div id="joystick" class="hidden"><div id="knob"></div></div>
+
+  <div id="loading" class="screen"><p>Loading…</p></div>
+
+  <div id="title-screen" class="screen hidden">
+    <h1>Robot Land <span>to</span> Gecko Land</h1>
+    <p id="title-hint" class="blink">Press any key or tap to start.</p>
+    <div id="title-buttons" class="hidden">
+      <button id="btn-continue" class="big-btn">▶ Continue</button>
+      <button id="btn-new" class="big-btn alt">New Game</button>
+    </div>
+  </div>
+
+  <div id="select-screen" class="screen hidden">
+    <h2>Pick your driver!</h2>
+    <div id="cards"></div>
+  </div>
+
+  <div id="phone" class="overlay hidden">
+    <div class="phone-body">
+      <div class="phone-top">📱 Robot Phone</div>
+      <div id="phone-status"></div>
+      <div id="phone-items"></div>
+      <div id="phone-answer" class="hidden"><div class="bubble-icon">🤖</div><p id="phone-hint"></p></div>
+      <button id="btn-call" class="big-btn">📞 Call a Robot</button>
+      <button id="btn-close" class="big-btn alt">Close</button>
+    </div>
+  </div>
+
+  <div id="dialog" class="overlay hidden">
+    <div class="bubble">
+      <div class="bubble-icon">🤖</div>
+      <p id="dialog-text"></p>
+      <button id="dialog-ok" class="big-btn">OK!</button>
+    </div>
+  </div>
+
+  <div id="room-status" class="hidden"></div>
+  <div id="speech" class="hidden"></div>
+  <div id="banner" class="hidden">
+    <p id="banner-text"></p>
+    <button id="btn-banner" class="big-btn">Yay! ▶</button>
+  </div>
+  <div id="toast" class="hidden"></div>
+
+  <div id="end-screen" class="screen hidden">
+    <h2 id="end-text"></h2>
+    <p id="end-sub"></p>
+    <button id="btn-again" class="big-btn">Play Again</button>
+  </div>
+
+  <div id="fade"></div>
+
+  <script src="src/roster.js"></script>
+  <script type="module" src="src/main.js"></script>
 </body>
 </html>
