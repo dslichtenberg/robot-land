@@ -10,7 +10,7 @@
 // texture, and what the walls and yard fences are made of.
 
 import * as THREE from 'three';
-import { makeModel, makeScatter, CORE_MODELS } from './models.js';
+import { makeModel, makeScatter, beltMap, CORE_MODELS } from './models.js';
 
 const mat = (color, extra) => new THREE.MeshStandardMaterial(Object.assign({ color, roughness: 0.85 }, extra));
 export const inBox = (x, z, [x1, z1, x2, z2]) => x > x1 && x < x2 && z > z1 && z < z2;
@@ -426,8 +426,7 @@ export function buildWorld(scene, w, flags) {
     for (let x = x1 + 2; x < x2; x += 4) for (let z = z1 + 2; z < z2; z += 4) spots.push({ x, y: heightAt(x, z) + 0.02, z, rot, scale: 1 });
     const sc = makeScatter('pieces/conveyor', spots, { shadows: false });
     scene.add(sc.group); sc.update(0, 0);
-    let beltTex = null; sc.group.traverse(o => { if (o.isMesh && o.material.name === 'belt') beltTex = o.material.map; });
-    world.belts.push({ box: c.box, push: c.push, tex: beltTex });
+    world.belts.push({ box: c.box, push: c.push, tex: beltMap(sc.group) });
   });
   (w.ice || []).forEach(b => groundStrip(b, mat('#cfefff', { roughness: 0.05, metalness: 0.2, transparent: true, opacity: 0.8 }), 0.04));
   world.pushAt = (x, z) => { const b = world.belts.find(b => inBox(x, z, b.box)); return b ? b.push : null; };

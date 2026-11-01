@@ -52,4 +52,6 @@ What the game does with each model (animations, faces, wheel spin, steering, pai
 | `docs/MODEL_SPEC.md` | The spec for every model and texture |
 | `v1-2d/` | The original 2D version (open its `index.html` directly) |
 
+**Test mode:** add `?test` to the address (for example `https://dslichtenberg.github.io/robot-land/?test`). Then Ctrl+1 to Ctrl+6 jump to that world and Ctrl+7 to the Gecko Land ending, from any screen. Alt+number does the same, for browsers that use Ctrl+number to switch tabs. Jumping does not change the saved game.
+
 Type `state` in the browser console to see what the game knows. While testing, `game.goToWorld(2)` jumps to World 3 and `game.placeCar(x, z)` moves the car.

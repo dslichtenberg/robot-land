@@ -250,12 +250,12 @@ export function makeVehicle(kind, ch) {
   g.add(inner);
   shadows(g);
   // Paint takes the driver's color; Zazz's shifts through the rainbow.
-  const paints = [], belts = [];
+  const paints = [];
   inner.traverse(o => {
     if (!o.isMesh) return;
     if (o.material.name === 'paint') { o.material.color.set(ch.color); paints.push(o.material); }
-    if (o.material.name === 'belt' && o.material.map) belts.push(o.material.map);
   });
+  const belt = beltMap(inner), belts = belt ? [belt] : [];
   if (ch.look === 'chameleon') g.userData.rainbow = paints;
   const driverSpot = new THREE.Group();
   seat.add(driverSpot);
@@ -281,6 +281,25 @@ export function makeVehicle(kind, ch) {
     inner.position.y = lift;
   };
   return g;
+}
+
+// The texture on a model's 'belt' material, but only when the belt has that
+// image to itself. If the belt shares an atlas with the rest of the model
+// (the loader then hands every material the same texture object), scrolling
+// it would slide the colors across the whole body, so we leave it still.
+export function beltMap(root) {
+  let map = null;
+  const others = new Set();
+  root.traverse(o => {
+    if (!o.isMesh) return;
+    for (const m of [].concat(o.material)) {
+      if (!m.map) continue;
+      if (m.name === 'belt') map = m.map;
+      else { others.add(m.map); others.add(m.map.source); }
+    }
+  });
+  if (!map || others.has(map) || others.has(map.source)) return null;
+  return map;
 }
 
 // ---------- Prize items ----------

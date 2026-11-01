@@ -684,8 +684,51 @@ function frame(now) {
 window.game = {
   state, placeCar, sound, WORLDS,
   get world() { return world; }, get room() { return room; }, get car() { return car; },
-  goToWorld(i) { state.worldIndex = i; state.flags = { switches: [], houseDone: false }; return enterWorld(false); },
+  goToWorld(i) { return jumpTo(i, false); },
 };
+
+// ---------- Test mode ----------
+// Open the game with ?test on the end of the address (for example
+// https://dslichtenberg.github.io/robot-land/?test). Then Ctrl+1 to Ctrl+6
+// jump straight to that world and Ctrl+7 to the Gecko Land ending, from any
+// screen. Alt works too, for browsers that keep Ctrl+number for tabs.
+// Jumping never touches the saved game.
+const TEST_MODE = new URLSearchParams(location.search).has('test');
+
+let jumping = false;
+async function jumpTo(i, greet) {
+  if (jumping) return;
+  jumping = true;
+  try {
+    if (!state.charId) { state.charId = CHARACTERS[0].id; state.stats = statsFor(state.charId); }
+    if (state.overlay) closeOverlay();
+    show('banner', false); show('speech', false);
+    engine(0);
+    if (room) { disposeScene(room.scene); room = null; }
+    if (homeScene) { disposeScene(homeScene); homeScene = null; }
+    if (i >= WORLDS.length) {
+      await showHome();
+    } else {
+      state.worldIndex = i;
+      state.flags = { switches: [], houseDone: false };
+      await enterWorld(greet);
+    }
+  } finally { jumping = false; }
+}
+
+if (TEST_MODE) {
+  window.addEventListener('keydown', (e) => {
+    const m = /^Digit([1-7])$/.exec(e.code);
+    if (!m || !(e.ctrlKey || e.altKey) || e.repeat) return;
+    e.preventDefault();
+    if (['loading', 'entering', 'leaving'].includes(state.screen)) return;
+    jumpTo(+m[1] - 1, true);
+  });
+  const badge = document.createElement('div');
+  badge.id = 'test-badge';
+  badge.textContent = 'Test mode: Ctrl+1 to 6 = worlds, Ctrl+7 = home';
+  document.body.append(badge);
+}
 
 resize();
 // Load the cast, then fade from the loading screen to the launch screen.

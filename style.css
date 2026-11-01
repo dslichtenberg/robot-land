@@ -148,3 +148,10 @@ button { font-family: inherit; cursor: pointer; touch-action: manipulation; }
 #loading p { color: #fff; font-size: 32px; font-weight: bold; }
 #end-screen h2 { font-size: max(44px, calc(76px * var(--u))); font-weight: 900; color: #9cf06c; margin: 0 20px 14px; paint-order: stroke fill;
   -webkit-text-stroke: max(4px, calc(5px * var(--u))) #2b2140; text-shadow: 0 max(5px, calc(7px * var(--u))) 0 #2b2140; animation: float 3s ease-in-out infinite; }
+
+/* Test mode reminder (only shown with ?test in the address). */
+#test-badge {
+  position: fixed; left: 50%; bottom: 8px; transform: translateX(-50%); z-index: 50; pointer-events: none;
+  padding: 4px 10px; border-radius: 999px; font: 600 12px system-ui, sans-serif;
+  color: #fff; background: rgba(20, 20, 40, 0.55);
+}
