@@ -316,6 +316,10 @@ export function buildWorld(scene, w, flags) {
       if (Math.abs(x) > 58 || Math.abs(z) > 58) continue;
       if (keepAway.some(p => Math.hypot(p[0] - x, p[1] - z) < (opts.small ? 3 : 5))) continue;
       if (!opts.nearStreets && onStreet(x, z, opts.small ? 0.3 : 1.5)) continue;
+      // Not on belts, ice, rivers or canyons.
+      if ((w.conveyors || []).some(c => inBox(x, z, [c.box[0] - 1, c.box[1] - 1, c.box[2] + 1, c.box[3] + 1]))) continue;
+      if ((w.ice || []).some(b => inBox(x, z, b)) && !opts.allowIce) continue;
+      if ((w.water || []).some(wt => inBox(x, z, [wt.box[0] - 1, wt.box[1] - 1, wt.box[2] + 1, wt.box[3] + 1]))) continue;
       if (blocked(x, z, r)) continue;
       if (!opts.small && heightAt(x, z) > 5) continue;
       const name = names[Math.floor(rnd() * names.length)], scale = opts.small ? 0.8 + rnd() * 0.6 : 0.85 + rnd() * 0.35;
@@ -326,7 +330,7 @@ export function buildWorld(scene, w, flags) {
     }
   }
   const STYLE_COLLIDE = { pine: 1, icerock: 1, tree: 1, lavarock: 1, mushroom: 1, crystal: 1 };
-  (w.scatter || []).forEach(sc => { const names = kit.styles[sc.style]; if (names) sprinkle(names, sc.count, sc.box, { collide: STYLE_COLLIDE[sc.style] }); });
+  (w.scatter || []).forEach(sc => { const names = kit.styles[sc.style]; if (names) sprinkle(names, sc.count, sc.box, { collide: STYLE_COLLIDE[sc.style], allowIce: true }); });
   kit.decor.forEach(d => sprinkle(d.models, d.count, [-58, -58, 58, 58], d));
 
   // Turn all the spots into instanced scenery, and give bumpable things their real size.
