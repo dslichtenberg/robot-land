@@ -73,10 +73,6 @@ button { font-family: inherit; cursor: pointer; touch-action: manipulation; }
 .logo-robot { color: #d6ebff; transform: rotate(-2deg); }
 .logo-gecko { color: #9cf06c; transform: rotate(1.5deg); }
 .logo-to { font-size: max(28px, calc(44px * var(--u))); color: #ffd23f; margin: 2px 0 4px; }
-.tagline {
-  margin: calc(14px * var(--u)) auto 0; display: inline-block; padding: 6px 18px; border-radius: 999px;
-  background: rgba(43,33,64,0.55); color: #fff; font-weight: bold; font-size: max(20px, calc(24px * var(--u)));
-}
 .title-bottom { display: flex; flex-direction: column; align-items: center; gap: 14px; }
 .start-pill {
   margin: 0; padding: 12px 30px; border-radius: 999px; background: #ffd23f; color: #2b2140; font-weight: 900;
