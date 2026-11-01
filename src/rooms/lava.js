@@ -98,7 +98,7 @@ export function createLavaRoom(ctx, cfg) {
   function fall() {
     R.phase = 'fall'; R.t = 0; R.fails++;
     ctx.sound('buzz');
-    ctx.say(R.fails >= 3 ? '👻 Boo-hoo! I will help. The path will glow a tiny bit.' : 'Oops! Splash! Try again!');
+    ctx.say(R.fails >= 3 ? '👻 Psst! It is Boo. I will help: the path will glow a tiny bit.' : 'Oops! Splash! Try again!');
   }
   mover.onLand = (c, r) => {
     if (r >= ROWS) {
@@ -191,7 +191,7 @@ export function createLavaRoom(ctx, cfg) {
 
   mover.place(2, -1);
   player.rotation.y = Math.PI;
-  ctx.say(cfg.fireEvery ? '🐲 I am back, and my lava is even HOTTER!' : '🐲 You will never cross my lava, little gecko!');
+  ctx.say(cfg.fireEvery ? '🐲 Scorch is back, and my lava is even HOTTER!' : '🐲 I am Scorch! You will never cross my lava!');
   status();
   return { scene, camera: base.camera, update, room: { get phase() { return ending.phase === 'done' ? 'done' : R.phase; }, debug: { R, mover } } };
 }

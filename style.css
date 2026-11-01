@@ -116,6 +116,7 @@ button { font-family: inherit; cursor: pointer; touch-action: manipulation; }
 }
 .phone-top { text-align: center; font-weight: bold; font-size: max(22px, calc(26px * var(--u))); }
 #phone-status { background: #ffd23f; color: #2b2140; border-radius: 14px; padding: 8px; text-align: center; font-weight: bold; }
+#phone-goal { background: #fff6c4; color: #2b2140; border-radius: 14px; padding: 8px; text-align: center; font-weight: bold; }
 #phone-items { background: #3d3260; border-radius: 14px; padding: 8px; line-height: 1.4; }
 #phone-answer, .bubble { background: #fff; color: #2b2140; border-radius: 18px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; }
 #phone-answer p, .bubble p { margin: 0; }
@@ -178,3 +179,22 @@ button { font-family: inherit; cursor: pointer; touch-action: manipulation; }
   position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); z-index: 1;
   font: 800 11px system-ui, sans-serif; color: #2b2140; background: rgba(255,255,255,0.85); border-radius: 6px; padding: 0 4px;
 }
+
+/* ---------- Storybook pages ---------- */
+#story { z-index: 4; background: rgba(20,20,40,0.72); padding: 12px; }
+.story-card {
+  width: min(94vw, calc(720px * var(--u))); max-height: 96vh; overflow-y: auto;
+  background: #fff8e6; border: 6px solid #2b2140; border-radius: 30px; padding: calc(18px * var(--u)) calc(22px * var(--u));
+  display: flex; flex-direction: column; align-items: center; gap: calc(10px * var(--u)); color: #2b2140; text-align: center;
+  box-shadow: 0 10px 0 #2b2140;
+}
+.story-card.turn { animation: page-in 0.3s ease-out; }
+@keyframes page-in { from { transform: translateY(14px) scale(0.97); opacity: 0.4; } to { transform: none; opacity: 1; } }
+#story-art { display: flex; justify-content: center; align-items: flex-end; flex-wrap: wrap; gap: calc(6px * var(--u)); min-height: calc(150px * var(--u)); }
+.story-pic { height: max(120px, calc(170px * var(--u))); width: auto; max-width: 40vw; object-fit: contain; filter: drop-shadow(0 4px 3px rgba(43,33,64,0.25)); }
+#story-art.crowd .story-pic { height: max(84px, calc(118px * var(--u))); }
+.story-emoji { font-size: max(70px, calc(100px * var(--u))); line-height: 1.2; }
+#story-art.crowd .story-emoji { font-size: max(52px, calc(70px * var(--u))); }
+#story-text { margin: 0; font-size: max(22px, calc(28px * var(--u))); font-weight: bold; line-height: 1.3; }
+#story-dots { color: #b9a8d8; letter-spacing: 2px; font-size: 14px; min-height: 14px; }
+.story-buttons { display: flex; gap: 14px; justify-content: center; }

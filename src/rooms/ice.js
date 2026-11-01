@@ -201,7 +201,7 @@ export function createIceRoom(ctx) {
   }
 
   mover.place(3, 0);
-  ctx.say('☃️ My ice is too slippery for you, little gecko!');
+  ctx.say('☃️ I am Chilly! My ice is too slippery for you!');
   ctx.status('☃️ Round 1 of 3');
   return { scene, camera: base.camera, update, room: { get phase() { return ending.phase === 'done' ? 'done' : R.phase; }, debug: { R, mover, slide } } };
 }

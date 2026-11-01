@@ -61,7 +61,7 @@ export const WORLDS = [
     patrols: [{ kind: 'dragon', x: 46, z: -40, r: 9.5, speed: 3.6, guard: true }],
     rollers: [{ from: [-55, 28], to: [55, 28], speed: 8, kind: 'gear' }],
     robots: [
-      { at: [-40, 45], line: 'Hi! I am Bolt.' },
+      { at: [-40, 45], line: 'Hi! I am Bolt. Scorch the dragon took our Robot Key! Please get it back.' },
       { at: [30, 7.5], line: 'Oh no! This bridge is broken. There is another bridge on the west side of town.' },
       { at: [-24, -7], line: 'Whoa, those moving belts push you to the east! Steer against them.' },
       { at: [18, -45], line: 'This yard has a locked gate. I heard a big red button opens it.' },

@@ -15,6 +15,7 @@ import { createIceRoom } from './rooms/ice.js';
 import { createLeverRoom } from './rooms/levers.js';
 import { createMirrorRoom, MIRRORS_EASY, MIRRORS_HARD } from './rooms/mirrors.js';
 import { makeLaser } from './laser.js';
+import { INTRO, WORLD_STORY, ENDING, houseStory, winLine, PORTAL_LINE, goalText, showStory } from './story.js';
 import { move, onKey, clearHeld, setupJoystick } from './input.js';
 import { unlockAudio, sound, engine, toggleMute } from './audio.js';
 const placeAt = (obj, x, y, z) => { obj.position.set(x, y, z); return obj; };
@@ -368,6 +369,7 @@ function startGame(charId, saved) {
   state.worldIndex = saved ? saved.worldIndex : 0;
   state.flags = saved ? { switches: saved.flags.switches || [], houseDone: !!saved.flags.houseDone } : { switches: [], houseDone: false };
   if (!saved) clearSave();
+  if (!saved) return story(INTRO).then(() => enterWorld(true));
   return enterWorld(true);
 }
 
@@ -392,9 +394,23 @@ async function enterWorld(greet) {
   updateHearts();
   view = { scene: worldScene, camera };
   if (greet) {
-    const v = VEHICLES[w.vehicle];
-    setTimeout(() => toast('World ' + (state.worldIndex + 1) + ': ' + w.name + '! You are driving the ' + v.name + '. 📱 Call a robot if you get lost.', 5.5), 600);
+    // Wait for the fade-in, then tell the story of this world.
+    const v = VEHICLES[w.vehicle], page = WORLD_STORY[state.worldIndex], n = state.worldIndex;
+    setTimeout(() => {
+      if (state.screen !== 'world' || state.worldIndex !== n || state.overlay) return;
+      story([{ art: page.art, text: 'World ' + (n + 1) + ': ' + w.name + '. ' + page.text + ' Your ride here is the ' + v.name + '.', next: 'Drive! ▶' }]);
+    }, 700);
   }
+}
+
+// Show storybook pages. The world waits while they are open.
+async function story(pages) {
+  const before = state.overlay;
+  state.overlay = 'story';
+  clearHeld(); engine(0);
+  await showStory(pages, state.charId, () => sound('tick'));
+  state.overlay = before === 'story' ? null : before;
+  clearHeld();
 }
 
 // Free a world's graphics memory, but keep parts shared with the loaded model files.
@@ -570,6 +586,7 @@ function openPhone() {
   state.overlay = 'phone';
   show('toast', false);
   $('phone-status').textContent = '🌍 World ' + (state.worldIndex + 1) + ' of 6: ' + world.data.name;
+  $('phone-goal').textContent = '🎯 ' + goalText(world.data, world.houseDone);
   const items = ownedItems().map(it => it.icon + ' ' + it.name + (POWERS[it.power] ? ' (' + POWERS[it.power].icon + (POWERS[it.power].key ? ' ' + POWERS[it.power].key : '') + ')' : ''));
   $('phone-items').textContent = 'Items: ' + (items.length ? items.join(', ') : 'none yet');
   show('phone-answer', false); show('phone', true);
@@ -600,6 +617,7 @@ async function enterHouse() {
   if (state.screen !== 'world') return;
   state.screen = 'entering';
   engine(0);
+  await story(houseStory(world.data.villain, world.data.item));
   await fade(true);
   setScreen('house');
   room = ROOMS[world.data.room]({
@@ -612,7 +630,7 @@ async function enterHouse() {
     onSolved: () => {
       const item = world.data.item;
       const power = POWERS[item.power];
-      $('banner-text').textContent = 'You got the ' + item.name + '! ' + item.icon + (power ? ' ' + power.text : '');
+      $('banner-text').textContent = winLine(world.data.villain) + 'You got the ' + item.name + '! ' + item.icon + (power ? ' ' + power.text : '');
       show('banner', true);
       $('btn-banner').focus();
     },
@@ -644,7 +662,7 @@ async function leaveHouse() {
   state.cutscene = { x: world.portalSpot.x, z: world.portalSpot.z, until: state.time + 2.6 };
   await fade(false);
   sound('chime');
-  toast('A magic portal opened! Drive into it! ✨', 4);
+  toast(PORTAL_LINE, 6);
 }
 
 async function finishWorld() {
@@ -708,6 +726,9 @@ async function showHome() {
   homeScene = makeHomeScene();
   setScreen('home');
   view = { scene: homeScene, camera };
+  show('end-screen', false);
+  await story(ENDING);
+  show('end-screen', true);
   $('end-text').textContent = 'Welcome home, ' + charOf().name + '!';
   $('end-sub').textContent = 'You beat all six haunted houses and made it home to Gecko Land! 🦎🎉';
   sound('chime');

@@ -175,7 +175,7 @@ export function createLeverRoom(ctx) {
 
   mover.place(EXIT_C, 0);
   player.rotation.y = Math.PI;
-  ctx.say('🪀 Round and round and up and down! You will never escape my room!');
+  ctx.say('🪀 I am Wobbles! Round and round and up and down! You will never escape my room!');
   ctx.status('🪀 Round 1 of 3');
   return { scene, camera: base.camera, update, room: { get phase() { return ending.phase === 'done' ? 'done' : R.phase; }, debug: { R, mover, leverAt, COLS, ROWS, EXIT_C } } };
 }

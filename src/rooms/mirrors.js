@@ -256,7 +256,7 @@ export function createMirrorRoom(ctx, cfg) {
   }
 
   mover.place(Math.floor(N / 2), 0);
-  ctx.say(cfg.sparkEvery ? '🧙 My tower is full of the trickiest magic of all! Hee hee!' : '🧙 Abracadabra! My magic mirrors will trick you!');
+  ctx.say(cfg.sparkEvery ? '🧙 You found my tower! It is full of the trickiest magic of all! Hee hee!' : '🧙 I am Wizzle! Abracadabra! My magic mirrors will trick you!');
   ctx.status('🧙 Round 1 of 3');
   return { scene, camera: base.camera, update, room: { get phase() { return ending.phase === 'done' ? 'done' : R.phase; }, debug: { R, mover, traceBeam } } };
 }

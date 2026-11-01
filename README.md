@@ -11,6 +11,8 @@ A 3D driving and puzzle game for a 7 year old. Drive through six hilly worlds, f
 | 5. Lava Meadow | Lava Tractor | Stepping stones that sink into lava, rolling fireballs, a volcano | Dragon again: longer lava paths plus rolling fireballs |
 | 6. Wizard Tower | Magic Carpet | Three rings of walls, each opened by a button | Wizard again: bigger mirror puzzles plus sparkles |
 
+**The story:** six best friends live in Gecko Land. Wizzle the wizard was sad nobody asked him to their picnic, so he blew them away to Robot Land with a magic wind, and his Grumble Gang (Scorch the dragon, Chilly the snowman and Wobbles the yo-yo) took the Gecko Land Map. The Gang hid in six old houses on the road home and made them haunted, with a shy ghost named Boo stuck inside. The robots are too scared of ghosts to go in, so they help with hints. Beat each villain, free Boo (who opens a portal to the next land), win back the map and drive home. A storybook tells it at the start, at each world and haunted house, and at the end. All the words are in `src/story.js`.
+
 Failing a puzzle never costs hearts: the round just starts again, and after a few misses a hint appears.
 
 Each haunted house prize gives your car a power for the rest of the game:
@@ -59,6 +61,7 @@ What the game does with each model (animations, faces, wheel spin, steering, pai
 | `src/worlds.js` | Each world's layout as plain numbers, and what the robots say |
 | `src/world.js` | Builds a world and runs its moving parts and collisions |
 | `src/rooms/` | The puzzle rooms: `lava.js`, `ice.js`, `levers.js`, `mirrors.js`, and `common.js` (shared room pieces) |
+| `src/story.js` | The story: storybook pages, villain names, and what is said at each world and haunted house |
 | `src/models.js` | Loads the `.glb` files; animations, faces, vehicles, prize items, and cheap many-copy scenery |
 | `src/roster.js` | The six friends, their perks, and their 2D card portraits |
 | `src/input.js`, `src/audio.js` | Keyboard, touch joystick, and sounds |
