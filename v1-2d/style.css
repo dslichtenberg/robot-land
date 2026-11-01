@@ -1,0 +1,164 @@
+/* style.css
+   Look of the buttons, boxes and words that sit on top of the game canvas.
+   --u is set by game.js: it is how much the 768x576 game is scaled up or
+   down, so boxes grow with the screen. Text never goes below 20px. */
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; height: 100%; overflow: hidden;
+  background: #1d2333;
+  font-family: "Chalkboard SE", "Comic Sans MS", "Trebuchet MS", system-ui, sans-serif;
+  color: #2b2140;
+  -webkit-user-select: none; user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+body { display: flex; align-items: center; justify-content: center; }
+
+#stage { --u: 1; position: relative; width: 768px; height: 576px; overflow: hidden; background: #8d9aac; }
+#game { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hidden { display: none !important; }
+
+/* ---------- Buttons ---------- */
+button { font-family: inherit; cursor: pointer; touch-action: manipulation; }
+.big-btn {
+  font-size: max(22px, calc(26px * var(--u)));
+  min-height: max(64px, calc(64px * var(--u)));
+  min-width: max(64px, calc(64px * var(--u)));
+  padding: 0 calc(24px * var(--u));
+  border: 4px solid #2b2140; border-radius: 20px;
+  background: #ffd23f; color: #2b2140; font-weight: bold;
+  box-shadow: 0 5px 0 #2b2140;
+}
+.big-btn:active { transform: translateY(3px); box-shadow: 0 2px 0 #2b2140; }
+.big-btn:focus-visible, .card:focus-visible, .pz-card:focus-visible { outline: 5px solid #ff5fa2; outline-offset: 3px; }
+.big-btn.alt { background: #bfe9ff; }
+.big-btn:disabled { opacity: 0.4; }
+.big-btn.good { background: #6cdc6c; }
+.shake { animation: shake 0.35s; }
+@keyframes shake { 25% { transform: translateX(-8px); } 75% { transform: translateX(8px); } }
+
+.icon-btn {
+  width: max(64px, calc(64px * var(--u))); height: max(64px, calc(64px * var(--u)));
+  font-size: max(30px, calc(36px * var(--u)));
+  border: 4px solid #2b2140; border-radius: 18px; background: rgba(255,255,255,0.9);
+  margin-left: 10px; padding: 0;
+}
+
+/* ---------- Heads up display ---------- */
+#hud { position: absolute; left: 0; right: 0; top: 0; display: flex; justify-content: space-between; align-items: flex-start; padding: 10px; pointer-events: none; }
+#hud button { pointer-events: auto; }
+#hearts { font-size: max(28px, calc(34px * var(--u))); background: rgba(255,255,255,0.75); border-radius: 16px; padding: 4px 12px; }
+
+/* ---------- Touch D-pad ---------- */
+#dpad {
+  position: absolute; left: 14px; bottom: 14px;
+  width: calc(3 * max(68px, calc(76px * var(--u)))); height: calc(3 * max(68px, calc(76px * var(--u))));
+  display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
+  touch-action: none;
+}
+#dpad button {
+  font-size: max(28px, calc(32px * var(--u))); border: 4px solid #2b2140; border-radius: 18px;
+  background: rgba(255,255,255,0.75); color: #2b2140; touch-action: none; padding: 0;
+}
+#dpad button.held { background: #ffd23f; }
+.dp-up { grid-column: 2; grid-row: 1; }
+.dp-left { grid-column: 1; grid-row: 2; }
+.dp-right { grid-column: 3; grid-row: 2; }
+.dp-down { grid-column: 2; grid-row: 3; }
+
+/* ---------- Full screens ---------- */
+.screen { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+#title-screen h1 {
+  font-size: max(44px, calc(70px * var(--u))); line-height: 1.05; margin: 0 20px calc(30px * var(--u));
+  color: #ffd23f; text-shadow: 4px 4px 0 #2b2140, -2px -2px 0 #2b2140, 2px -2px 0 #2b2140, -2px 2px 0 #2b2140;
+}
+#title-screen h1 span { display: block; font-size: 0.55em; color: #fff; }
+#title-hint { font-size: max(24px, calc(30px * var(--u))); color: #fff; text-shadow: 2px 2px 0 #2b2140; }
+#title-buttons { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+.blink { animation: blink 1.4s infinite; }
+@keyframes blink { 50% { opacity: 0.35; } }
+
+#select-screen { background: rgba(43,33,64,0.55); justify-content: flex-start; padding-top: calc(14px * var(--u)); }
+#select-screen h2 { font-size: max(28px, calc(34px * var(--u))); color: #fff; margin: 0 0 calc(10px * var(--u)); text-shadow: 3px 3px 0 #2b2140; }
+#cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: calc(12px * var(--u)); width: 94%; }
+.card {
+  background: #fff; border: 4px solid #2b2140; border-radius: 18px; padding: calc(6px * var(--u));
+  display: flex; flex-direction: column; align-items: center; color: #2b2140;
+  font-size: max(20px, calc(18px * var(--u)));
+}
+.card canvas { width: calc(80px * var(--u)); height: calc(80px * var(--u)); min-width: 64px; min-height: 64px; }
+.card .name { font-size: max(24px, calc(26px * var(--u))); font-weight: bold; line-height: 1.1; }
+.card .persona, .card .perk { font-size: max(20px, calc(19px * var(--u))); line-height: 1.12; }
+.card .perk { color: #1f7a2e; margin-top: 4px; font-weight: bold; }
+.card.selected { background: #fff6c4; border-color: #ff5fa2; transform: scale(1.03); }
+
+/* ---------- Phone and robot talk ---------- */
+.overlay { position: absolute; inset: 0; background: rgba(20,20,40,0.5); display: flex; align-items: center; justify-content: center; }
+.phone-body {
+  width: calc(440px * var(--u)); min-width: 300px; max-height: 96%; overflow-y: auto;
+  background: #2b2140; border-radius: 34px; padding: calc(18px * var(--u)); border: 6px solid #111;
+  display: flex; flex-direction: column; gap: calc(12px * var(--u)); color: #fff;
+  font-size: max(20px, calc(22px * var(--u)));
+}
+.phone-top { text-align: center; font-weight: bold; font-size: max(22px, calc(26px * var(--u))); }
+#phone-status { background: #ffd23f; color: #2b2140; border-radius: 14px; padding: 8px; text-align: center; font-weight: bold; }
+#phone-items { background: #3d3260; border-radius: 14px; padding: 8px; line-height: 1.4; }
+#phone-answer, .bubble { background: #fff; color: #2b2140; border-radius: 18px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; }
+#phone-answer p, .bubble p { margin: 0; }
+.bubble-icon { font-size: max(36px, calc(44px * var(--u))); line-height: 1; }
+.bubble { flex-direction: column; align-items: center; text-align: center; width: calc(560px * var(--u)); min-width: 300px; font-size: max(22px, calc(26px * var(--u))); border: 5px solid #2b2140; }
+
+/* ---------- Haunted house words ---------- */
+#speech {
+  position: absolute; right: 3%; top: 3%; max-width: 60%;
+  background: #fff; border: 4px solid #2b2140; border-radius: 22px; padding: 10px 16px;
+  font-size: max(22px, calc(24px * var(--u))); font-weight: bold;
+}
+#puzzle {
+  position: absolute; left: 3%; right: 3%; top: 43%; bottom: 2%;
+  background: rgba(255,255,255,0.95); border: 5px solid #2b2140; border-radius: 24px;
+  display: flex; flex-direction: column; align-items: center; justify-content: space-evenly;
+  padding: 6px; text-align: center; font-size: max(20px, calc(22px * var(--u)));
+}
+.pz-title { font-weight: bold; font-size: max(22px, calc(24px * var(--u))); }
+.pz-dots { color: #ff5fa2; font-size: max(22px, calc(24px * var(--u))); letter-spacing: 4px; }
+.pz-body { display: flex; flex-direction: column; align-items: center; gap: calc(6px * var(--u)); }
+.pz-body .pz-prompt { line-height: 1.1; }
+.pz-prompt { font-size: max(32px, calc(44px * var(--u))); font-weight: bold; letter-spacing: 2px; }
+.pz-prompt.small { font-size: max(22px, calc(26px * var(--u))); letter-spacing: 0; max-width: 95%; }
+.pz-choices { display: flex; gap: calc(16px * var(--u)); flex-wrap: wrap; justify-content: center; }
+.pz-choice { min-width: max(90px, calc(110px * var(--u))); font-size: max(28px, calc(34px * var(--u))); }
+.pz-pattern { display: flex; gap: 10px; font-size: max(36px, calc(48px * var(--u))); }
+.pz-ask { animation: blink 1s infinite; }
+.pz-picture { width: calc(76px * var(--u)); height: calc(76px * var(--u)); min-width: 64px; min-height: 64px; }
+.pz-msg { min-height: 1.2em; font-weight: bold; font-size: max(24px, calc(28px * var(--u))); }
+.pz-msg.wrong { color: #d94a8c; }
+.pz-msg.right { color: #1f9a3a; }
+.pz-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: calc(10px * var(--u)); }
+.pz-card {
+  width: max(70px, calc(96px * var(--u))); height: max(70px, calc(96px * var(--u)));
+  border: 4px solid #2b2140; border-radius: 16px; background: #b583ff; padding: 0;
+}
+.pz-card.up { background: #fff6c4; }
+.pz-card canvas { width: 100%; height: 100%; display: block; }
+.pz-code { font-size: max(28px, calc(34px * var(--u))); font-weight: bold; letter-spacing: 6px; }
+.pz-keypad { display: grid; grid-template-columns: repeat(6, auto); gap: 8px; }
+.pz-key { padding: 0; }
+
+#banner {
+  position: absolute; left: 10%; right: 10%; bottom: 6%;
+  background: #fff6c4; border: 5px solid #2b2140; border-radius: 24px; padding: 14px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;
+  font-size: max(26px, calc(32px * var(--u))); font-weight: bold;
+}
+#banner p { margin: 0; }
+
+#toast {
+  position: absolute; left: 50%; top: 14%; transform: translateX(-50%); width: max-content; max-width: 80%;
+  background: rgba(255,255,255,0.95); border: 4px solid #2b2140; border-radius: 18px;
+  padding: 10px 18px; font-size: max(22px, calc(24px * var(--u))); font-weight: bold; text-align: center;
+  pointer-events: none;
+}
+
+#ending-ui { justify-content: flex-start; padding-top: 5%; }
+#ending-ui h2 { font-size: max(40px, calc(58px * var(--u))); color: #fff; margin: 0 20px 14px; text-shadow: 4px 4px 0 #2b2140; }
