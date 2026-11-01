@@ -89,7 +89,6 @@ export const KITS = {
     decor: [
       { models: S('lava', 'tree_dead_a', 'tree_dead_b'), count: 16, collide: true },
       { models: S('lava', 'bones_silly'), count: 14 },
-      { models: S('lava', 'lava_crack'), count: 34 },
       { models: S('lava', 'steam_vent'), count: 8 },
       { models: S('lava', 'grass_tuft_a', 'grass_tuft_b'), count: 80, small: true },
     ],
