@@ -1,4 +1,6 @@
-# Robot Land to Gecko Land: 3D Model Specification (v2.1)
+# Robot Land to Gecko Land: 3D Model Specification (v2.2)
+
+**v2.2 change:** naming (section 2.5) now says the exact identifiers in this spec, such as `wheel_FL` and `hand_R_grip`, win over the general lowercase rule, side suffixes are always uppercase, and what the shorthand `arm_L/R` means.
 
 **v2.1 change:** the material rules (section 2.3) now say exactly which materials count toward the limit, that required special materials take priority, the hard cap per model, and the full material list for every model (section 12). Glow and glass now go inside the main material unless the game animates them.
 
@@ -125,9 +127,16 @@ Every material is one draw call per copy on screen, so materials are counted str
 - **Texel density:** about 256 pixels per meter for characters and vehicles, 128 per meter for buildings and props. Characters' faces get double density (place them big in the UV layout).
 
 ### 2.5 Naming
-- **Every node and mesh name is unique in its file.** Use the exact names in this spec. For repeated parts use clear suffixes: `wheel_FL`, `wheel_FR`, `wheel_RL`, `wheel_RR` (front-left, front-right, rear-left, rear-right); `_L` and `_R` for left and right (the model's own left, which is +X).
-- Lowercase, underscores, no spaces, no dots.
-- File names exactly as listed in section 11.
+- **Every node, mesh, bone, material and clip name is unique in its file.**
+- **Use the exact identifiers in this spec, character for character.** Names are case-sensitive: the game looks for `wheel_FL`, so `wheel_fl` or `Wheel_FL` will not be found. **The exact identifiers in this spec always win over the general format rule below.**
+- **General format** for names this spec does not give (your own extra parts): lowercase words joined by underscores, for example `seat_pad`, `front_bumper`. No spaces, dots, dashes or other punctuation.
+- **Side and position suffixes are always uppercase**, at the end of the name or just before a final word:
+  - `_L` and `_R`: the model's own left and right (its left is +X). Example: `hand_L`, `hand_R`, `hand_R_grip`.
+  - `_FL`, `_FR`, `_RL`, `_RR`: front-left, front-right, rear-left, rear-right. Example: `wheel_FL`, `steer_FR`, `spring_RL`.
+  - Any extra part you add that has a side follows the same pattern (`mirror_L`, `fender_RR`).
+- **Shorthand in this spec:** `arm_L/R` means two separate names, `arm_L` and `arm_R`; `spring_FL/FR/RL/RR` means four names. `tail_1..tail_5` means `tail_1`, `tail_2`, `tail_3`, `tail_4`, `tail_5`. `<id>` means the file's name (`<id>_main` in `tyler.glb` is `tyler_main`).
+- **Numbered parts** count from 1 with no leading zeros: `tail_1`, `carpet_5`. Do not use numbers to tell apart parts that have a side; use `_L` and `_R`.
+- **File names** are lowercase, exactly as listed in section 11 (`tall-robot.glb` keeps its dash because the game already uses that name).
 
 ### 2.6 Moving parts and pivots
 - **A part that moves on its own is one mesh** (or one bone, for characters), with its **origin at the joint:** a wheel's origin at its axle center, a lever's at its hinge, a door's at its hinge edge, a wing's at its shoulder.
