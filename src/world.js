@@ -320,6 +320,7 @@ export function buildWorld(scene, w, flags) {
       if ((w.conveyors || []).some(c => inBox(x, z, [c.box[0] - 1, c.box[1] - 1, c.box[2] + 1, c.box[3] + 1]))) continue;
       if ((w.ice || []).some(b => inBox(x, z, b)) && !opts.allowIce) continue;
       if ((w.water || []).some(wt => inBox(x, z, [wt.box[0] - 1, wt.box[1] - 1, wt.box[2] + 1, wt.box[3] + 1]))) continue;
+      if ((w.bridges || []).some(br => inBox(x, z, [br.box[0] - 3, br.box[1] - 4, br.box[2] + 3, br.box[3] + 4]))) continue;
       if (blocked(x, z, r)) continue;
       if (!opts.small && heightAt(x, z) > 5) continue;
       const name = names[Math.floor(rnd() * names.length)], scale = opts.small ? 0.8 + rnd() * 0.6 : 0.85 + rnd() * 0.35;
@@ -344,18 +345,31 @@ export function buildWorld(scene, w, flags) {
 
   // ----- Rivers, lava and canyons -----
   world.flowing = [];
-  (w.water || []).forEach(wt => {
-    const [x1, z1, x2, z2] = wt.box, style = wt.style || 'water';
+  // The water (or lava) surface for a box. Textures line up across boxes, so
+  // the strips beside and under a bridge look like one river.
+  function liquid(box, style) {
+    const [x1, z1, x2, z2] = box;
     let m;
     if (style === 'chasm') m = mat('#1a1530');
     else {
       const t = texture(style === 'lava' ? 'lava' : 'water', (x2 - x1) / 8, (z2 - z1) / 8);
+      t.offset.set(x1 / 8, -z1 / 8);
       m = style === 'lava' ? mat('#ffffff', { map: t, emissive: '#ffffff', emissiveMap: t, emissiveIntensity: 0.9 }) : mat('#ffffff', { map: t, roughness: 0.15, metalness: 0.1 });
       world.flowing.push({ t, lava: style === 'lava', m });
     }
-    groundStrip(wt.box, m, style === 'chasm' ? 0.02 : 0.05);
+    groundStrip(box, m, style === 'chasm' ? 0.02 : 0.05);
+  }
+  (w.water || []).forEach(wt => {
+    const [x1, z1, x2, z2] = wt.box, style = wt.style || 'water';
+    liquid(wt.box, style);
     if (style === 'chasm') for (const z of [z1, z2]) { const lip = new THREE.Mesh(new THREE.BoxGeometry(x2 - x1, 0.3, 0.4), mat('#5a4a3a')); at(lip, (x1 + x2) / 2, z, 0.1); scene.add(lip); }
     solid(x1, z1, x2, z2);
+  });
+  // Under each bridge: the same river as the strips beside it (seen when the bridge lifts or the stones sink).
+  (w.bridges || []).forEach(br => {
+    if (br.kind === 'broken') return;
+    const beside = (w.water || []).find(wt => wt.box[1] === br.box[1] && wt.box[3] === br.box[3]);
+    liquid(br.box, (beside && beside.style) || 'water');
   });
 
   // ----- Bridges: drawbridges lift, stepping stones sink, broken ones are decoys -----
