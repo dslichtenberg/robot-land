@@ -26,6 +26,8 @@
 //   checkpoints  where you come back if you run out of hearts: { box, at }
 //   goals(s)     what the robots tell you to do next, given where you are
 //
+// item.power is what the prize does for you in the later worlds (see POWERS in main.js).
+//
 // guard: true on a villain means it leaves once you beat that world's house.
 
 const inBox = (x, z, [x1, z1, x2, z2]) => x > x1 && x < x2 && z > z1 && z < z2;
@@ -36,7 +38,7 @@ export const WORLDS = [
   // ===================== 1. GEAR CITY =====================
   {
     id: 'gear-city', name: 'Gear City', vehicle: 'kart', room: 'lava1',
-    villain: 'dragon', item: { name: 'Robot Key', icon: '🔑', kind: 'key' },
+    villain: 'dragon', item: { name: 'Robot Key', icon: '🔑', kind: 'key', power: 'laser' },
     theme: { ground: 'plates', groundColor: '#8d9aac', road: '#5d6475', fog: '#c3cddb', edge: '#b9c2cf', house: '#6d5a9c' },
     start: [-45, 48],
     hills: [[-2, -54, 6, 3], [10, -50, 5, 2.5], [42, -14, 7, 3]],
@@ -76,7 +78,7 @@ export const WORLDS = [
   // ===================== 2. FROSTY PEAKS =====================
   {
     id: 'frosty', name: 'Frosty Peaks', vehicle: 'snowmobile', room: 'ice',
-    villain: 'snowgun', item: { name: 'Snow Boots', icon: '🥾', kind: 'boots' },
+    villain: 'snowgun', item: { name: 'Rocket Boots', icon: '🥾', kind: 'boots', power: 'turbo' },
     theme: { ground: 'snow', groundColor: '#eef4fb', road: '#c9d8ea', fog: '#dfe9f5', edge: '#a9c4e0', house: '#7a9cc6' },
     start: [0, 52],
     hills: [[-30, 40, 10, 4], [30, 38, 10, 4], [-45, 25, 7, 3], [45, 52, 8, 4], [-35, -50, 8, 3], [35, -50, 8, 3]],
@@ -119,7 +121,7 @@ export const WORLDS = [
   // ===================== 3. BOUNCY HILLS =====================
   {
     id: 'bouncy', name: 'Bouncy Hills', vehicle: 'buggy', room: 'levers',
-    villain: 'yoyo', item: { name: 'Yo-yo String', icon: '🧵', kind: 'string' },
+    villain: 'yoyo', item: { name: 'Bouncy String', icon: '🧵', kind: 'string', power: 'jump' },
     theme: { ground: 'grass', groundColor: '#7cc86a', road: '#d9c48c', fog: '#cfe8d6', edge: '#8a5a2b', house: '#c25b8f' },
     start: [0, 50],
     hills: [[-30, 35, 9, 4], [28, 40, 10, 5], [-48, 52, 7, 3], [45, 22, 7, 3], [-18, 22, 6, 2.5], [-35, -50, 7, 3.5], [35, -50, 6, 3]],
@@ -173,7 +175,7 @@ export const WORLDS = [
   // ===================== 4. STARRY WOODS =====================
   {
     id: 'starry', name: 'Starry Woods', vehicle: 'glider', room: 'mirrors1',
-    villain: 'wizard', item: { name: 'Wizard Hat', icon: '🎩', kind: 'hat' },
+    villain: 'wizard', item: { name: 'Wizard Hat', icon: '🎩', kind: 'hat', power: 'shield' },
     theme: { ground: 'night', groundColor: '#24405a', road: '#3d5a78', fog: '#141c38', edge: '#1e5a3a', house: '#5a3d8a', night: true, fogNear: 16, fogFar: 55 },
     start: [-30, 44],
     hills: [[-45, 45, 8, 3], [45, 25, 8, 3], [-45, -25, 7, 3], [12, -50, 5, 2]],
@@ -225,7 +227,7 @@ export const WORLDS = [
   // ===================== 5. LAVA MEADOW =====================
   {
     id: 'lava', name: 'Lava Meadow', vehicle: 'tractor', room: 'lava2',
-    villain: 'dragon', item: { name: 'Dragon Scale', icon: '🐲', kind: 'scale' },
+    villain: 'dragon', item: { name: 'Dragon Scale', icon: '🐲', kind: 'scale', power: 'heart' },
     theme: { ground: 'ash', groundColor: '#6b4a3a', road: '#9a7a5a', fog: '#e8b48a', edge: '#4a2f22', house: '#7a3b2b' },
     start: [0, 52],
     hills: [[-40, 35, 9, 3], [38, 40, 9, 4], [35, -50, 6, 2.5]],

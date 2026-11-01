@@ -39,6 +39,10 @@ const state = {
   hearts: 3, safe: 0,
   car: { x: 0, z: 0, vx: 0, vz: 0, heading: Math.PI },
   jump: null,          // flying through the air from a spring pad
+  powers: {},          // what this world's prizes let you do: { laser: true, ... }
+  hop: null,           // a Bouncy String jump: { t }
+  turbo: 0,            // seconds of Rocket Boots left
+  cool: { laser: 0, turbo: 0, jump: 0, shield: 0 },  // seconds until each power is ready again
   teleLock: null,      // the teleport pad you just arrived on
   checkpoint: null,
   cutscene: null,      // { x, z, until } the camera looks somewhere else for a bit
@@ -82,6 +86,74 @@ function fade(on) { $('fade').classList.toggle('on', on); return new Promise(r =
 function blurAll() { if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); }
 function updateHearts() {
   $('hearts').textContent = '❤️'.repeat(Math.max(0, state.hearts)) + '🤍'.repeat(Math.max(0, state.stats.hearts - state.hearts));
+}
+
+// ---------- Prize powers ----------
+// Each haunted house prize gives the car a power for the worlds after it.
+// The ones with a key are buttons; the shield and the heart just work.
+const POWERS = {
+  laser: { icon: '⚡', key: 'Space', keys: [' ', 'z', 'Z'], wait: 1.2, text: 'It turns on a LASER for your car! Press Space (or tap ⚡) to zap snowballs, sparkles and villains.' },
+  turbo: { icon: '🚀', key: 'X', keys: ['x', 'X'], wait: 5, text: 'Press X (or tap 🚀) for a burst of super speed!' },
+  jump: { icon: '🦘', key: 'C', keys: ['c', 'C'], wait: 1, text: 'Press C (or tap 🦘) to jump right over snowballs, fireballs and yo-yos!' },
+  shield: { icon: '🫧', wait: 10, text: 'It makes a magic bubble around your car that blocks one bump, then grows back.' },
+  heart: { icon: '❤️', text: 'You get an extra heart from now on!' },
+};
+const ownedItems = () => WORLDS.slice(0, state.worldIndex + (state.flags.houseDone ? 1 : 0)).map(w => w.item);
+
+// Work out the powers from the prizes you have, and draw their buttons.
+function refreshPowers() {
+  state.powers = {};
+  ownedItems().forEach(it => { if (it.power) state.powers[it.power] = true; });
+  state.stats = statsFor(state.charId);
+  if (state.powers.heart) state.stats.hearts += 1;
+  const box = $('powers');
+  box.innerHTML = '';
+  for (const name of ['shield', 'jump', 'turbo', 'laser']) {
+    if (!state.powers[name]) continue;
+    const P = POWERS[name], b = document.createElement(P.keys ? 'button' : 'div');
+    b.className = 'power' + (P.keys ? '' : ' passive');
+    b.dataset.power = name;
+    b.innerHTML = '<span class="power-icon">' + P.icon + '</span><span class="power-cool"></span>' + (P.key ? '<span class="power-key">' + P.key + '</span>' : '');
+    if (P.keys) b.addEventListener('pointerdown', (e) => { e.preventDefault(); unlockAudio(); usePower(name); });
+    box.append(b);
+  }
+}
+
+function usePower(name) {
+  if (state.screen !== 'world' || state.overlay || state.cutscene || !state.powers[name] || state.cool[name] > 0 || state.jump) return;
+  const c = state.car;
+  state.cool[name] = POWERS[name].wait;
+  if (name === 'laser') {
+    const dx = Math.sin(c.heading), dz = Math.cos(c.heading);
+    const { hits, range } = world.zap(c.x, c.z, dx, dz, 16);
+    const beam = worldScene.userData.beam, y = world.heightAt(c.x, c.z) + 1.3;
+    beam.position.set(c.x + dx * range / 2, y, c.z + dz * range / 2);
+    beam.rotation.set(0, c.heading, 0); beam.rotateX(Math.PI / 2);
+    beam.scale.set(1, range, 1);
+    beam.userData.until = state.time + 0.3; beam.visible = true;
+    sound('zap');
+    if (hits) setTimeout(() => sound('pop'), 120);
+  }
+  if (name === 'turbo') { state.turbo = 2.5; sound('boost'); }
+  if (name === 'jump') { state.hop = { t: 0 }; sound('boing'); }
+}
+
+function updatePowers(dt) {
+  for (const k in state.cool) state.cool[k] = Math.max(0, state.cool[k] - dt);
+  state.turbo = Math.max(0, state.turbo - dt);
+  if (state.hop) { state.hop.t += dt; if (state.hop.t > HOP_TIME) state.hop = null; }
+}
+const HOP_TIME = 0.8;
+const hopHeight = () => state.hop ? Math.sin(state.hop.t / HOP_TIME * Math.PI) * 3 : 0;
+
+// Grey out a button while it charges back up.
+function drawPowerButtons() {
+  for (const b of $('powers').children) {
+    const name = b.dataset.power, P = POWERS[name];
+    const left = P.wait ? state.cool[name] / P.wait : 0;
+    b.querySelector('.power-cool').style.height = (left * 100).toFixed(0) + '%';
+    b.classList.toggle('ready', left === 0);
+  }
 }
 
 function setScreen(name) {
@@ -246,8 +318,11 @@ async function enterWorld(greet) {
   const spot = state.flags.houseDone ? w.checkpoints[w.checkpoints.length - 1].at : state.flags.switches.length ? w.checkpoints[0].at : w.start;
   placeCar(spot[0], spot[1]);
   state.checkpoint = spot;
+  refreshPowers();
   state.hearts = state.stats.hearts;
   state.jump = null; state.teleLock = null; state.robotNear = -1;
+  state.hop = null; state.turbo = 0;
+  for (const k in state.cool) state.cool[k] = 0;
   setScreen('world');
   updateHearts();
   view = { scene: worldScene, camera };
@@ -290,6 +365,12 @@ function buildCurrentWorld() {
     lamp.position.set(0, 2.5, 2); car.add(lamp);
   }
   worldScene.add(car);
+  // The Wizard Hat bubble, and the laser beam (hidden until used).
+  const bubble = new THREE.Mesh(new THREE.SphereGeometry(2.1, 24, 16), new THREE.MeshStandardMaterial({ color: '#9fe3ff', emissive: '#3aa8ff', emissiveIntensity: 0.4, transparent: true, opacity: 0.22, depthWrite: false }));
+  bubble.position.y = 1.1; bubble.visible = false;
+  car.add(bubble); car.userData.bubble = bubble;
+  const beam = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 1, 10), new THREE.MeshBasicMaterial({ color: '#ff3df5', transparent: true, opacity: 0.9, depthWrite: false }));
+  beam.visible = false; worldScene.add(beam); worldScene.userData.beam = beam;
 }
 
 function placeCar(x, z) {
@@ -301,7 +382,7 @@ function placeCar(x, z) {
 
 function updateDriving(dt) {
   const c = state.car, m = move(), v = VEHICLES[world.data.vehicle];
-  const top = state.stats.carSpeed * v.speed;
+  const top = state.stats.carSpeed * v.speed * (state.turbo > 0 ? 1.7 : 1);
   let grip = Math.hypot(m.x, m.y) > 0.1 ? v.grip : v.grip * 1.4;
   if (world.iceAt(c.x, c.z)) grip = v.iceGrip;
   const k = 1 - Math.exp(-dt * grip);
@@ -326,7 +407,15 @@ function updateDriving(dt) {
 }
 
 function hurt(fromX, fromZ) {
-  if (state.safe > 0 || state.jump) return;
+  if (state.safe > 0 || state.jump || state.hop) return;
+  const c = state.car, dx = c.x - fromX, dz = c.z - fromZ, d = Math.hypot(dx, dz) || 1;
+  // The Wizard Hat bubble takes the bump instead of a heart.
+  if (state.powers.shield && state.cool.shield <= 0) {
+    state.cool.shield = POWERS.shield.wait; state.safe = 1.2;
+    sound('pop');
+    c.vx = dx / d * 18; c.vz = dz / d * 18;
+    return;
+  }
   state.hearts--;
   state.safe = state.stats.safeTime;
   sound('bonk');
@@ -338,14 +427,13 @@ function hurt(fromX, fromZ) {
     toast('Whoops! Back to safety. Hearts are full again! ❤️');
     return;
   }
-  const c = state.car, dx = c.x - fromX, dz = c.z - fromZ, d = Math.hypot(dx, dz) || 1;
   c.vx = dx / d * 22; c.vz = dz / d * 22;
 }
 
 function checkWorldThings() {
   const c = state.car, w = world.data;
-  world.hazards.forEach(h => { if (h.r && Math.hypot(c.x - h.x, c.z - h.z) < h.r + CAR_R) hurt(h.x, h.z); });
-  world.shots.forEach(s => { if (!s.hit && Math.hypot(c.x - s.x, c.z - s.z) < s.r + CAR_R) { s.hit = true; hurt(s.x - s.vx, s.z - s.vz); } });
+  world.hazards.forEach(h => { if (h.r && !(h.stun > 0) && Math.hypot(c.x - h.x, c.z - h.z) < h.r + CAR_R) hurt(h.x, h.z); });
+  world.shots.forEach(s => { if (!s.hit && !state.hop && Math.hypot(c.x - s.x, c.z - s.z) < s.r + CAR_R) { s.hit = true; hurt(s.x - s.vx, s.z - s.vz); } });
   // Robots talk when you drive up to them.
   let near = -1;
   world.robots.forEach((r, i) => { if (Math.hypot(c.x - r.x, c.z - r.z) < 2.6) near = i; });
@@ -418,7 +506,7 @@ function openPhone() {
   state.overlay = 'phone';
   show('toast', false);
   $('phone-status').textContent = '🌍 World ' + (state.worldIndex + 1) + ' of 6: ' + world.data.name;
-  const items = WORLDS.slice(0, state.worldIndex + (world.houseDone ? 1 : 0)).map(w => w.item.icon + ' ' + w.item.name);
+  const items = ownedItems().map(it => it.icon + ' ' + it.name + (POWERS[it.power] ? ' (' + POWERS[it.power].icon + (POWERS[it.power].key ? ' ' + POWERS[it.power].key : '') + ')' : ''));
   $('phone-items').textContent = 'Items: ' + (items.length ? items.join(', ') : 'none yet');
   show('phone-answer', false); show('phone', true);
   $('btn-call').focus();
@@ -459,7 +547,8 @@ async function enterHouse() {
     status: (text) => { $('room-status').textContent = text; },
     onSolved: () => {
       const item = world.data.item;
-      $('banner-text').textContent = 'You got the ' + item.name + '! ' + item.icon;
+      const power = POWERS[item.power];
+      $('banner-text').textContent = 'You got the ' + item.name + '! ' + item.icon + (power ? ' ' + power.text : '');
       show('banner', true);
       $('btn-banner').focus();
     },
@@ -476,6 +565,7 @@ async function leaveHouse() {
   disposeScene(room.scene);
   room = null;
   world.houseDone = state.flags.houseDone = true;
+  refreshPowers();
   world.removeGuards();
   world.portal.visible = true;
   state.hearts = state.stats.hearts;
@@ -578,6 +668,7 @@ onKey((key, dir) => {
     return;
   }
   if (s === 'world') {
+    for (const name in POWERS) if (POWERS[name].keys && POWERS[name].keys.includes(key)) usePower(name);
     if (key === 'p' || key === 'P') { if (state.overlay === 'phone') closeOverlay(); else openPhone(); }
     if (key === 'Escape' && state.overlay) closeOverlay();
   }
@@ -617,7 +708,11 @@ function updateWorldCamera(dt) {
 function placeCarMesh(t) {
   const c = state.car, hAt = world.heightAt;
   const ground = hAt(c.x, c.z);
-  car.position.set(c.x, ground + (state.jump ? state.jump.y : 0), c.z);
+  car.position.set(c.x, ground + (state.jump ? state.jump.y : 0) + hopHeight(), c.z);
+  car.userData.bubble.visible = !!state.powers.shield && state.cool.shield <= 0;
+  if (car.userData.bubble.visible) car.userData.bubble.scale.setScalar(1 + Math.sin(t * 3) * 0.03);
+  const beam = worldScene.userData.beam;
+  if (beam.visible) { const left = beam.userData.until - t; beam.material.opacity = Math.max(0, left / 0.3) * 0.9; if (left <= 0) beam.visible = false; }
   // Tilt the car to match the hill.
   const fx = Math.sin(c.heading), fz = Math.cos(c.heading);
   const pitch = Math.atan2(hAt(c.x + fx, c.z + fz) - hAt(c.x - fx, c.z - fz), 2);
@@ -630,7 +725,7 @@ function placeCarMesh(t) {
   c.turn = 0;
   if (car.userData.rainbow) car.userData.rainbow.forEach(m => m.color.setHSL((t * 0.1) % 1, 0.8, 0.6));
   const hurtNow = state.safe > state.stats.safeTime - 0.9;
-  driver.userData.animate(t, hurtNow ? 'oops' : state.jump ? 'happy' : turn > 0.08 ? 'drive_left' : turn < -0.08 ? 'drive_right' : 'drive');
+  driver.userData.animate(t, hurtNow ? 'oops' : state.jump || state.hop ? 'happy' : turn > 0.08 ? 'drive_left' : turn < -0.08 ? 'drive_right' : 'drive');
 }
 
 let last = performance.now();
@@ -669,11 +764,12 @@ function frame(now) {
     const paused = state.overlay || state.screen !== 'world' || state.cutscene;
     if (!paused) {
       state.safe = Math.max(0, state.safe - dt);
+      updatePowers(dt);
       if (state.jump) updateJump(dt);
       else { updateDriving(dt); checkWorldThings(); }
     } else engine(0);
     if (!state.overlay && world) world.update(dt, t, state.car, state.stats.villainSpeed);
-    if (world) { placeCarMesh(t); updateWorldCamera(dt); }
+    if (world) { placeCarMesh(t); updateWorldCamera(dt); drawPowerButtons(); }
   }
   if (state.screen === 'house' && room) room.update(dt, t);
   if (view) renderer.render(view.scene, view.camera);

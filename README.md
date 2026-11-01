@@ -13,6 +13,19 @@ A 3D driving and puzzle game for a 7 year old. Drive through six hilly worlds, f
 
 Failing a puzzle never costs hearts: the round just starts again, and after a few misses a hint appears.
 
+Each haunted house prize gives your car a power for the rest of the game:
+
+| Prize (from) | Power | How |
+|---|---|---|
+| 🔑 Robot Key (World 1) | ⚡ Laser: pops snowballs and sparkles, makes villains dizzy for 4 seconds. Stops at walls. | Space or Z |
+| 🥾 Rocket Boots (World 2) | 🚀 Turbo: a burst of super speed | X |
+| 🧵 Bouncy String (World 3) | 🦘 Jump: hop over snowballs, fireballs and yo-yos (not over walls or rivers) | C |
+| 🎩 Wizard Hat (World 4) | 🫧 Bubble: blocks one bump, grows back after 10 seconds | Always on |
+| 🐲 Dragon Scale (World 5) | ❤️ One extra heart | Always on |
+| 🗺️ Gecko Land Map (World 6) | Leads you home | |
+
+On a touch screen, tap the round buttons in the bottom right corner.
+
 ## Play it
 
 - **Online:** turn on GitHub Pages (Settings → Pages → Deploy from a branch → `main`, `/ (root)`), then open `https://dslichtenberg.github.io/robot-land/`.

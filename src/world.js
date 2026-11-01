@@ -362,7 +362,7 @@ export function buildWorld(scene, w, flags) {
     const [x1, z1, x2, z2] = wt.box, style = wt.style || 'water';
     liquid(wt.box, style);
     if (style === 'chasm') for (const z of [z1, z2]) { const lip = new THREE.Mesh(new THREE.BoxGeometry(x2 - x1, 0.3, 0.4), mat('#5a4a3a')); at(lip, (x1 + x2) / 2, z, 0.1); scene.add(lip); }
-    solid(x1, z1, x2, z2);
+    solid(x1, z1, x2, z2).low = true;
   });
   // Under each bridge: the same river as the strips beside it (seen when the bridge lifts or the stones sink).
   (w.bridges || []).forEach(br => {
@@ -385,7 +385,7 @@ export function buildWorld(scene, w, flags) {
       return pivot;
     };
     if (br.kind === 'broken') { leaf(z2, true, -0.2).scale.z = 0.45; leaf(z1, false, 0.2).scale.z = 0.45; return; }
-    const bridge = { box: br.box, cycle: br.cycle || 8, offset: br.offset || 0, kind: br.kind, gap: solid(x1, z1, x2, z2), parts: [], lamps: [] };
+    const bridge = { box: br.box, cycle: br.cycle || 8, offset: br.offset || 0, kind: br.kind, gap: Object.assign(solid(x1, z1, x2, z2), { low: true }), parts: [], lamps: [] };
     bridge.gap.kind = 'bridge';
     if (br.kind === 'draw') {
       // Positive turns lift the south half (it reaches north); the north half turns the other way.
@@ -676,6 +676,13 @@ export function buildWorld(scene, w, flags) {
     });
 
     world.hazards.forEach(h => {
+      // Zapped by the laser: stand still and spin, dizzy, until it wears off.
+      if (h.stun > 0) {
+        h.stun -= dt;
+        h.mesh.rotation.y += dt * 9;
+        if (h.mesh.userData.animate) h.mesh.userData.animate(t, 'dizzy');
+        return;
+      }
       if (h.kind === 'roller') {
         const [fx, fz] = h.data.from, [tx, tz] = h.data.to, len = Math.hypot(tx - fx, tz - fz);
         h.p += h.way * h.data.speed * speed * dt / len;
@@ -732,6 +739,24 @@ export function buildWorld(scene, w, flags) {
       if (s.left <= 0 || s.hit) { scene.remove(s.mesh); return false; }
       return true;
     });
+  };
+
+  // The car's laser: a straight beam from (x, z) along (dx, dz). Pops the
+  // snowballs and sparkles it touches and makes villains dizzy for a while.
+  // Returns how many things it hit and how far the beam reached.
+  world.zap = (x, z, dx, dz, range) => {
+    // The beam stops at the first wall (it flies over rivers and canyons).
+    const wall = (px, pz) => world.boxes.some(b => b.on && !b.low && px > b.x1 && px < b.x2 && pz > b.z1 && pz < b.z2) ||
+      world.circles.some(c => Math.hypot(c.x - px, c.z - pz) < c.r * 0.8);
+    for (let k = 1.5; k < range; k += 0.5) if (wall(x + dx * k, z + dz * k)) { range = k; break; }
+    const along = (px, pz, r) => {
+      const k = (px - x) * dx + (pz - z) * dz;
+      return k > -1 && k < range + r + 0.5 && Math.abs((px - x) * dz - (pz - z) * dx) < r + 0.9;
+    };
+    let hits = 0;
+    world.shots.forEach(s => { if (!s.hit && along(s.x, s.z, s.r)) { s.hit = true; hits++; } });
+    world.hazards.forEach(h => { if (along(h.x, h.z, Math.max(h.r, 1.2))) { h.stun = 4; hits++; } });
+    return { hits, range };
   };
 
   // After the house is beaten, its guard villains go home.

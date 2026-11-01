@@ -31,10 +31,11 @@ export function engine(speed) {
   audio.hum.frequency.setTargetAtTime(55 + level * 45, now, 0.1);
 }
 
-function tone(freq, delay, dur, type, vol) {
+function tone(freq, delay, dur, type, vol, toFreq) {
   const ac = audio.ac, t0 = ac.currentTime + delay;
   const osc = ac.createOscillator(), gain = ac.createGain();
-  osc.type = type; osc.frequency.value = freq;
+  osc.type = type; osc.frequency.setValueAtTime(freq, t0);
+  if (toFreq) osc.frequency.exponentialRampToValueAtTime(toFreq, t0 + dur);
   gain.gain.setValueAtTime(vol, t0);
   gain.gain.exponentialRampToValueAtTime(0.001, t0 + dur);
   osc.connect(gain); gain.connect(ac.destination);
@@ -51,6 +52,10 @@ export function sound(name) {
     if (name === 'beep') { tone(660, 0, 0.08, 'square', 0.06); tone(990, 0.1, 0.1, 'square', 0.06); }
     if (name === 'tick') tone(1200, 0, 0.06, 'sine', 0.12);
     if (name === 'hop') tone(420, 0, 0.08, 'triangle', 0.12);
+    if (name === 'zap') tone(1800, 0, 0.25, 'sawtooth', 0.08, 200);
+    if (name === 'boost') tone(150, 0, 0.6, 'sawtooth', 0.08, 900);
+    if (name === 'boing') tone(250, 0, 0.35, 'sine', 0.25, 900);
+    if (name === 'pop') { tone(900, 0, 0.12, 'sine', 0.2, 300); tone(1400, 0.05, 0.15, 'triangle', 0.12); }
     if (name === 'clank') { tone(110, 0, 0.3, 'square', 0.1); tone(90, 0.15, 0.4, 'square', 0.1); }
   } catch (e) { /* sound is optional */ }
 }
