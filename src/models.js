@@ -17,6 +17,9 @@ export const MODEL_FILES = {
   pip: 'pip.glb', mo: 'mo.glb', zazz: 'zazz.glb',
   dragon: 'dragon.glb', snowgun: 'snowgun.glb', yoyo: 'yoyo.glb', wizard: 'wizard.glb',
   ghost: 'ghost.glb', robot: 'tall-robot.glb',
+  // Vehicles: one for each world.
+  kart: 'kart.glb', snowmobile: 'snowmobile.glb', buggy: 'buggy.glb',
+  glider: 'glider.glb', tractor: 'tractor.glb', carpet: 'carpet.glb',
 };
 
 const loaded = {};   // name -> the loaded scene, or null when there is no file
@@ -202,26 +205,100 @@ function friendStandIn(ch) {
   return g;
 }
 
-// ---------- The car ----------
+// ---------- Vehicles ----------
+// One vehicle per world. Each handles a little differently:
+//   speed: top speed compared to normal   grip: how fast it turns and stops
+//   iceGrip: grip on ice (lower slides more)   hover: floats this high
+export const VEHICLES = {
+  kart:       { name: 'Robo-Kart',     speed: 1,    grip: 3.2, iceGrip: 0.3, hover: 0 },
+  snowmobile: { name: 'Snow Zoomer',   speed: 1.05, grip: 3.0, iceGrip: 0.55, hover: 0 },
+  buggy:      { name: 'Boing Buggy',   speed: 1.1,  grip: 2.7, iceGrip: 0.3, hover: 0, bouncy: true },
+  glider:     { name: 'Moth Glider',   speed: 0.95, grip: 2.8, iceGrip: 0.3, hover: 0.7, light: true },
+  tractor:    { name: 'Lava Tractor',  speed: 0.95, grip: 4,   iceGrip: 0.3, hover: 0 },
+  carpet:     { name: 'Magic Carpet',  speed: 1.05, grip: 2.5, iceGrip: 0.3, hover: 0.9 },
+};
 
-export function makeCar(ch) {
-  const g = new THREE.Group();
-  const body = box(1.7, 0.55, 2.7, ch.color, 0, 0.55, 0);
-  const bonnet = box(1.5, 0.3, 0.9, ch.color, 0, 0.95, 0.75);
-  const seatBack = box(1.3, 0.6, 0.2, '#2b2b38', 0, 1.1, -0.55);
-  const trim = box(1.76, 0.12, 2.76, '#2b2b38', 0, 0.3, 0);
-  g.add(body, bonnet, seatBack, trim);
-  for (const [x, z] of [[-0.85, 0.85], [0.85, 0.85], [-0.85, -0.85], [0.85, -0.85]]) {
-    const w = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.35, 0.3, 18), mat('#222222'));
-    w.rotation.z = Math.PI / 2; w.position.set(x, 0.35, z); g.add(w);
-  }
-  g.add(ball(0.13, '#fff7b0', -0.5, 0.65, 1.36, 1, 1, 0.5), ball(0.13, '#fff7b0', 0.5, 0.65, 1.36, 1, 1, 0.5));
-  if (ch.look === 'chameleon') g.userData.rainbow = [body.material, bonnet.material];
-  shadows(g);
-  const seat = new THREE.Group();
+// kind: one of the VEHICLES names. ch: the driver (for the paint color).
+// The vehicle is about 2.8 long, faces +Z, and has userData.seat for the driver
+// and userData.animate(t, speed) to spin wheels and flap wings.
+export function makeVehicle(kind, ch) {
+  const g = new THREE.Group(), spinners = [], flappers = [];
+  let seat = new THREE.Group();
   seat.position.set(0, 0.7, -0.1);
+  if (loaded[kind]) {
+    const inner = loaded[kind].clone(true);
+    inner.traverse(o => { if (o.isMesh) o.material = o.material.clone(); });
+    const bb = new THREE.Box3().setFromObject(inner), sz = bb.getSize(new THREE.Vector3());
+    const s = 2.8 / Math.max(sz.x, sz.z, 0.01);
+    inner.scale.setScalar(s);
+    inner.position.y = -bb.min.y * s;
+    g.add(inner);
+    const mark = inner.getObjectByName('seat');
+    if (mark) { mark.add(seat); seat.position.set(0, 0, 0); seat.scale.setScalar(1 / s); }
+    partsNamed(inner, 'wheel').forEach(m => spinners.push(pivotPart(m, b => b.getCenter(new THREE.Vector3()))));
+    partsNamed(inner, 'wing').forEach(m => flappers.push(pivotPart(m, b => { const c = b.getCenter(new THREE.Vector3()); return new THREE.Vector3(c.x > 0 ? b.min.x : b.max.x, c.y, c.z); })));
+  } else {
+    const paint = ch.color, dark = '#2b2b38';
+    const wheel = (r, w, x, y, z) => {
+      const m = new THREE.Mesh(new THREE.CylinderGeometry(r, r, w, 18), mat('#222222'));
+      m.rotation.z = Math.PI / 2;
+      const p = new THREE.Group(); p.position.set(x, y, z); p.add(m); g.add(p); spinners.push(p);
+    };
+    if (kind === 'snowmobile') {
+      g.add(box(1.3, 0.55, 2.2, paint, 0, 0.6, 0.1), box(1.2, 0.5, 1.2, dark, 0, 0.35, -0.7));
+      g.add(Object.assign(box(1.1, 0.5, 0.1, '#bfe9ff', 0, 1.05, 0.9), {}));
+      for (const x of [-0.65, 0.65]) { g.add(box(0.25, 0.08, 1.8, '#cccccc', x, 0.08, 0.9)); g.add(box(0.25, 0.08, 0.35, '#cccccc', x, 0.2, 1.85)); }
+      seat.position.set(0, 0.8, -0.3);
+    } else if (kind === 'buggy') {
+      g.add(box(1.2, 0.45, 2.2, paint, 0, 0.9, 0));
+      for (const x of [-0.6, 0.6]) g.add(box(0.1, 1, 0.1, dark, x, 1.5, -0.4));
+      g.add(box(1.3, 0.1, 0.1, dark, 0, 2, -0.4));
+      for (const [x, z] of [[-0.95, 0.85], [0.95, 0.85], [-0.95, -0.85], [0.95, -0.85]]) wheel(0.6, 0.45, x, 0.6, z);
+      seat.position.set(0, 1.05, -0.1);
+    } else if (kind === 'glider') {
+      g.add(ball(0.75, paint, 0, 0.6, 0, 1, 0.6, 1.8));
+      g.add(ball(0.25, '#fff3a0', 0, 0.7, 1.35));
+      g.children[g.children.length - 1].material.emissive = new THREE.Color('#ffd23f');
+      for (const sx of [-1, 1]) {
+        const wing = new THREE.Mesh(new THREE.CircleGeometry(1.2, 20), mat('#e8d7ff', { transparent: true, opacity: 0.8, side: THREE.DoubleSide }));
+        wing.rotation.x = -Math.PI / 2; wing.scale.set(1, 0.7, 1); wing.position.x = sx * 1.1;
+        const p = new THREE.Group(); p.position.set(sx * 0.4, 0.9, 0); p.add(wing); g.add(p); flappers.push(p);
+      }
+      seat.position.set(0, 0.85, -0.2);
+    } else if (kind === 'tractor') {
+      g.add(box(1.2, 0.8, 2.4, paint, 0, 0.9, 0.2), box(1.3, 0.12, 1.2, dark, 0, 2.3, -0.5));
+      for (const [x, z] of [[-0.6, -0.1], [0.6, -0.1], [-0.6, -0.9], [0.6, -0.9]]) g.add(box(0.1, 1.1, 0.1, dark, x, 1.75, z));
+      g.add(Object.assign(new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 1), mat(dark)), { position: new THREE.Vector3(0.35, 1.7, 1) }));
+      wheel(0.85, 0.5, -0.95, 0.85, -0.6); wheel(0.85, 0.5, 0.95, 0.85, -0.6);
+      wheel(0.45, 0.35, -0.8, 0.45, 1); wheel(0.45, 0.35, 0.8, 0.45, 1);
+      seat.position.set(0, 1.25, -0.5);
+    } else if (kind === 'carpet') {
+      g.add(box(1.7, 0.12, 2.7, paint, 0, 0.3, 0), box(1.3, 0.13, 2.3, '#ffd23f', 0, 0.31, 0), box(1.1, 0.14, 2.1, paint, 0, 0.32, 0));
+      for (const [x, z] of [[-0.8, 1.4], [0.8, 1.4], [-0.8, -1.4], [0.8, -1.4]]) g.add(ball(0.12, '#ffd23f', x, 0.25, z));
+      seat.position.set(0, 0.35, 0);
+    } else {
+      g.add(box(1.7, 0.55, 2.7, paint, 0, 0.55, 0), box(1.5, 0.3, 0.9, paint, 0, 0.95, 0.75));
+      g.add(box(1.3, 0.6, 0.2, dark, 0, 1.1, -0.55), box(1.76, 0.12, 2.76, dark, 0, 0.3, 0));
+      for (const [x, z] of [[-0.85, 0.85], [0.85, 0.85], [-0.85, -0.85], [0.85, -0.85]]) wheel(0.35, 0.3, x, 0.35, z);
+      g.add(ball(0.13, '#fff7b0', -0.5, 0.65, 1.36, 1, 1, 0.5), ball(0.13, '#fff7b0', 0.5, 0.65, 1.36, 1, 1, 0.5));
+    }
+    if (ch.look === 'chameleon') {
+      g.userData.rainbow = [];
+      g.traverse(o => { if (o.isMesh && o.material.color.getHexString() === paint.slice(1)) g.userData.rainbow.push(o.material); });
+    }
+  }
+  shadows(g);
   g.add(seat);
   g.userData.seat = seat;
+  const info = VEHICLES[kind] || VEHICLES.kart;
+  let roll = 0;
+  g.userData.animate = (t, speed) => {
+    roll += speed * 0.05;
+    spinners.forEach(p => { p.rotation.x = roll; });
+    flappers.forEach((p, i) => { p.rotation.z = (i % 2 ? 1 : -1) * Math.sin(t * 10) * 0.35; });
+    const lift = info.hover ? info.hover + Math.sin(t * 3) * 0.12 : info.bouncy ? Math.abs(Math.sin(t * 9)) * 0.12 * Math.min(1, speed / 4) : 0;
+    g.children.forEach(c => { c.position.y = (c.userData.baseY ??= c.position.y) + lift; });
+  };
   return g;
 }
 
@@ -229,13 +306,26 @@ export function makeCar(ch) {
 
 export function makeItem(kind) {
   const g = new THREE.Group();
+  const shiny = (c) => mat(c, { metalness: 0.5, roughness: 0.3, emissive: new THREE.Color(c).multiplyScalar(0.25) });
+  const add = (geo, c, x, y, z) => { const m = new THREE.Mesh(geo, shiny(c)); m.position.set(x, y, z); g.add(m); return m; };
   if (kind === 'key') {
-    const ring = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.1, 12, 24), mat('#ffc93c', { metalness: 0.6, roughness: 0.3 }));
-    ring.position.y = 0.4; g.add(ring);
-    g.add(box(0.12, 0.7, 0.12, '#ffc93c', 0, -0.15, 0), box(0.25, 0.1, 0.12, '#ffc93c', 0.12, -0.4, 0), box(0.2, 0.1, 0.12, '#ffc93c', 0.1, -0.2, 0));
-    g.traverse(o => { if (o.isMesh) o.material.emissive = new THREE.Color('#664400'); });
+    add(new THREE.TorusGeometry(0.3, 0.1, 12, 24), '#ffc93c', 0, 0.4, 0);
+    add(new THREE.BoxGeometry(0.12, 0.7, 0.12), '#ffc93c', 0, -0.15, 0);
+    add(new THREE.BoxGeometry(0.25, 0.1, 0.12), '#ffc93c', 0.12, -0.4, 0);
+  } else if (kind === 'boots') {
+    for (const x of [-0.25, 0.25]) { add(new THREE.BoxGeometry(0.3, 0.6, 0.3), '#7a4a2b', x, 0.1, 0); add(new THREE.BoxGeometry(0.3, 0.2, 0.55), '#7a4a2b', x, -0.2, 0.12); add(new THREE.BoxGeometry(0.34, 0.1, 0.34), '#ffffff', x, 0.42, 0); }
+  } else if (kind === 'string') {
+    add(new THREE.TorusKnotGeometry(0.3, 0.06, 64, 8), '#ff5fa2', 0, 0, 0);
+  } else if (kind === 'hat') {
+    add(new THREE.ConeGeometry(0.4, 0.9, 20), '#5a2a9a', 0, 0.2, 0);
+    add(new THREE.CylinderGeometry(0.6, 0.6, 0.06, 24), '#5a2a9a', 0, -0.25, 0);
+  } else if (kind === 'scale') {
+    const m = add(new THREE.SphereGeometry(0.45, 16, 12), '#ff4a3a', 0, 0, 0); m.scale.set(1, 1.2, 0.3);
+  } else if (kind === 'map') {
+    add(new THREE.BoxGeometry(0.9, 0.6, 0.04), '#f2e3b3', 0, 0, 0);
+    add(new THREE.BoxGeometry(0.2, 0.2, 0.05), '#3fae4a', 0.15, 0.05, 0.01);
   } else {
-    g.add(ball(0.4, '#ffd23f', 0, 0, 0));
+    add(new THREE.SphereGeometry(0.4), '#ffd23f', 0, 0, 0);
   }
   shadows(g);
   return g;
