@@ -14,6 +14,7 @@ import { createLavaRoom, LAVA_EASY, LAVA_HARD } from './rooms/lava.js';
 import { createIceRoom } from './rooms/ice.js';
 import { createLeverRoom } from './rooms/levers.js';
 import { createMirrorRoom, MIRRORS_EASY, MIRRORS_HARD } from './rooms/mirrors.js';
+import { makeLaser } from './laser.js';
 import { move, onKey, clearHeld, setupJoystick } from './input.js';
 import { unlockAudio, sound, engine, toggleMute } from './audio.js';
 const placeAt = (obj, x, y, z) => { obj.position.set(x, y, z); return obj; };
@@ -126,16 +127,18 @@ function usePower(name) {
   if (name === 'laser') {
     const dx = Math.sin(c.heading), dz = Math.cos(c.heading);
     const { hits, range } = world.zap(c.x, c.z, dx, dz, 16);
-    const beam = worldScene.userData.beam, y = world.heightAt(c.x, c.z) + 1.3;
-    beam.position.set(c.x + dx * range / 2, y, c.z + dz * range / 2);
-    beam.rotation.set(0, c.heading, 0); beam.rotateX(Math.PI / 2);
-    beam.scale.set(1, range, 1);
-    beam.userData.until = state.time + 0.3; beam.visible = true;
+    worldScene.userData.laser.fire(muzzle(), c.heading, Math.max(0.5, range - 1.2), state.time);
     sound('zap');
     if (hits) setTimeout(() => sound('pop'), 120);
   }
   if (name === 'turbo') { state.turbo = 2.5; sound('boost'); }
   if (name === 'jump') { state.hop = { t: 0 }; sound('boing'); }
+}
+
+// The front of the car, where the laser comes out.
+function muzzle() {
+  const c = state.car;
+  return new THREE.Vector3(c.x + Math.sin(c.heading) * 1.2, world.heightAt(c.x, c.z) + 1.3 + hopHeight(), c.z + Math.cos(c.heading) * 1.2);
 }
 
 function updatePowers(dt) {
@@ -369,8 +372,7 @@ function buildCurrentWorld() {
   const bubble = new THREE.Mesh(new THREE.SphereGeometry(2.1, 24, 16), new THREE.MeshStandardMaterial({ color: '#9fe3ff', emissive: '#3aa8ff', emissiveIntensity: 0.4, transparent: true, opacity: 0.22, depthWrite: false }));
   bubble.position.y = 1.1; bubble.visible = false;
   car.add(bubble); car.userData.bubble = bubble;
-  const beam = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 1, 10), new THREE.MeshBasicMaterial({ color: '#ff3df5', transparent: true, opacity: 0.9, depthWrite: false }));
-  beam.visible = false; worldScene.add(beam); worldScene.userData.beam = beam;
+  worldScene.userData.laser = makeLaser(worldScene);
 }
 
 function placeCar(x, z) {
@@ -711,8 +713,6 @@ function placeCarMesh(t) {
   car.position.set(c.x, ground + (state.jump ? state.jump.y : 0) + hopHeight(), c.z);
   car.userData.bubble.visible = !!state.powers.shield && state.cool.shield <= 0;
   if (car.userData.bubble.visible) car.userData.bubble.scale.setScalar(1 + Math.sin(t * 3) * 0.03);
-  const beam = worldScene.userData.beam;
-  if (beam.visible) { const left = beam.userData.until - t; beam.material.opacity = Math.max(0, left / 0.3) * 0.9; if (left <= 0) beam.visible = false; }
   // Tilt the car to match the hill.
   const fx = Math.sin(c.heading), fz = Math.cos(c.heading);
   const pitch = Math.atan2(hAt(c.x + fx, c.z + fz) - hAt(c.x - fx, c.z - fz), 2);
@@ -769,7 +769,7 @@ function frame(now) {
       else { updateDriving(dt); checkWorldThings(); }
     } else engine(0);
     if (!state.overlay && world) world.update(dt, t, state.car, state.stats.villainSpeed);
-    if (world) { placeCarMesh(t); updateWorldCamera(dt); drawPowerButtons(); }
+    if (world) { placeCarMesh(t); const L = worldScene.userData.laser; if (L.on) L.follow(muzzle(), state.car.heading); L.update(t, dt); updateWorldCamera(dt); drawPowerButtons(); }
   }
   if (state.screen === 'house' && room) room.update(dt, t);
   if (view) renderer.render(view.scene, view.camera);
