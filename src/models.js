@@ -107,6 +107,33 @@ const EYES = { open: [0, 0], blink: [0.5, 0], happy: [0, 0.5], sad: [0.5, 0.5] }
 const MOUTH = { smile: [0, 0], grin: [0.5, 0], o: [0, 0.5], frown: [0.5, 0.5] };
 const MOOD_FACE = { happy: ['happy', 'grin'], victory: ['happy', 'grin'], oops: ['sad', 'o'], dizzy: ['sad', 'frown'], hurt: ['sad', 'frown'], defeat: ['sad', 'o'], talk: ['open', 'grin'], taunt: ['happy', 'grin'] };
 
+// A 'skin_tint' skin is painted gray so the game can color it. We paint it
+// with rainbow bands that run across the body (by where each point sits on
+// the model) and drift over time, like a chameleon showing off.
+function rainbowSkin(mesh) {
+  const m = mesh.material;
+  if (m.userData.rainbow) return;
+  mesh.geometry.computeBoundingBox();
+  const bb = mesh.geometry.boundingBox, size = Math.max(0.001, bb.max.y - bb.min.y);
+  const hue = { value: Math.random() }, scale = { value: 1.4 / size };
+  m.userData.rainbow = hue; m.userData.hue = hue.value;
+  m.color.set('#ffffff');
+  m.customProgramCacheKey = () => 'rainbow-skin';
+  m.onBeforeCompile = (shader) => {
+    shader.uniforms.uRainbow = hue; shader.uniforms.uRainbowScale = scale;
+    shader.vertexShader = shader.vertexShader
+      .replace('#include <common>', '#include <common>\nvarying vec3 vRainbowPos;')
+      .replace('#include <begin_vertex>', '#include <begin_vertex>\nvRainbowPos = position;');
+    shader.fragmentShader = shader.fragmentShader
+      .replace('#include <common>', '#include <common>\nvarying vec3 vRainbowPos;\nuniform float uRainbow;\nuniform float uRainbowScale;')
+      .replace('#include <map_fragment>', `#include <map_fragment>
+        float rbH = fract(uRainbow + (vRainbowPos.y * 1.0 + vRainbowPos.x * 0.45 + vRainbowPos.z * 0.25) * uRainbowScale);
+        vec3 rbC = clamp(abs(mod(rbH * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 0.0, 1.0);
+        diffuseColor.rgb *= mix(vec3(1.0), rbC, 0.85) * 1.75;`);
+  };
+  m.needsUpdate = true;
+}
+
 function animator(root, animations) {
   const mixer = animations.length ? new THREE.AnimationMixer(root) : null;
   const actions = {};
@@ -116,7 +143,7 @@ function animator(root, animations) {
     if (!o.isMesh) return;
     if (o.material.name === 'eyes') faces.eyes.push(o.material.map);
     if (o.material.name === 'mouth') faces.mouth.push(o.material.map);
-    if (o.material.name === 'skin_tint') faces.tint.push(o.material);
+    if (o.material.name === 'skin_tint') { rainbowSkin(o); faces.tint.push(o.material); }
   });
   let current = null, lastT = null, blinkAt = 2 + Math.random() * 3;
   const setFace = (e, m) => {
@@ -148,7 +175,8 @@ function animator(root, animations) {
         setFace(blinkAt < 0 ? 'blink' : 'open', mood === 'walk' ? 'grin' : 'smile');
         if (blinkAt < -0.14) blinkAt = 2.5 + Math.random() * 3;
       }
-      faces.tint.forEach((m, i) => m.color.setHSL((t * (mood === 'happy' ? 0.5 : 0.1) + i * 0.3) % 1, 0.75, 0.62));
+      // Zazz's rainbow drifts slowly, and races when excited.
+      faces.tint.forEach(m => { m.userData.hue = (m.userData.hue + dt * (mood === 'happy' ? 0.6 : 0.08)) % 1; m.userData.rainbow.value = m.userData.hue; });
     },
   };
 }
