@@ -7,6 +7,7 @@
 
 import * as THREE from 'three';
 import { makeModel } from './models.js';
+const placeAt = (obj, x, y, z) => { obj.position.set(x, y, z); return obj; };
 
 const mat = (color, extra) => new THREE.MeshStandardMaterial(Object.assign({ color, roughness: 0.85 }, extra));
 export const inBox = (x, z, [x1, z1, x2, z2]) => x > x1 && x < x2 && z > z1 && z < z2;
@@ -225,6 +226,7 @@ export function buildWorld(scene, w, flags) {
       return;
     }
     const bridge = { box: br.box, cycle: br.cycle || 8, offset: br.offset || 0, kind: br.kind, gap: solid(x1, z1, x2, z2), parts: [], lamps: [] };
+    bridge.gap.kind = 'bridge';
     if (br.kind === 'draw') {
       [z2, z1].forEach((hz, i) => {
         const pivot = new THREE.Group(); pivot.position.set(cx, 0.3, hz);
@@ -278,13 +280,13 @@ export function buildWorld(scene, w, flags) {
   // ----- Spring pads and magic teleport pads -----
   (w.jumpPads || []).forEach(p => {
     const g = new THREE.Group();
-    g.add(Object.assign(new THREE.Mesh(new THREE.CylinderGeometry(1.8, 2, 0.3, 24), mat('#ffd23f')), { position: new THREE.Vector3(0, 0.15, 0) }));
+    g.add(placeAt(new THREE.Mesh(new THREE.CylinderGeometry(1.8, 2, 0.3, 24), mat('#ffd23f')), 0, 0.15, 0));
     const coil = new THREE.Mesh(new THREE.TorusGeometry(1.1, 0.18, 8, 20), mat('#ff5fa2'));
     coil.rotation.x = Math.PI / 2; coil.position.y = 0.5; g.add(coil);
     const arrow = new THREE.Mesh(new THREE.ConeGeometry(0.6, 1.2, 4), mat('#ff5fa2', { emissive: '#802050' }));
     const dx = p.to[0] - p.at[0], dz = p.to[1] - p.at[1];
-    arrow.rotation.set(Math.PI / 2, 0, -Math.atan2(dx, dz) + Math.PI); arrow.rotation.order = 'YXZ';
-    arrow.rotation.y = Math.atan2(dx, dz); arrow.rotation.x = Math.PI / 2;
+    arrow.rotation.order = 'YXZ';
+    arrow.rotation.set(Math.PI / 2, Math.atan2(dx, dz), 0);
     arrow.position.y = 1.2; g.add(arrow);
     scene.add(at(g, p.at[0], p.at[1]));
     world.pads.push({ at: p.at, to: p.to, coil, arrow });
@@ -308,7 +310,7 @@ export function buildWorld(scene, w, flags) {
   if (lm) {
     const [lx, lz] = lm.at, g = new THREE.Group();
     if (lm.kind === 'gear') {
-      g.add(Object.assign(new THREE.Mesh(new THREE.BoxGeometry(3, 18, 3), mat('#6c7380', { metalness: 0.5 })), { position: new THREE.Vector3(0, 9, 0) }));
+      g.add(placeAt(new THREE.Mesh(new THREE.BoxGeometry(3, 18, 3), mat('#6c7380', { metalness: 0.5 })), 0, 9, 0));
       const gear = new THREE.Group();
       gear.add(new THREE.Mesh(new THREE.TorusGeometry(4, 0.8, 10, 24), mat('#ffb300', { metalness: 0.6 })));
       for (let i = 0; i < 12; i++) {
@@ -321,7 +323,7 @@ export function buildWorld(scene, w, flags) {
       const c = new THREE.Mesh(new THREE.OctahedronGeometry(4), mat('#9fe3ff', { emissive: '#3aa8e0', roughness: 0.1 }));
       c.scale.y = 3; c.position.y = 14; g.add(c); world.spinners.push({ obj: c, axis: 'y', speed: 0.4 });
     } else if (lm.kind === 'yoyoTower') {
-      g.add(Object.assign(new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.8, 22), mat('#8a5a2b')), { position: new THREE.Vector3(0, 11, 0) }));
+      g.add(placeAt(new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.8, 22), mat('#8a5a2b')), 0, 11, 0));
       const yo = makeModel('yoyo', 6); yo.position.y = 14; g.add(yo); world.spinners.push({ obj: yo, axis: 'bob', speed: 1.2 });
     } else if (lm.kind === 'moon') {
       const moon = new THREE.Mesh(new THREE.SphereGeometry(10, 24, 16), new THREE.MeshBasicMaterial({ color: '#fff3c4', fog: false }));
@@ -349,7 +351,7 @@ export function buildWorld(scene, w, flags) {
       top.position.y = 2;
       const glow = new THREE.PointLight('#ffe14d', 8, 10); glow.position.y = 2; g.add(glow);
     } else {
-      g.add(Object.assign(new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.4, 0.3, 28), mat('#ffd23f')), { position: new THREE.Vector3(0, 0.15, 0) }));
+      g.add(placeAt(new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.4, 0.3, 28), mat('#ffd23f')), 0, 0.15, 0));
       top = new THREE.Mesh(new THREE.CylinderGeometry(1.4, 1.4, 0.7, 28), mat('#e03c31', { emissive: '#400000' }));
       top.position.y = done ? 0.2 : 0.6;
     }
@@ -364,6 +366,7 @@ export function buildWorld(scene, w, flags) {
     const look = gt.style ? gateLook[gt.style]() : mat('#e05555', { metalness: 0.3 });
     const m = wallBox(gt.box, 3, look);
     const gate = { box: gt.box, needs, mesh: m, solid: solid(...gt.box), open: false, sink: 0 };
+    gate.solid.kind = 'gate';
     gate.open = needs.every(k => doneSwitches.has(k));
     gate.solid.on = !gate.open;
     if (gate.open) m.visible = false;

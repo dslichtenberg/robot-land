@@ -129,7 +129,7 @@ button { font-family: inherit; cursor: pointer; touch-action: manipulation; }
   pointer-events: none;
 }
 
-#end-screen { background: rgba(43,33,64,0.45); }
+#end-screen { background: linear-gradient(rgba(43,33,64,0.55), rgba(43,33,64,0) 45%); justify-content: flex-start; padding-top: 4%; }
 #end-sub { color: #fff; font-size: max(24px, calc(30px * var(--u))); text-shadow: 2px 2px 0 #2b2140; margin: 0 20px 20px; }
 #loading p { color: #fff; font-size: 32px; }
 #end-screen h2 { font-size: max(40px, calc(58px * var(--u))); color: #fff; margin: 0 20px 14px; text-shadow: 4px 4px 0 #2b2140; }

@@ -11,6 +11,7 @@
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+const placeAt = (obj, x, y, z) => { obj.position.set(x, y, z); return obj; };
 
 export const MODEL_FILES = {
   tyler: 'tyler.glb', skyler: 'skyler.glb', nick: 'nick.glb',
@@ -56,22 +57,36 @@ function eyes(g, y, z, spread, r) {
   }
 }
 
-// Move a mesh so it turns around a joint instead of the model's middle.
-// Our GLB parts have their points baked in model space, so we shift them.
-function pivotPart(mesh, pickPoint) {
-  mesh.geometry.computeBoundingBox();
-  const b = mesh.geometry.boundingBox, p = pickPoint(b);
-  mesh.geometry = mesh.geometry.clone();
-  mesh.geometry.translate(-p.x, -p.y, -p.z);
+// Put a part inside a "joint" so it turns around that point instead of the
+// model's middle (wheels spin on their axle, wings flap from their root).
+// The part can be one mesh or a group of meshes. pickPoint gets the part's
+// box (in its parent's space) and returns where the joint goes.
+function pivotPart(part, pickPoint) {
+  const parent = part.parent;
+  parent.updateMatrixWorld(true);
+  const box = new THREE.Box3().setFromObject(part);
+  box.applyMatrix4(parent.matrixWorld.clone().invert());
+  const p = pickPoint(box);
   const pivot = new THREE.Group();
   pivot.position.copy(p);
-  mesh.parent.add(pivot);
-  pivot.add(mesh);
+  parent.add(pivot);
+  pivot.add(part);
+  part.position.sub(p);
   return pivot;
 }
+// Every part with this name (a mesh or a group). three.js renames repeats
+// to wheel_1, wheel_2 and so on, so those count too.
 function partsNamed(root, name) {
   const out = [];
-  root.traverse(o => { if (o.isMesh && o.name === name) out.push(o); });
+  const matches = (o) => o.name === name || (o.name.startsWith(name + '_') && /^\d+$/.test(o.name.slice(name.length + 1)));
+  root.traverse(o => { if (matches(o)) out.push(o); });
+  // A group's own pieces are named the same way (wheel_1, wheel_2...). Keep only the outer part.
+  return out.filter(o => { for (let p = o.parent; p; p = p.parent) if (out.includes(p)) return false; return true; });
+}
+// All the meshes inside some parts.
+function meshesIn(parts) {
+  const out = [];
+  parts.forEach(p => p.traverse(o => { if (o.isMesh) out.push(o); }));
   return out;
 }
 
@@ -124,7 +139,7 @@ function rigParts(name, inner, fromFile) {
     };
   }
   if (name === 'robot' && fromFile) {
-    const bulbs = partsNamed(inner, 'red-bulb');
+    const bulbs = meshesIn(partsNamed(inner, 'red-bulb'));
     return (t, mood) => {
       const on = Math.floor(t * 2) % 2 === 0;
       bulbs.forEach(b => { b.material.emissive = new THREE.Color(on ? '#ff2020' : '#000000'); });
@@ -235,6 +250,10 @@ export function makeVehicle(kind, ch) {
     g.add(inner);
     const mark = inner.getObjectByName('seat');
     if (mark) { mark.add(seat); seat.position.set(0, 0, 0); seat.scale.setScalar(1 / s); }
+    inner.traverse(o => { if (o.isMesh && /headlight$|lantern-glow/.test(o.name)) o.material.emissive = new THREE.Color('#ffe9a0'); });
+    const paints = meshesIn(partsNamed(inner, 'paint'));
+    paints.forEach(p => p.material.color.set(ch.color));
+    if (ch.look === 'chameleon' && paints.length) g.userData.rainbow = paints.map(p => p.material);
     partsNamed(inner, 'wheel').forEach(m => spinners.push(pivotPart(m, b => b.getCenter(new THREE.Vector3()))));
     partsNamed(inner, 'wing').forEach(m => flappers.push(pivotPart(m, b => { const c = b.getCenter(new THREE.Vector3()); return new THREE.Vector3(c.x > 0 ? b.min.x : b.max.x, c.y, c.z); })));
   } else {
@@ -246,7 +265,7 @@ export function makeVehicle(kind, ch) {
     };
     if (kind === 'snowmobile') {
       g.add(box(1.3, 0.55, 2.2, paint, 0, 0.6, 0.1), box(1.2, 0.5, 1.2, dark, 0, 0.35, -0.7));
-      g.add(Object.assign(box(1.1, 0.5, 0.1, '#bfe9ff', 0, 1.05, 0.9), {}));
+      g.add(box(1.1, 0.5, 0.1, '#bfe9ff', 0, 1.05, 0.9));
       for (const x of [-0.65, 0.65]) { g.add(box(0.25, 0.08, 1.8, '#cccccc', x, 0.08, 0.9)); g.add(box(0.25, 0.08, 0.35, '#cccccc', x, 0.2, 1.85)); }
       seat.position.set(0, 0.8, -0.3);
     } else if (kind === 'buggy') {
@@ -268,7 +287,7 @@ export function makeVehicle(kind, ch) {
     } else if (kind === 'tractor') {
       g.add(box(1.2, 0.8, 2.4, paint, 0, 0.9, 0.2), box(1.3, 0.12, 1.2, dark, 0, 2.3, -0.5));
       for (const [x, z] of [[-0.6, -0.1], [0.6, -0.1], [-0.6, -0.9], [0.6, -0.9]]) g.add(box(0.1, 1.1, 0.1, dark, x, 1.75, z));
-      g.add(Object.assign(new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 1), mat(dark)), { position: new THREE.Vector3(0.35, 1.7, 1) }));
+      g.add(placeAt(new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 1), mat(dark)), 0.35, 1.7, 1));
       wheel(0.85, 0.5, -0.95, 0.85, -0.6); wheel(0.85, 0.5, 0.95, 0.85, -0.6);
       wheel(0.45, 0.35, -0.8, 0.45, 1); wheel(0.45, 0.35, 0.8, 0.45, 1);
       seat.position.set(0, 1.25, -0.5);
