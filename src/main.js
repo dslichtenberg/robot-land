@@ -331,6 +331,11 @@ function showSelect() {
       const b = document.createElement('button');
       b.className = 'card';
       b.innerHTML = '<canvas width="128" height="128"></canvas><div class="name"></div><div class="persona"></div><div class="perk"></div>';
+      // Use the painted portrait if there is one; keep the simple drawing if not.
+      const img = new Image();
+      img.className = 'portrait'; img.alt = '';
+      img.onload = () => b.querySelector('canvas').replaceWith(img);
+      img.src = 'assets/portraits/' + ch.id + '.webp';
       b.querySelector('.name').textContent = ch.name;
       b.querySelector('.persona').textContent = ch.species + '. ' + ch.persona;
       b.querySelector('.perk').textContent = '⭐ ' + ch.perkText;
@@ -345,9 +350,12 @@ function showSelect() {
 function drawCards() {
   const cards = $('cards').children;
   for (let i = 0; i < cards.length; i++) {
-    const g = cards[i].querySelector('canvas').getContext('2d'), sel = i === state.selectIndex;
-    g.clearRect(0, 0, 128, 128);
+    const sel = i === state.selectIndex;
     cards[i].classList.toggle('selected', sel);
+    const canvas = cards[i].querySelector('canvas');
+    if (!canvas) continue;
+    const g = canvas.getContext('2d');
+    g.clearRect(0, 0, 128, 128);
     drawCharacter(g, CHARACTERS[i], 64, 70, 96, state.time + i, sel ? (CHARACTERS[i].look === 'chameleon' ? 'excited' : 'happy') : null);
   }
 }

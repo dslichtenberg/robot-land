@@ -1,6 +1,7 @@
 // roster.js
 // The six friends you can play as: names, colors, perks, and flat 2D
-// portraits drawn with simple shapes (used on the character cards).
+// portraits drawn with simple shapes. If assets/portraits/<id>.webp exists,
+// the character's card shows that picture instead.
 // The 3D models live in models.js.
 //
 // Each draw function takes the canvas context, a center point (x, y),

@@ -97,6 +97,10 @@ button { font-family: inherit; cursor: pointer; touch-action: manipulation; }
   font-size: max(20px, calc(18px * var(--u)));
 }
 .card canvas { width: calc(80px * var(--u)); height: calc(80px * var(--u)); min-width: 64px; min-height: 64px; }
+.card .portrait { width: calc(130px * var(--u)); height: calc(130px * var(--u)); min-width: 96px; min-height: 96px; object-fit: contain; margin-bottom: 2px;
+  transform-origin: 50% 100%; transition: transform 0.15s; filter: drop-shadow(0 3px 2px rgba(43,33,64,0.25)); }
+.card.selected .portrait { animation: portrait-bob 0.9s ease-in-out infinite; }
+@keyframes portrait-bob { 0%, 100% { transform: translateY(0) scale(1.08); } 50% { transform: translateY(-5px) scale(1.12, 1.06); } }
 .card .name { font-size: max(24px, calc(26px * var(--u))); font-weight: bold; line-height: 1.1; }
 .card .persona, .card .perk { font-size: max(20px, calc(19px * var(--u))); line-height: 1.12; }
 .card .perk { color: #1f7a2e; margin-top: 4px; font-weight: bold; }

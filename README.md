@@ -46,6 +46,8 @@ All models follow [`docs/MODEL_SPEC.md`](docs/MODEL_SPEC.md) and live in `assets
    `tools/compress-models.sh path/to/new/models assets/models`
 3. Reload the game. A missing or broken file falls back to a simple stand-in, so the game always runs.
 
+**Character pictures** for the "Pick your driver" cards go in `assets/portraits/<name>.webp` (for example `tyler.webp`): a see-through background, about 512 by 512 pixels. A character without one shows the simple drawing.
+
 What the game does with each model (animations, faces, wheel spin, steering, paint tint, the `col` collision box, the `lod1` far-away copy) is described in section 10 of the spec and in `src/models.js`.
 
 ## Files
