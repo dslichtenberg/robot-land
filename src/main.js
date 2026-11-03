@@ -45,6 +45,7 @@ const state = {
   hop: null,           // a Bouncy String jump: { t }
   turbo: 0,            // seconds of Rocket Boots left
   cool: { laser: 0, turbo: 0, jump: 0, shield: 0 },  // seconds until each power is ready again
+  tips: { used: {}, since: 0 }, tipAt: 0,            // power reminders already shown in this world
   teleLock: null,      // the teleport pad you just arrived on
   checkpoint: null,
   cutscene: null,      // { x, z, until } the camera looks somewhere else for a bit
@@ -94,12 +95,38 @@ function updateHearts() {
 // Each haunted house prize gives the car a power for the worlds after it.
 // The ones with a key are buttons; the shield and the heart just work.
 const POWERS = {
-  laser: { icon: '⚡', key: 'Space', keys: [' ', 'z', 'Z'], wait: 1.2, text: 'It turns on a LASER for your car! Press Space (or tap ⚡) to zap snowballs, sparkles and villains.' },
-  turbo: { icon: '🚀', key: 'X', keys: ['x', 'X'], wait: 5, text: 'Press X (or tap 🚀) for a burst of super speed!' },
-  jump: { icon: '🦘', key: 'C', keys: ['c', 'C'], wait: 1, text: 'Press C (or tap 🦘) to jump right over snowballs, fireballs and yo-yos!' },
-  shield: { icon: '🫧', wait: 10, text: 'It makes a magic bubble around your car that blocks one bump, then grows back.' },
-  heart: { icon: '❤️', text: 'You get an extra heart from now on!' },
+  laser: { name: 'Laser', icon: '⚡', key: 'Space', keys: [' ', 'z', 'Z'], wait: 1.2,
+    text: 'Your car has a LASER now! Press Space (or tap the ⚡ button) to zap snowballs and sparkles, and make villains too dizzy to hurt you.',
+    short: 'press Space to zap' },
+  turbo: { name: 'Rocket Boost', icon: '🚀', key: 'X', keys: ['x', 'X'], wait: 5,
+    text: 'Your car has ROCKETS now! Press X (or tap the 🚀 button) to zoom super fast for a few seconds.',
+    short: 'press X to zoom' },
+  jump: { name: 'Super Jump', icon: '🦘', key: 'C', keys: ['c', 'C'], wait: 1,
+    text: 'Your car can JUMP now! Press C (or tap the 🦘 button) to hop right over snowballs, fireballs and yo-yos.',
+    short: 'press C to hop over danger' },
+  shield: { name: 'Bubble Shield', icon: '🫧', wait: 10,
+    text: 'A magic bubble now floats around your car. It blocks one bump for you, then grows back. You do not need to press anything.',
+    short: 'blocks one bump by itself' },
+  heart: { name: 'Extra Heart', icon: '❤️',
+    text: 'You get an extra heart from now on!', short: 'one more heart' },
 };
+const POWER_ORDER = ['laser', 'turbo', 'jump', 'shield', 'heart'];
+
+// The storybook page for a power you just won.
+function newPowerPage(item) {
+  const P = POWERS[item.power];
+  return { art: [item.icon, P.icon], text: 'New power: ' + P.name + '! ' + P.text, next: 'Cool! ▶' };
+}
+// A reminder page of every power you have (shown as each world starts).
+function powersPage() {
+  const have = POWER_ORDER.filter(n => state.powers[n]);
+  if (!have.length) return null;
+  return {
+    art: have.map(n => POWERS[n].icon),
+    text: 'Your powers: ' + have.map(n => POWERS[n].icon + ' ' + POWERS[n].name + ' (' + POWERS[n].short + ')').join(', ') + '. On a tablet, tap the round buttons in the corner.',
+    next: 'Drive! ▶',
+  };
+}
 const ownedItems = () => WORLDS.slice(0, state.worldIndex + (state.flags.houseDone ? 1 : 0)).map(w => w.item);
 
 // Work out the powers from the prizes you have, and draw their buttons.
@@ -117,7 +144,11 @@ function refreshPowers() {
     b.dataset.power = name;
     b.innerHTML = '<span class="power-icon">' + P.icon + '</span><span class="power-cool"></span>' + (P.key ? '<span class="power-key">' + P.key + '</span>' : '');
     if (P.keys) b.addEventListener('pointerdown', (e) => { e.preventDefault(); unlockAudio(); usePower(name); });
-    box.append(b);
+    const slot = document.createElement('div');
+    slot.className = 'power-slot';
+    slot.innerHTML = '<span class="power-name">' + P.name + '</span>';
+    slot.append(b);
+    box.append(slot);
   }
 }
 
@@ -125,6 +156,7 @@ function usePower(name) {
   if (state.screen !== 'world' || state.overlay || state.cutscene || !state.powers[name] || state.cool[name] > 0 || state.jump) return;
   const c = state.car;
   state.cool[name] = POWERS[name].wait;
+  if (state.tips) state.tips.used[name] = true;
   if (name === 'laser') {
     const dx = Math.sin(c.heading), dz = Math.cos(c.heading);
     const { hits, range } = world.zap(c.x, c.z, dx, dz, 16);
@@ -152,7 +184,7 @@ const hopHeight = () => state.hop ? Math.sin(state.hop.t / HOP_TIME * Math.PI) *
 
 // Grey out a button while it charges back up.
 function drawPowerButtons() {
-  for (const b of $('powers').children) {
+  for (const b of $('powers').querySelectorAll('.power')) {
     const name = b.dataset.power, P = POWERS[name];
     const left = P.wait ? state.cool[name] / P.wait : 0;
     b.querySelector('.power-cool').style.height = (left * 100).toFixed(0) + '%';
@@ -263,7 +295,7 @@ function makeTitleScene() {
   s.add(sun);
   const rim = new THREE.DirectionalLight('#b9d8ff', 0.8); rim.position.set(6, 5, -10); s.add(rim);
   // The island: grass on top, a rocky rim, flowers and tufts.
-  const grassTex = new THREE.TextureLoader().load('assets/textures/ground_grass.webp');
+  const grassTex = new THREE.TextureLoader().load('assets/textures/ground_grass.webp' + (window.V ? '?v=' + window.V : ''));
   grassTex.colorSpace = THREE.SRGBColorSpace; grassTex.wrapS = grassTex.wrapT = THREE.RepeatWrapping; grassTex.repeat.set(5, 5);
   const top = new THREE.Mesh(new THREE.CircleGeometry(16, 64), new THREE.MeshStandardMaterial({ map: grassTex, roughness: 0.9 }));
   top.rotation.x = -Math.PI / 2; top.receiveShadow = true; s.add(top);
@@ -336,7 +368,7 @@ function showSelect() {
       const img = new Image();
       img.className = 'portrait'; img.alt = '';
       img.onload = () => b.querySelector('canvas').replaceWith(img);
-      img.src = 'assets/portraits/' + ch.id + '.webp';
+      img.src = 'assets/portraits/' + ch.id + '.webp' + (window.V ? '?v=' + window.V : '');
       b.querySelector('.name').textContent = ch.name;
       b.querySelector('.persona').textContent = ch.species + '. ' + ch.persona;
       b.querySelector('.perk').textContent = '⭐ ' + ch.perkText;
@@ -389,6 +421,7 @@ async function enterWorld(greet) {
   state.hearts = state.stats.hearts;
   state.jump = null; state.teleLock = null; state.robotNear = -1;
   state.hop = null; state.turbo = 0;
+  state.tips = { used: {}, since: state.time }; state.tipAt = state.time + 8;
   for (const k in state.cool) state.cool[k] = 0;
   setScreen('world');
   updateHearts();
@@ -398,7 +431,10 @@ async function enterWorld(greet) {
     const v = VEHICLES[w.vehicle], page = WORLD_STORY[state.worldIndex], n = state.worldIndex;
     setTimeout(() => {
       if (state.screen !== 'world' || state.worldIndex !== n || state.overlay) return;
-      story([{ art: page.art, text: 'World ' + (n + 1) + ': ' + w.name + '. ' + page.text + ' Your ride here is the ' + v.name + '.', next: 'Drive! ▶' }]);
+      const pages = [{ art: page.art, text: 'World ' + (n + 1) + ': ' + w.name + '. ' + page.text + ' Your ride here is the ' + v.name + '.', next: 'Drive! ▶' }];
+      const pw = powersPage();
+      if (pw) { pages[0].next = 'Next ▶'; pages.push(pw); }
+      story(pages);
     }, 700);
   }
 }
@@ -510,8 +546,31 @@ function hurt(fromX, fromZ) {
   c.vx = dx / d * 22; c.vz = dz / d * 22;
 }
 
+// Little reminders to use your powers, at the moment they would help.
+// Each one shows at most twice per world, and stops once you use that power.
+const TIPS = {
+  laser: '⚡ Danger ahead! Press Space (or tap ⚡) to zap it with your laser!',
+  jump: '🦘 Press C (or tap 🦘) to jump over it!',
+  turbo: '🚀 Tip: press X (or tap 🚀) for a rocket boost!',
+};
+function powerTips() {
+  if (state.time < state.tipAt) return;
+  const c = state.car, T = state.tips;
+  const can = (n) => state.powers[n] && !T.used[n] && (T[n] || 0) < 2 && state.cool[n] <= 0;
+  const near = world.shots.some(s => Math.hypot(c.x - s.x, c.z - s.z) < 12) ||
+    world.hazards.some(h => !(h.stun > 0) && (h.r || h.kind === 'cannon') && Math.hypot(c.x - h.x, c.z - h.z) < 12);
+  let tip = null;
+  if (near) tip = can('laser') ? 'laser' : can('jump') ? 'jump' : null;
+  else if (can('turbo') && state.time - T.since > 15 && Math.hypot(c.vx, c.vz) > 5) tip = 'turbo';
+  if (!tip) return;
+  T[tip] = (T[tip] || 0) + 1;
+  state.tipAt = state.time + 20;
+  toast(TIPS[tip], 4.5);
+}
+
 function checkWorldThings() {
   const c = state.car, w = world.data;
+  powerTips();
   world.hazards.forEach(h => { if (h.r && !(h.stun > 0) && Math.hypot(c.x - h.x, c.z - h.z) < h.r + CAR_R) hurt(h.x, h.z); });
   world.shots.forEach(s => { if (!s.hit && !state.hop && Math.hypot(c.x - s.x, c.z - s.z) < s.r + CAR_R) { s.hit = true; hurt(s.x - s.vx, s.z - s.vz); } });
   // Robots talk when you drive up to them.
@@ -629,8 +688,7 @@ async function enterHouse() {
     status: (text) => { $('room-status').textContent = text; },
     onSolved: () => {
       const item = world.data.item;
-      const power = POWERS[item.power];
-      $('banner-text').textContent = winLine(world.data.villain) + 'You got the ' + item.name + '! ' + item.icon + (power ? ' ' + power.text : '');
+      $('banner-text').textContent = winLine(world.data.villain) + 'You got the ' + item.name + '! ' + item.icon;
       show('banner', true);
       $('btn-banner').focus();
     },
@@ -659,9 +717,10 @@ async function leaveHouse() {
   setScreen('world');
   updateHearts();
   view = { scene: worldScene, camera };
-  state.cutscene = { x: world.portalSpot.x, z: world.portalSpot.z, until: state.time + 2.6 };
   await fade(false);
   sound('chime');
+  if (POWERS[world.data.item.power]) await story([newPowerPage(world.data.item)]);
+  state.cutscene = { x: world.portalSpot.x, z: world.portalSpot.z, until: state.time + 2.6 };
   toast(PORTAL_LINE, 6);
 }
 

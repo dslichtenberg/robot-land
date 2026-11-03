@@ -36,7 +36,7 @@ export function loadModels(names) {
     const f = fileOf(n);
     if (f in loaded) return null;
     if (!pending[f]) {
-      pending[f] = loader.loadAsync('assets/models/' + f + '.glb')
+      pending[f] = loader.loadAsync('assets/models/' + f + '.glb' + (window.V ? '?v=' + window.V : ''))
         .then(g => {
           // Marked shared, so leaving a world does not throw away parts other worlds reuse.
           g.scene.traverse(o => {

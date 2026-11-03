@@ -66,7 +66,7 @@ What the game does with each model (animations, faces, wheel spin, steering, pai
 | `src/roster.js` | The six friends, their perks, and their 2D card portraits |
 | `src/input.js`, `src/audio.js` | Keyboard, touch joystick, and sounds |
 | `vendor/three/` | A copy of three.js 0.170.0 (plus its glTF, mesh-decompression and skeleton helpers), so nothing loads from the internet |
-| `tools/` | `check-models.mjs` (spec checker) and `compress-models.sh` (web compression) |
+| `tools/` | `check-models.mjs` (spec checker), `compress-models.sh` (web compression), and `stamp-version.mjs` (run before pushing an update, so a normal reload picks up the new files) |
 | `docs/MODEL_SPEC.md` | The spec for every model and texture |
 | `v1-2d/` | The original 2D version (open its `index.html` directly) |
 

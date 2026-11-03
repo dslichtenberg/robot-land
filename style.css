@@ -163,6 +163,8 @@ button { font-family: inherit; cursor: pointer; touch-action: manipulation; }
 
 /* ---------- Prize power buttons (bottom right, shown while driving) ---------- */
 #powers { position: fixed; right: 16px; bottom: 16px; display: flex; gap: 12px; align-items: flex-end; z-index: 2; pointer-events: none; }
+.power-slot { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.power-name { font: 800 max(12px, calc(13px * var(--u))) system-ui, sans-serif; color: #2b2140; background: rgba(255,255,255,0.9); border: 2px solid #2b2140; border-radius: 999px; padding: 1px 8px; white-space: nowrap; }
 #hud.hidden ~ #powers { display: none; }
 .power {
   position: relative; overflow: hidden; pointer-events: auto; touch-action: none;

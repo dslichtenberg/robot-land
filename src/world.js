@@ -21,7 +21,7 @@ function seeded(text) {
 }
 const texLoader = new THREE.TextureLoader();
 function texture(file, repeatX, repeatY) {
-  const t = texLoader.load('assets/textures/' + file + '.webp');
+  const t = texLoader.load('assets/textures/' + file + '.webp' + (window.V ? '?v=' + window.V : ''));
   t.colorSpace = THREE.SRGBColorSpace;
   t.wrapS = t.wrapT = THREE.RepeatWrapping;
   t.anisotropy = 8;

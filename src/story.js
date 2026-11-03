@@ -119,7 +119,7 @@ function artFor(token, me) {
     const img = document.createElement('img');
     img.className = 'story-pic portrait-pic';
     img.alt = '';
-    img.src = 'assets/portraits/' + token + '.webp';
+    img.src = 'assets/portraits/' + token + '.webp' + (window.V ? '?v=' + window.V : '');
     return [img];
   }
   if (/^[a-z]/.test(token)) {

@@ -6,11 +6,33 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <title>Robot Land to Gecko Land</title>
-  <link rel="stylesheet" href="style.css">
+  <!-- version:start (written by tools/stamp-version.mjs) -->
+  <script>window.V = '202611030057';</script>
+  <link rel="stylesheet" href="style.css?v=202611030057">
   <!-- three.js is copied into vendor/ so the game never needs the internet. -->
   <script type="importmap">
-    { "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/addons/" } }
+    {
+      "imports": {
+        "three": "./vendor/three/three.module.min.js",
+        "three/addons/": "./vendor/three/addons/",
+        "./src/audio.js": "./src/audio.js?v=202611030057",
+        "./src/input.js": "./src/input.js?v=202611030057",
+        "./src/laser.js": "./src/laser.js?v=202611030057",
+        "./src/main.js": "./src/main.js?v=202611030057",
+        "./src/models.js": "./src/models.js?v=202611030057",
+        "./src/rooms/common.js": "./src/rooms/common.js?v=202611030057",
+        "./src/rooms/ice.js": "./src/rooms/ice.js?v=202611030057",
+        "./src/rooms/lava.js": "./src/rooms/lava.js?v=202611030057",
+        "./src/rooms/levers.js": "./src/rooms/levers.js?v=202611030057",
+        "./src/rooms/mirrors.js": "./src/rooms/mirrors.js?v=202611030057",
+        "./src/roster.js": "./src/roster.js?v=202611030057",
+        "./src/story.js": "./src/story.js?v=202611030057",
+        "./src/world.js": "./src/world.js?v=202611030057",
+        "./src/worlds.js": "./src/worlds.js?v=202611030057"
+      }
+    }
   </script>
+  <!-- version:end -->
 </head>
 <body>
   <canvas id="game"></canvas>
@@ -96,7 +118,7 @@
 
   <div id="fade"></div>
 
-  <script src="src/roster.js"></script>
-  <script type="module" src="src/main.js"></script>
+  <script src="src/roster.js?v=202611030057"></script>
+  <script type="module" src="src/main.js?v=202611030057"></script>
 </body>
 </html>
