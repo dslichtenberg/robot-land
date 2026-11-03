@@ -283,7 +283,7 @@ export function makeVehicle(kind, ch) {
     if (!o.isMesh) return;
     if (o.material.name === 'paint') { o.material.color.set(ch.color); paints.push(o.material); }
   });
-  const belt = beltMap(inner), belts = belt ? [belt] : [];
+  const belt = beltMap(inner) || treadBelt(inner, 'track', 5), belts = belt ? [belt] : [];
   if (ch.look === 'chameleon') g.userData.rainbow = paints;
   const driverSpot = new THREE.Group();
   seat.add(driverSpot);
@@ -309,6 +309,56 @@ export function makeVehicle(kind, ch) {
     inner.position.y = lift;
   };
   return g;
+}
+
+// ---------- Moving belts ----------
+// A belt that shares its picture with the rest of the model cannot be
+// scrolled (the whole model would slide). So we give it a tread pattern of
+// its own, laid along the belt's length (its z axis), which can scroll.
+const treadCanvas = {};
+function treadPicture(kind) {
+  if (treadCanvas[kind]) return treadCanvas[kind];
+  const c = document.createElement('canvas'); c.width = c.height = 64;
+  const g = c.getContext('2d');
+  if (kind === 'conveyor') {
+    // Dark rubber with a yellow arrow pointing the way the belt moves (up the picture).
+    g.fillStyle = '#26232e'; g.fillRect(0, 0, 64, 64);
+    g.fillStyle = '#ffd23f';
+    g.beginPath(); g.moveTo(8, 50); g.lineTo(32, 18); g.lineTo(56, 50); g.lineTo(44, 50); g.lineTo(32, 34); g.lineTo(20, 50); g.closePath(); g.fill();
+    g.fillStyle = '#3a3646'; g.fillRect(0, 0, 4, 64); g.fillRect(60, 0, 4, 64);
+  } else {
+    // Snow tracks: dark grey bars.
+    g.fillStyle = '#2b2b31'; g.fillRect(0, 0, 64, 64);
+    g.fillStyle = '#4a4a55'; g.fillRect(0, 8, 64, 22);
+    g.fillStyle = '#5c5c68'; g.fillRect(0, 8, 64, 5);
+  }
+  return (treadCanvas[kind] = c);
+}
+// Swap the belt meshes in root for tread-pattern ones. repeats is how many
+// times the pattern fits along the belt. Returns the texture to scroll (or null).
+export function treadBelt(root, kind, repeats) {
+  const belts = [];
+  root.traverse(o => { if (o.isMesh && o.material && o.material.name === 'belt') belts.push(o); });
+  if (!belts.length) return null;
+  const tex = new THREE.CanvasTexture(treadPicture(kind));
+  tex.colorSpace = THREE.SRGBColorSpace; tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+  const material = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.85 });
+  material.name = 'belt';
+  const made = new Map();
+  belts.forEach(o => {
+    let geo = made.get(o.geometry);
+    if (!geo) {
+      geo = o.geometry.clone(); geo.userData = {};
+      const pos = geo.attributes.position, n = pos.count, uv = new Float32Array(n * 2);
+      geo.computeBoundingBox();
+      const b = geo.boundingBox, w = Math.max(1e-6, b.max.x - b.min.x), d = Math.max(1e-6, b.max.z - b.min.z);
+      for (let i = 0; i < n; i++) { uv[i * 2] = (pos.getX(i) - b.min.x) / w; uv[i * 2 + 1] = (pos.getZ(i) - b.min.z) / d * repeats; }
+      geo.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
+      made.set(o.geometry, geo);
+    }
+    o.geometry = geo; o.material = material;
+  });
+  return tex;
 }
 
 // The texture on a model's 'belt' material, but only when the belt has that
