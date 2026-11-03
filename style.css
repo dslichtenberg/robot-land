@@ -200,3 +200,15 @@ button { font-family: inherit; cursor: pointer; touch-action: manipulation; }
 #story-text { margin: 0; font-size: max(22px, calc(28px * var(--u))); font-weight: bold; line-height: 1.3; }
 #story-dots { color: #b9a8d8; letter-spacing: 2px; font-size: 14px; min-height: 14px; }
 .story-buttons { display: flex; gap: 14px; justify-content: center; }
+
+/* ---------- Touch screens: keep messages clear of the joystick ---------- */
+body.touch #speech { bottom: auto; top: calc(max(64px, calc(70px * var(--u))) + env(safe-area-inset-top)); max-width: 92%; }
+body.touch #banner { bottom: auto; top: 16%; left: 4%; right: 4%; }
+@media (max-width: 700px) {
+  /* Narrow phones: power buttons stack up the right edge instead of along the bottom. */
+  #powers { flex-direction: column-reverse; align-items: flex-end; right: 10px; bottom: 10px; gap: 8px; }
+  .power { width: 60px; height: 60px; }
+  .power-icon { font-size: 28px; }
+  .power-name { font-size: 11px; }
+}
+body.touch .power-key { display: none; }

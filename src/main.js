@@ -57,6 +57,8 @@ window.state = state;
 const $ = (id) => document.getElementById(id);
 const show = (id, on) => $(id).classList.toggle('hidden', !on);
 const isTouch = () => ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+// On touch screens the joystick sits in the bottom corner, so messages move up (see style.css).
+document.body.classList.toggle('touch', isTouch());
 const charOf = () => CHARACTERS.find(c => c.id === state.charId);
 
 // ---------- Renderer and screen size ----------
